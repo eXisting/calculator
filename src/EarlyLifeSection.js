@@ -11,6 +11,7 @@ const EarlyLifeSection = ({monthlyCallback, yearsCallback}) => {
           min={200} 
           max={600} 
           interval={100}
+          sign={'$'}
         />
       <NumberOfYears>Number of Years</NumberOfYears>
       <SliderWithSnaps 
