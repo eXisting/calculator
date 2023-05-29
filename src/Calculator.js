@@ -23,7 +23,8 @@ const Calculator = () => {
     const n = 12;
     
     var t = parseInt(earlyLifeYears);
-    var P = parseInt(initialEarlyLifeAmount);
+    var P = parseFloat(initialEarlyLifeAmount.replace(/,/g, '')); // Remove commas
+
     var monthlyContributions = parseFloat(earlyLifeMonthlySavings);
 
     const futureValue = P * Math.pow(1 + (r / n), n * t) + monthlyContributions * ((Math.pow(1 + (r / n), n * t) - 1) / (r / n));
