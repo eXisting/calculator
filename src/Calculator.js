@@ -4,10 +4,10 @@ import SavingsSection from "./SavingsSection";
 
 const Calculator = () => {
   const [initialEarlyLifeAmount, setEarlyLifeInitialDeposit] = useState("5000");
-  const [earlyLifeMonthlySavings, setEarlyLifeMonthlySavings] = useState(200);
+  const [earlyLifeMonthlySavings, setEarlyLifeMonthlySavings] = useState(100);
   const [earlyLifeYears, setEarlyLifeYears] = useState(5);
-  const [ballerYears, setBallerYears] = useState(null);
-  const [ballerSavings, setBallerSavings] = useState(null);
+  const [ballerYears, setBallerYears] = useState(5);
+  const [ballerSavings, setBallerSavings] = useState(500);
   const [totalSavings, setTotalSavings] = useState("");
 
   useEffect(() => {
