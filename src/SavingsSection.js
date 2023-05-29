@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import styled, { css } from "styled-components";
 import SliderWithSnaps from "./SliderWithSnaps";
 
-const EarlyLifeSection = ({monthlyCallback, yearsCallback}) => {
+const SavingsSection = ({monthlyCallback, yearsCallback, min, max, interval}) => {
   return (
     <Container>
-      <MonthlySavingsTitle>Monthly Savings</MonthlySavingsTitle>
+      <MonthlySavingsTitle>What are your monthly savings?</MonthlySavingsTitle>
       <SliderWithSnaps 
           callback={monthlyCallback} 
-          min={200} 
-          max={600} 
-          interval={100}
+          min={min} 
+          max={max} 
+          interval={interval}
           sign={'$'}
         />
-      <NumberOfYears>Number of Years</NumberOfYears>
+      <NumberOfYears>Number of years you will save.</NumberOfYears>
       <SliderWithSnaps 
         callback={yearsCallback} 
         min={5} 
@@ -53,4 +53,4 @@ const NumberOfYears = styled.span`
   display: block;
 `;
 
-export default EarlyLifeSection;
+export default SavingsSection;

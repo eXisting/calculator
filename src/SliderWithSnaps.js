@@ -3,7 +3,7 @@ import Slider from 'rc-slider';
 import styled, { css } from "styled-components";
 import 'rc-slider/assets/index.css';
 
-const SliderWithSnaps = ({ callback, min, max, interval, sign }) => {
+const SliderWithSnaps = ({ callback, min, max, interval }) => {
   const [value, setValue] = useState(min);
 
   const handleSliderChange = (newValue) => {
@@ -88,7 +88,7 @@ const SliderWithSnaps = ({ callback, min, max, interval, sign }) => {
                   ...(isMarkSelected ? selectedMarkStyle : regularMarkStyle),
                 }}
               >
-                {sign}{mark}
+                ${mark}
               </div>
             </div>
           );

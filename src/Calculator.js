@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
-import EarlyLifeSection from "./EarlyLifeSection";
-import BallerLifeSection from "./BallerLifeSection";
+import SavingsSection from "./SavingsSection";
 
 const Calculator = () => {
-  const [initialEarlyLifeAmount, setEarlyLifeInitialDeposit] = useState(5000);
+  const [initialEarlyLifeAmount, setEarlyLifeInitialDeposit] = useState("5000");
   const [earlyLifeMonthlySavings, setEarlyLifeMonthlySavings] = useState(200);
   const [earlyLifeYears, setEarlyLifeYears] = useState(5);
   const [ballerYears, setBallerYears] = useState(null);
@@ -16,11 +15,15 @@ const Calculator = () => {
   }, [initialEarlyLifeAmount, earlyLifeMonthlySavings, earlyLifeYears, ballerYears, ballerSavings]);
 
   const calculateSavings = () => {
+    if (initialEarlyLifeAmount === '') {
+      setTotalSavings(0);
+      return;
+    }
     const r = parseFloat(10) / 100;
     const n = 12;
     
     var t = parseInt(earlyLifeYears);
-    var P = parseFloat(initialEarlyLifeAmount);
+    var P = parseInt(initialEarlyLifeAmount);
     var monthlyContributions = parseFloat(earlyLifeMonthlySavings);
 
     const futureValue = P * Math.pow(1 + (r / n), n * t) + monthlyContributions * ((Math.pow(1 + (r / n), n * t) - 1) / (r / n));
@@ -34,9 +37,9 @@ const Calculator = () => {
   
       const total = P * Math.pow(1 + (r / n), n * t) + monthlyContributions * ((Math.pow(1 + (r / n), n * t) - 1) / (r / n));
   
-      setTotalSavings(total.toFixed(2));
+      setTotalSavings(Math.round(total).toLocaleString());
     } else {
-      setTotalSavings(futureValue.toFixed(2));
+      setTotalSavings(Math.round(futureValue).toLocaleString());
     }
   };
 
@@ -49,7 +52,19 @@ const Calculator = () => {
   };
 
   const earlyStageDepositChanged = (value) => {
-    setEarlyLifeInitialDeposit(value);
+    const numericValue = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+    const formattedValue = numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, ','); // Add commas
+    setEarlyLifeInitialDeposit(formattedValue);
+  };
+
+  const resetValueOnFocus = () => {
+    setEarlyLifeInitialDeposit('');
+  };
+
+  const handleBlur = () => {
+    if (initialEarlyLifeAmount === '') {
+      setEarlyLifeInitialDeposit('0');
+    }
   };
 
   const earlyLifeMonthlySavingsChanged = (value) => {
@@ -63,37 +78,36 @@ const Calculator = () => {
   return (
     <>
     <Container>
-      <Section blue>
-      <VerticalStack>
+      <Section gray heightValue={"45px"}>
         <ApplicationTitle>Millionair Maker</ApplicationTitle>
-        <div style={{ margin: '10px' }}>
-          <DepositLable>Starting Cash:</DepositLable>
-          <DollarSign>$</DollarSign>
-          <InitialDeposit
-            defaultValue={initialEarlyLifeAmount}
-            selectTextOnFocus={true}
-            maxLength={10}
-            onInput={(e) => earlyStageDepositChanged(e.target.value)}
-          />
-        </div>
-      </VerticalStack>
       </Section>
-      <Section small><h2>Early Life savings phase</h2></Section>
-      <Section orange large>
-        <EarlyLifeSection monthlyCallback={earlyLifeMonthlySavingsChanged} yearsCallback={earlyLifeYearsChanged}/>
-      </Section>
-      <Section small><h2>Baller Life savings phase</h2></Section>
-      <Section orange medium>
-        <BallerLifeSection monthlyCallback={selectBallerLifeSavings} yearsCallback={selectBallerLifeYears}/>
-      </Section>
-      <Section blue>
+      <Section blue heightValue={"150px"}>
         <VerticalStack>
-        <ApplicationTitle>How rich am I?</ApplicationTitle>
-          <TotalSavingsLabelRow>
-            <DepositLable>Total savings:</DepositLable>
+          <HorizontalStack space="60px">
+            <span style={{"color" : "#FFA500", "fontSize":"22px", "textAlign" : "center"}}><b>What is your <br/> starting cash?</b></span>
+            <InitialDeposit
+              defaultValue={initialEarlyLifeAmount}
+              value={initialEarlyLifeAmount === '0' ? '$0' : `$${initialEarlyLifeAmount}`}
+              selectTextOnFocus={true}
+              maxLength={12}
+              onInput={(e) => earlyStageDepositChanged(e.target.value)}
+              onFocus={resetValueOnFocus}
+              onBlur={handleBlur}
+            />
+          </HorizontalStack>
+          <HorizontalStack space="5px">
+            <span style={{"color" : "#ffffff", "fontSize":"26px", "textAlign" : "center"}}>How rich <br/> are you?</span>
             <TotalSavingsResult>${totalSavings}</TotalSavingsResult>
-          </TotalSavingsLabelRow>
+          </HorizontalStack>
         </VerticalStack>
+      </Section>
+      <Section heightValue={"30px"}><span style={{"font-size" : "20px"}}>Savings Phase 1: <i>EARLY LIFE</i></span></Section>
+      <Section orange heightValue={"auto"}>
+        <SavingsSection monthlyCallback={earlyLifeMonthlySavingsChanged} yearsCallback={earlyLifeYearsChanged} min={100} max={1000} interval={100}/>
+      </Section>
+      <Section heightValue={"30px"}><span style={{"font-size" : "20px"}}>Savings Phase 2: <i>BALLER LIFE</i></span></Section>
+      <Section orange heightValue={"auto"}>
+        <SavingsSection monthlyCallback={selectBallerLifeSavings} yearsCallback={selectBallerLifeYears} min={500} max={5000} interval={500}/>
       </Section>
     </Container>
     </>
@@ -109,17 +123,30 @@ const Container = styled.div`
 
 const Section = styled.section`
   width: 100%;
-  height: ${props => (props.large ? '300px' : props.medium ? '220px' : props.small ? '30px' : '120px')};
+  height: ${props => props.heightValue ? props.heightValue : '120px'};
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${props => (props.blue ? '#007BFF' : props.orange ? '#FFA500' : '#ffffff')};
+  background-color: ${props => (props.blue ? '#007BFF' : props.orange ? '#FFA500' : props.gray ? '#808080' : '#ffffff')};
 `;
 
 const VerticalStack = styled.div`
-  display: flex;
-  flex-direction: column;
+  dflex-direction: column;
   align-items: center;
+  justify-content: center;
+`;
+
+const HorizontalStack = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+
+  > *:not(:last-child) {
+    margin-right: ${props => props.space};
+  }
+
+  justify-content: space-between;
 `;
 
 const ApplicationTitle = styled.span`
@@ -132,113 +159,33 @@ const ApplicationTitle = styled.span`
   margin-top: 0;
 `;
 
-const DepositLable = styled.label`
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 1);
-  font-size: 18px;
-  text-align: center;
-  margin-top: 0;
-  margin-right: 10px;
-`;
-
-const DollarSign = styled.span`
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 400;
-  color: rgba(0, 0, 0, 1);
-  font-size: 18px;
-  margin-right: 5px;
-`;
-
 const InitialDeposit = styled.input`
   font-family: Roboto;
   font-style: normal;
   font-weight: 400;
   color: rgba(0, 0, 0, 1);
   font-size: 18px;
-  background-color: rgba(255, 255, 255, 1);
+  background-color: orange;
   text-align: center;
-  border-width: 1px;
-  border-color: rgba(0, 0, 0, 1);
-  border-style: solid;
+  border-width: 0px;
   margin-top: 0;
   width: 120px;
   height: 25px;
-`;
-
-const Worth = styled.div`
-  background-color: #02b5ff;
-  flex-direction: column;
-  display: flex;
-  flex: 1 1 0%;
-  margin-top: 19px;
-`;
-
-const HowRichAmI = styled.span`
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 700;
-  color: rgba(255,255,255,1);
-  height: 37px;
-  width: 211px;
-  font-size: 25px;
-  text-align: center;
-  margin-top: 20px;
-  margin-left: 82px;
-`;
-
-const TotalSavingsLabel = styled.span`
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 400;
-  color: rgba(255,255,255,1);
-  height: 28px;
-  width: 117px;
-  font-size: 18px;
-  text-align: center;
+  border-radius: 5px; /* Make the input round */
 `;
 
 const TotalSavingsResult = styled.span`
   font-family: Roboto;
   font-style: normal;
   font-weight: 400;
-  color: rgba(255,255,255,1);
-  font-size: 20px;
+  color: rgba(255, 255, 255, 1);
+  font-size: 45px;
   text-align: center;
-  width: 135px;
-  height: 25px;
-  margin-left: 24px;
-  margin-top: 3px;
+  display: inline-block; /* Allow flexible width */
+  padding: 5px 10px; /* Add some padding for better appearance */
+  border: 1px solid white; /* Add white border */
 `;
 
-const TotalSavingsLabelRow = styled.div`
-  height: 28px;
-  flex-direction: row;
-  display: flex;
-  margin-top: 2px;
-  margin-left: 57px;
-  margin-right: 42px;
-`;
 
-const BallerLifeGroupStack = styled.div`
-  height: 360px;
-  margin-top: 6px;
-  position: relative;
-`;
-
-const EarlyLifeSelection = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-`;
-
-const EarlyLife = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
-`;
 
 export default Calculator;
