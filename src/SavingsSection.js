@@ -14,9 +14,9 @@ const SavingsSection = ({monthlyCallback, yearsCallback, min, max, interval}) =>
           sign={'$'}
         />
       <NumberOfYears>Number of years you will save.</NumberOfYears>
-      <SliderWithSnaps 
+      <SliderWithSnaps
         callback={yearsCallback} 
-        min={5} 
+        min={0} 
         max={20} 
         interval={5}
       />
@@ -36,7 +36,8 @@ const MonthlySavingsTitle = styled.span`
   height: 28px;
   width: 100%;
   text-align: center;
-  margin-top: 15px;
+  margin-bottom: -30px;
+  margin-top: 30px;
   font-size: 18px;
   display: block;
 `;
@@ -51,6 +52,8 @@ const NumberOfYears = styled.span`
   text-align: center;
   font-size: 18px;
   display: block;
+  margin-top: 80px;
+  margin-bottom: -30px;
 `;
 
 export default SavingsSection;

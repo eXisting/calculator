@@ -4,15 +4,17 @@ import SavingsSection from "./SavingsSection";
 
 const Calculator = () => {
   const [initialEarlyLifeAmount, setEarlyLifeInitialDeposit] = useState("5000");
-  const [earlyLifeMonthlySavings, setEarlyLifeMonthlySavings] = useState(100);
-  const [earlyLifeYears, setEarlyLifeYears] = useState(5);
-  const [ballerYears, setBallerYears] = useState(5);
-  const [ballerSavings, setBallerSavings] = useState(500);
+  const [startingAge, setStartingAge] = useState(15);
+  const [earlyLifeMonthlySavings, setEarlyLifeMonthlySavings] = useState(0);
+  const [earlyLifeYears, setEarlyLifeYears] = useState(0);
+  const [earlyLifeTotalSaved, setEarlyLifeTotal] = useState(0);
+  const [ballerYears, setBallerYears] = useState(0);
+  const [ballerSavings, setBallerSavings] = useState(0);
   const [totalSavings, setTotalSavings] = useState("");
 
   useEffect(() => {
     calculateSavings();
-  }, [initialEarlyLifeAmount, earlyLifeMonthlySavings, earlyLifeYears, ballerYears, ballerSavings]);
+  }, [initialEarlyLifeAmount, earlyLifeMonthlySavings, earlyLifeTotalSaved, earlyLifeYears, ballerYears, ballerSavings]);
 
   const calculateSavings = () => {
     if (initialEarlyLifeAmount === '') {
@@ -29,6 +31,9 @@ const Calculator = () => {
 
     const futureValue = P * Math.pow(1 + (r / n), n * t) + monthlyContributions * ((Math.pow(1 + (r / n), n * t) - 1) / (r / n));
 
+    const saved = Math.round(futureValue).toLocaleString();
+    setEarlyLifeTotal(saved);
+
     if (ballerSavings != null && ballerYears != null) {
       const ballerLifeInitialDeposit = futureValue.toFixed(2);
 
@@ -40,7 +45,7 @@ const Calculator = () => {
   
       setTotalSavings(Math.round(total).toLocaleString());
     } else {
-      setTotalSavings(Math.round(futureValue).toLocaleString());
+      setTotalSavings(saved);
     }
   };
 
@@ -79,15 +84,34 @@ const Calculator = () => {
   return (
     <>
     <Container>
-      <Section gray heightValue={"45px"}>
-        <ApplicationTitle>Millionair Maker</ApplicationTitle>
+      <Section black heightValue={"45px"}>
+        <VerticalStack style={{ "padding" : "10px"}}>
+          <ApplicationTitle><b>Millionair Maker</b></ApplicationTitle>
+          <span style={{"color" : "#ffffff", "fontSize":"18px", "textAlign" : "center"}}>Longterm savings guarantees wealth</span>
+        </VerticalStack>
       </Section>
       <Section blue heightValue={"150px"}>
         <VerticalStack>
-          <HorizontalStack space="60px">
-            <span style={{"color" : "#FFA500", "fontSize":"22px", "textAlign" : "center"}}><b>What is your <br/> starting cash?</b></span>
-            <InitialDeposit
-              defaultValue={initialEarlyLifeAmount}
+          <HorizontalStack space="5px">
+            <span style={{"color" : "#ffffff", "fontSize":"20px", "textAlign" : "right", "paddingRight" : "15px"}}>How reach will<br/> you be?</span>
+            <TotalSavingsResult>${totalSavings}</TotalSavingsResult>
+          </HorizontalStack>
+        </VerticalStack>
+      </Section>
+      <Section gray heightValue={"200px"}>
+        <HorizontalStack space="20px">
+          <VerticalStack space="10px">
+            <span style={{"color" : "#ffffff", "fontSize":"22px", "textAlign" : "center"}}>How old are you?</span>
+            <span style={{"color" : "#ffffff", "fontSize":"22px", "textAlign" : "center"}}>What are your current savings?</span>
+          </VerticalStack>
+          <VerticalStack space="10px">
+            <StyledInput
+              value={startingAge}
+              selectTextOnFocus={true}
+              maxLength={2}
+              onInput={(e) => setStartingAge(e.target.value)}
+            />
+            <StyledInput
               value={initialEarlyLifeAmount === '0' ? '$0' : `$${initialEarlyLifeAmount}`}
               selectTextOnFocus={true}
               maxLength={12}
@@ -95,20 +119,20 @@ const Calculator = () => {
               onFocus={resetValueOnFocus}
               onBlur={handleBlur}
             />
-          </HorizontalStack>
-          <HorizontalStack space="5px">
-            <span style={{"color" : "#ffffff", "fontSize":"26px", "textAlign" : "center"}}>How rich <br/> are you?</span>
-            <TotalSavingsResult>${totalSavings}</TotalSavingsResult>
-          </HorizontalStack>
+          </VerticalStack>
+        </HorizontalStack>
+      </Section>
+      <Section heightValue={"30px"}><span style={{"fontSize" : "25px"}}>Break your savings into two life phases</span></Section>
+      <Section orange>
+        <VerticalStack>
+          <SavingsSection monthlyCallback={earlyLifeMonthlySavingsChanged} yearsCallback={earlyLifeYearsChanged} min={0} max={1000} interval={100}/>
+          <span style={{"color" : "white", "fontSize" : "20px", "paddingBottom" : "5px", "marginTop" : "10px"}}>
+            You are <b>{Number(startingAge) + Number(earlyLifeYears)}</b> and you will have <b>{earlyLifeTotalSaved}</b> saved!</span>
         </VerticalStack>
       </Section>
-      <Section heightValue={"30px"}><span style={{"font-size" : "20px"}}>Savings Phase 1: <i>EARLY LIFE</i></span></Section>
-      <Section orange heightValue={"auto"}>
-        <SavingsSection monthlyCallback={earlyLifeMonthlySavingsChanged} yearsCallback={earlyLifeYearsChanged} min={100} max={1000} interval={100}/>
-      </Section>
-      <Section heightValue={"30px"}><span style={{"font-size" : "20px"}}>Savings Phase 2: <i>BALLER LIFE</i></span></Section>
-      <Section orange heightValue={"auto"}>
-        <SavingsSection monthlyCallback={selectBallerLifeSavings} yearsCallback={selectBallerLifeYears} min={500} max={5000} interval={500}/>
+      <Section heightValue={"30px"}><span style={{"fontSize" : "25px"}}>In your second phase save more!</span></Section>
+      <Section orange heightValue={"auto"} style={{"paddingBottom" : "50px"}}>
+        <SavingsSection monthlyCallback={selectBallerLifeSavings} yearsCallback={selectBallerLifeYears} min={0} max={5000} interval={500}/>
       </Section>
     </Container>
     </>
@@ -124,17 +148,22 @@ const Container = styled.div`
 
 const Section = styled.section`
   width: 100%;
-  height: ${props => props.heightValue ? props.heightValue : '120px'};
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${props => (props.blue ? '#007BFF' : props.orange ? '#FFA500' : props.gray ? '#808080' : '#ffffff')};
+  background-color: ${props => (props.blue ? '#007BFF' : props.orange ? '#FFA500' : props.black ? '#111111' : props.gray ? 'gray' : '#ffffff')};
 `;
 
 const VerticalStack = styled.div`
-  dflex-direction: column;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 8px;
+
+  > *:not(:last-child) {
+    margin-bottom: ${props => props.space};
+  }
 `;
 
 const HorizontalStack = styled.div`
@@ -153,20 +182,18 @@ const HorizontalStack = styled.div`
 const ApplicationTitle = styled.span`
   font-family: Roboto;
   font-style: normal;
-  font-weight: 700;
   color: rgba(255, 255, 255, 1);
   font-size: 25px;
   text-align: center;
-  margin-top: 0;
 `;
 
-const InitialDeposit = styled.input`
+const StyledInput = styled.input`
   font-family: Roboto;
   font-style: normal;
   font-weight: 400;
   color: rgba(0, 0, 0, 1);
   font-size: 18px;
-  background-color: orange;
+  background-color: white;
   text-align: center;
   border-width: 0px;
   margin-top: 0;
