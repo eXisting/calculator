@@ -2,12 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import Calculator from './Calculator.js';
+import styled from 'styled-components';
 export { default as Untitled } from "./Calculator.js";
+
+const RootApp = styled.div`
+  width: 100vw;
+  height: 100vh;
+`;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Calculator />
+    <RootApp>
+      <Calculator />
+    </RootApp>
   </React.StrictMode>
 );
 

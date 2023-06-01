@@ -49,6 +49,46 @@ const SliderWithSnaps = ({ callback, min, max, interval, sign }) => {
 
   return (
     <Container>
+      <div style={{ display: 'flex', marginTop: '15px' }}>
+        {Array.from({ length: (max - min) / interval + 1 }).map((_, index) => {
+          const mark = min + index * interval;
+          const isMarkSelected = value === mark;
+          const markPosition = (mark - min) / (max - min) * 100; // Calculate the position based on percentage
+
+          const isEdgeElement = index == 0 || index == (max - min) / interval;
+
+          return (
+            <div key={mark} style={{ position: 'relative', flex: '1' }}>
+              {(isMarkSelected || isEdgeElement) && (
+                <div style={{
+                    position: 'absolute',
+                    top: isMarkSelected ? '-40px' : isEdgeElement ? '-30px' : '0px',
+                    left: `${markPosition}%`,
+                    transform: 'translateX(-50%)',
+                    textAlign: 'center',
+                    fontSize: '15px',
+                    marginTop: '10px',
+                    ...(isMarkSelected ? selectedMarkStyle : regularMarkStyle),
+                  }}
+                >
+                  {sign}{mark}
+                </div>
+              )}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: isMarkSelected ? '-15px' : '-3px',
+                  left: `${markPosition}%`,
+                  transform: 'translateX(-50%)',
+                  width: '3px',
+                  height: isMarkSelected ? '20px' : '8px',
+                  backgroundColor: isMarkSelected ? '#007BFF' : '#ffffff',
+                }}
+              />
+            </div>
+          );
+        })}
+      </div>
       <Slider
         min={min}
         max={max}
@@ -61,49 +101,13 @@ const SliderWithSnaps = ({ callback, min, max, interval, sign }) => {
         handleStyle={handleStyle}
         dotStyle={dotStyle}
       />
-      <div style={{ display: 'flex', marginTop: '15px' }}>
-        {Array.from({ length: (max - min) / interval + 1 }).map((_, index) => {
-          const mark = min + index * interval;
-          const isMarkSelected = value === mark;
-          const markPosition = (mark - min) / (max - min) * 100; // Calculate the position based on percentage
-
-          return (
-            <div key={mark} style={{ position: 'relative', flex: '1' }}>
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '-10px',
-                  left: `${markPosition}%`,
-                  transform: 'translateX(-50%)',
-                  width: '3px',
-                  height: '20px',
-                  backgroundColor: isMarkSelected ? '#007BFF' : '#ffffff',
-                }}
-              />
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '5px',
-                  left: `${markPosition}%`,
-                  transform: 'translateX(-50%)',
-                  textAlign: 'center',
-                  fontSize: '15px',
-                  marginTop: '10px',
-                  ...(isMarkSelected ? selectedMarkStyle : regularMarkStyle),
-                }}
-              >
-                {sign}{mark}
-              </div>
-            </div>
-          );
-        })}
-      </div>
     </Container>
   );
 };
 
 const Container = styled.div`
-  margin: 30px;
+  margin-left: 50px;
+  margin-right: 50px;
 `;
 
 export default SliderWithSnaps;

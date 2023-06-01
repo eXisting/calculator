@@ -26,6 +26,10 @@ const SavingsSection = ({monthlyCallback, yearsCallback, min, max, interval}) =>
 
 const Container = styled.div`
   width: 100vw; /* 100% of viewport width */
+  
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 const MonthlySavingsTitle = styled.span`
@@ -36,10 +40,9 @@ const MonthlySavingsTitle = styled.span`
   height: 28px;
   width: 100%;
   text-align: center;
-  margin-bottom: -30px;
-  margin-top: 30px;
   font-size: 18px;
   display: block;
+  margin-bottom: 30px;
 `;
 
 const NumberOfYears = styled.span`
@@ -52,8 +55,8 @@ const NumberOfYears = styled.span`
   text-align: center;
   font-size: 18px;
   display: block;
-  margin-top: 80px;
-  margin-bottom: -30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 `;
 
 export default SavingsSection;

@@ -82,60 +82,85 @@ const Calculator = () => {
   };
   
   return (
-    <>
     <Container>
-      <Section black heightValue={"45px"}>
-        <VerticalStack style={{ "padding" : "10px"}}>
-          <ApplicationTitle><b>Millionair Maker</b></ApplicationTitle>
-          <span style={{"color" : "#ffffff", "fontSize":"18px", "textAlign" : "center"}}>Longterm savings guarantees wealth</span>
+      <Section black ignore maxHeight={"10%"}>
+        <VerticalStack style={{ padding: '2vw' }}>
+          <ApplicationTitle>
+            <b>Millionair Maker</b>
+          </ApplicationTitle>
+          <span style={{ color: '#ffffff', fontSize: '2vh', textAlign: 'center' }}>
+            Longterm savings guarantees wealth
+          </span>
         </VerticalStack>
       </Section>
-      <Section blue heightValue={"150px"}>
+      <Section blue ignore maxHeight={"10%"}>
         <VerticalStack>
-          <HorizontalStack space="5px">
-            <span style={{"color" : "#ffffff", "fontSize":"20px", "textAlign" : "right", "paddingRight" : "15px"}}>How reach will<br/> you be?</span>
+          <HorizontalStack space="1vw">
+            <span style={{ color: '#ffffff', fontSize: '2vh', textAlign: 'right', paddingRight: '1.5vw' }}>
+              How rich will<br />you be?
+            </span>
             <TotalSavingsResult>${totalSavings}</TotalSavingsResult>
           </HorizontalStack>
         </VerticalStack>
       </Section>
-      <Section gray heightValue={"200px"}>
-        <HorizontalStack space="20px">
-          <VerticalStack space="10px">
-            <span style={{"color" : "#ffffff", "fontSize":"22px", "textAlign" : "center"}}>How old are you?</span>
-            <span style={{"color" : "#ffffff", "fontSize":"22px", "textAlign" : "center"}}>What are your current savings?</span>
+      <Section gray ignore maxHeight={"15%"}>
+        <HorizontalStack space="1vw">
+          <VerticalStack space="1vh">
+            <span style={{ color: '#ffffff', fontSize: '2.2vh', textAlign: 'right' }}>How old are you?</span>
+            <span style={{ color: '#ffffff', fontSize: '2.2vh', textAlign: 'right' }}>What are your current savings?</span>
           </VerticalStack>
-          <VerticalStack space="10px">
+          <VerticalStack space="0.5vh">
             <StyledInput
               value={startingAge}
               selectTextOnFocus={true}
               maxLength={2}
-              onInput={(e) => setStartingAge(e.target.value)}
+              onInput={e => setStartingAge(e.target.value)}
             />
             <StyledInput
               value={initialEarlyLifeAmount === '0' ? '$0' : `$${initialEarlyLifeAmount}`}
               selectTextOnFocus={true}
               maxLength={12}
-              onInput={(e) => earlyStageDepositChanged(e.target.value)}
+              onInput={e => earlyStageDepositChanged(e.target.value)}
               onFocus={resetValueOnFocus}
               onBlur={handleBlur}
             />
           </VerticalStack>
         </HorizontalStack>
       </Section>
-      <Section heightValue={"30px"}><span style={{"fontSize" : "25px"}}>Break your savings into two life phases</span></Section>
-      <Section orange>
+      <Section heightValue={'3vh'}>
+        <span style={{ fontSize: '2.5vh', marginLeft: '0.8vw' }}>Break your savings into two life phases</span>
+      </Section>
+      <Section orange ignore maxHeight={"35%"}>
         <VerticalStack>
-          <SavingsSection monthlyCallback={earlyLifeMonthlySavingsChanged} yearsCallback={earlyLifeYearsChanged} min={0} max={1000} interval={100}/>
-          <span style={{"color" : "white", "fontSize" : "20px", "paddingBottom" : "5px", "marginTop" : "10px"}}>
-            You are <b>{Number(startingAge) + Number(earlyLifeYears)}</b> and you will have <b>{earlyLifeTotalSaved}</b> saved!</span>
+          <SavingsSection
+            monthlyCallback={earlyLifeMonthlySavingsChanged}
+            yearsCallback={earlyLifeYearsChanged}
+            min={0}
+            max={1000}
+            interval={100}
+          />
+          <span
+            style={{
+              color: 'white',
+              fontSize: '2vh',
+              paddingBottom: '0.5vw',
+              marginTop: '3vh',
+              marginLeft: '2.5vw',
+              marginRight: '2.5vw',
+              textAlign: 'center',
+            }}>
+            You are <b>{Number(startingAge) + Number(earlyLifeYears)}</b> and you will have <b>${earlyLifeTotalSaved}</b>{' '}
+            saved!
+          </span>
         </VerticalStack>
       </Section>
-      <Section heightValue={"30px"}><span style={{"fontSize" : "25px"}}>In your second phase save more!</span></Section>
-      <Section orange heightValue={"auto"} style={{"paddingBottom" : "50px"}}>
-        <SavingsSection monthlyCallback={selectBallerLifeSavings} yearsCallback={selectBallerLifeYears} min={0} max={5000} interval={500}/>
+      <Section heightValue={'3vh'}>
+        <span style={{ fontSize: '2.5vh', marginLeft: '0.8vw' }}>In your second phase, save more!</span>
+      </Section>
+      <Section orange style={{ paddingBottom: '5vw' }} >
+        <SavingsSection monthlyCallback={selectBallerLifeSavings} yearsCallback={selectBallerLifeYears} min={0} max={5000} interval={500} />
       </Section>
     </Container>
-    </>
   );
 }
 
@@ -144,14 +169,21 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  height: 100vh;
+  max-height: 100%;
+  max-height: 100vh; /* Set the maximum height to screen height */
+  overflow: auto; /* Enable scrolling when content overflows */
 `;
 
 const Section = styled.section`
-  width: 100%;
+  flex: ${props => (props.heightValue || props.ignore ? 'none' : '1')};
   display: flex;
+  max-height: ${props => (props.maxHeight ? props.maxHeight : 'none')};
   justify-content: center;
   align-items: center;
-  background-color: ${props => (props.blue ? '#007BFF' : props.orange ? '#FFA500' : props.black ? '#111111' : props.gray ? 'gray' : '#ffffff')};
+  width: 100vw;
+  background-color: ${props =>
+    props.blue ? '#007BFF' : props.orange ? '#FFA500' : props.black ? '#111111' : props.gray ? 'gray' : '#ffffff'};
 `;
 
 const VerticalStack = styled.div`
@@ -159,7 +191,7 @@ const VerticalStack = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 8px;
+  padding: 1vw;
 
   > *:not(:last-child) {
     margin-bottom: ${props => props.space};
@@ -170,7 +202,7 @@ const HorizontalStack = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 1vw;
 
   > *:not(:last-child) {
     margin-right: ${props => props.space};
@@ -183,7 +215,7 @@ const ApplicationTitle = styled.span`
   font-family: Roboto;
   font-style: normal;
   color: rgba(255, 255, 255, 1);
-  font-size: 25px;
+  font-size: 3vh;
   text-align: center;
 `;
 
@@ -192,14 +224,14 @@ const StyledInput = styled.input`
   font-style: normal;
   font-weight: 400;
   color: rgba(0, 0, 0, 1);
-  font-size: 18px;
+  font-size: 1.8vh;
   background-color: white;
   text-align: center;
   border-width: 0px;
   margin-top: 0;
-  width: 120px;
-  height: 25px;
-  border-radius: 5px; /* Make the input round */
+  width: 15vw;
+  height: 3vh;
+  border-radius: 5px;
 `;
 
 const TotalSavingsResult = styled.span`
@@ -207,13 +239,9 @@ const TotalSavingsResult = styled.span`
   font-style: normal;
   font-weight: 400;
   color: rgba(255, 255, 255, 1);
-  font-size: 45px;
+  font-size: 4.5vw;
   text-align: center;
-  display: inline-block; /* Allow flexible width */
-  padding: 5px 10px; /* Add some padding for better appearance */
-  border: 1px solid white; /* Add white border */
+  display: inline-block;
 `;
-
-
 
 export default Calculator;
