@@ -63,6 +63,11 @@ const Calculator = () => {
     setEarlyLifeInitialDeposit(formattedValue);
   };
 
+  const startingAgeChanged = (value) => {
+    const numericValue = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+    setStartingAge(numericValue);
+  };
+
   const resetValueOnFocus = () => {
     setEarlyLifeInitialDeposit('');
   };
@@ -107,7 +112,8 @@ const Calculator = () => {
               value={startingAge}
               selectTextOnFocus={true}
               maxLength={2}
-              onInput={e => setStartingAge(e.target.value)}
+              width={"10%"}
+              onInput={e => startingAgeChanged(e.target.value)}
             />
           </HorizontalStack>
       </Section>
@@ -122,6 +128,7 @@ const Calculator = () => {
             value={initialEarlyLifeAmount === '0' ? '$0' : `$${initialEarlyLifeAmount}`}
             selectTextOnFocus={true}
             maxLength={12}
+            width={"45%"}
             onInput={e => earlyStageDepositChanged(e.target.value)}
             onFocus={resetValueOnFocus}
             onBlur={handleBlur}
@@ -227,7 +234,7 @@ const HorizontalStack = styled.div`
     margin-right: ${props => props.space};
   }
 
-  justify-content: space-between;
+  justify-content: center; /* Updated value */
 `;
 
 const ApplicationTitle = styled.span`
@@ -248,7 +255,7 @@ const StyledInput = styled.input`
   text-align: center;
   border-width: 0px;
   margin-top: 0;
-  width: 20vw;
+  width: ${props => props.width};
   height: 3vh;
   border-radius: 5px;
 `;
