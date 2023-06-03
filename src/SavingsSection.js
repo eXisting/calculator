@@ -12,7 +12,7 @@ const SavingsSection = ({step, monthlyCallback, yearsCallback, min, max, interva
           max={20} 
           interval={5}
         />
-      <NumberOfYears>What are your monthly savings?</NumberOfYears>
+      <NumberOfYears>What is your monthly savings?</NumberOfYears>
       <SliderWithSnaps
         callback={monthlyCallback} 
         min={min} 

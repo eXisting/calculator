@@ -100,7 +100,7 @@ const Calculator = () => {
       </Section>
       <Section backgroundColor="#0476bb" ignore maxHeight={"15%"}>
         <HorizontalStack space="1vw">
-          <span style={{ color: '#ffffff', fontSize: '3vh', textAlign: 'center', marginRight: '2vw' }}>
+          <span style={{ color: '#ffffff', fontSize: '3vh', textAlign: 'center', marginRight: '2vw'}}>
             <b>Your total savings! ${totalSavings}</b>
           </span>
         </HorizontalStack>
@@ -122,7 +122,7 @@ const Calculator = () => {
         <Square>
           <span style={{ color: '#ffffff', fontSize: '2.2vh', textAlign: 'center' }}><b>1</b></span>
         </Square>
-        <HorizontalStack space="1vh" align="right">
+        <HorizontalStack space="1vh" align="right" style={{paddingLeft:"10vw"}}>
           <span style={{ color: '#ffffff', fontSize: '2.2vh', textAlign: 'right' }}><b>Your current savings?</b></span>
           <StyledInput
             value={initialEarlyLifeAmount === '0' ? '$0' : `$${initialEarlyLifeAmount}`}
