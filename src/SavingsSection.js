@@ -2,31 +2,29 @@ import React, { Component } from "react";
 import styled, { css } from "styled-components";
 import SliderWithSnaps from "./SliderWithSnaps";
 
-const SavingsSection = ({monthlyCallback, yearsCallback, min, max, interval}) => {
+const SavingsSection = ({step, monthlyCallback, yearsCallback, min, max, interval}) => {
   return (
     <Container>
-      <MonthlySavingsTitle>What are your monthly savings?</MonthlySavingsTitle>
+      <MonthlySavingsTitle>Number of years in <b>Step {step}</b></MonthlySavingsTitle>
       <SliderWithSnaps 
-          callback={monthlyCallback} 
-          min={min} 
-          max={max} 
-          interval={interval}
-          sign={'$'}
+          callback={yearsCallback} 
+          min={0} 
+          max={20} 
+          interval={5}
         />
-      <NumberOfYears>Number of years you will save.</NumberOfYears>
+      <NumberOfYears>What are your monthly savings?</NumberOfYears>
       <SliderWithSnaps
-        callback={yearsCallback} 
-        min={0} 
-        max={20} 
-        interval={5}
+        callback={monthlyCallback} 
+        min={min} 
+        max={max} 
+        interval={interval}
+        sign={'$'}
       />
     </Container>
   );
 }
 
 const Container = styled.div`
-  width: 100vw; /* 100% of viewport width */
-  
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -36,27 +34,30 @@ const MonthlySavingsTitle = styled.span`
   font-family: Roboto;
   font-style: normal;
   font-weight: 400;
-  color: rgba(255,255,255,1);
-  height: 28px;
-  width: 100%;
+  color: rgba(255, 255, 255, 1);
+  width: 100vw;
   text-align: center;
-  font-size: 18px;
+  font-size: 2.5vh; /* Adjust the value as needed */
   display: block;
-  margin-bottom: 30px;
+  margin-top: 3.5vh; /* Adjust the value as needed */
+
+  /* Styles for "Step" */
+  > b {
+    font-weight: bold;
+    color: #21759f;
+  }
 `;
 
 const NumberOfYears = styled.span`
   font-family: Roboto;
   font-style: normal;
   font-weight: 400;
-  color: rgba(255,255,255,1);
-  height: 28px;
-  width: 100%;
+  color: rgba(255, 255, 255, 1);
+  width: 100vw;
   text-align: center;
-  font-size: 18px;
+  font-size: 2.5vh; /* Adjust the value as needed */
   display: block;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 4vh; /* Adjust the value as needed */
 `;
 
 export default SavingsSection;

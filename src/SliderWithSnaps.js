@@ -24,67 +24,62 @@ const SliderWithSnaps = ({ callback, min, max, interval, sign }) => {
 
   const selectedMarkStyle = {
     fontWeight: 'bold',
-    height: '16px',
-    color: '#007BFF',
+    height: '3vh',
+    color: '#ffffff',
   };
 
   const regularMarkStyle = {
     fontWeight: 'regular',
-    height: '16px',
+    height: '2.5vh',
     color: '#ffffff',
   };
 
   const handleStyle = {
-    borderColor: '#007BFF',
-    borderWidth: '7px',
-    height: '30px',
-    width: '30px',
-    marginTop: '-10px',
-    backgroundColor: '#fff',
-  };
-
-  const dotStyle = {
-    backgroundColor: '#fff',
+    borderColor: '#929292',
+    borderWidth: '0.1vh',
+    height: '3vh',
+    width: '3vh',
+    marginTop: '-1.5vh',
+    backgroundColor: '#929292',
+    opacity: "1"
   };
 
   return (
     <Container>
-      <div style={{ display: 'flex', marginTop: '15px' }}>
+      <div style={{ display: 'flex', marginTop: '0.75vh' }}>
         {Array.from({ length: (max - min) / interval + 1 }).map((_, index) => {
           const mark = min + index * interval;
           const isMarkSelected = value === mark;
           const markPosition = (mark - min) / (max - min) * 100; // Calculate the position based on percentage
 
-          const isEdgeElement = index == 0 || index == (max - min) / interval;
+          const isEdgeElement = index == (max - min) / interval;
 
           return (
             <div key={mark} style={{ position: 'relative', flex: '1' }}>
-              {(isMarkSelected || isEdgeElement) && (
+              {isEdgeElement && (
                 <div style={{
                     position: 'absolute',
-                    top: isMarkSelected ? '-40px' : isEdgeElement ? '-30px' : '0px',
+                    top: '3vh',
                     left: `${markPosition}%`,
                     transform: 'translateX(-50%)',
                     textAlign: 'center',
-                    fontSize: '15px',
-                    marginTop: '10px',
                     ...(isMarkSelected ? selectedMarkStyle : regularMarkStyle),
                   }}
                 >
                   {sign}{mark}
                 </div>
               )}
-              <div
+              {index > 0 && <div
                 style={{
                   position: 'absolute',
-                  top: isMarkSelected ? '-15px' : '-3px',
+                  top: '1vh',
                   left: `${markPosition}%`,
                   transform: 'translateX(-50%)',
-                  width: '3px',
-                  height: isMarkSelected ? '20px' : '8px',
-                  backgroundColor: isMarkSelected ? '#007BFF' : '#ffffff',
+                  width: '1px',
+                  height: '2vh',
+                  backgroundColor: '#111111',
                 }}
-              />
+              />}
             </div>
           );
         })}
@@ -96,18 +91,17 @@ const SliderWithSnaps = ({ callback, min, max, interval, sign }) => {
         value={value}
         onChange={handleSliderChange}
         onAfterChange={handleSliderSnap}
-        railStyle={{ backgroundColor: '#ccc', height: '8px', borderRadius: '4px' }}
-        trackStyle={{ backgroundColor: '#007BFF', height: '8px', borderRadius: '4px' }}
+        railStyle={{ backgroundColor: '#9c8f7d', height: '0.2vh' }}
+        trackStyle={{ backgroundColor: '#111111', height: '0.2vh' }}
         handleStyle={handleStyle}
-        dotStyle={dotStyle}
       />
     </Container>
   );
 };
 
 const Container = styled.div`
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 8vh;
+  margin-right: 8vh;
 `;
 
 export default SliderWithSnaps;
