@@ -159,8 +159,7 @@ const Calculator = () => {
               marginRight: '3vw',
               textAlign: 'center',
             }}>
-            You are <b>{Number(startingAge) + Number(earlyLifeYears)}</b> and you saved <b>${earlyLifeTotalSaved}</b>{' '}
-            saved!
+            You are <b>{Number(startingAge) + Number(earlyLifeYears)}</b> and you saved <b>${earlyLifeTotalSaved}</b>!
           </span>
         </VerticalStack>
       </Section>
