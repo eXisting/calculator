@@ -120,7 +120,7 @@ const Calculator = () => {
       <Section heightValue={'0.8vh'} maxHeight={"0.8vh"} style={{"height" : "0.8vh"}}></Section>
       <Section backgroundColor="#fead00" maxHeight={"8vh"} style={{"heigth" : "8vh"}}>
         <Square>
-          <span style={{ color: '#ffffff', fontSize: '2.2vh', textAlign: 'center' }}><b>1</b></span>
+          <span style={{ color: '#111111', fontSize: '2.2vh', textAlign: 'center' }}><b>1</b></span>
         </Square>
         <HorizontalStack space="1vh" align="right" style={{paddingLeft:"10vw"}}>
           <span style={{ color: '#ffffff', fontSize: '2.2vh', textAlign: 'right' }}><b>Your current savings?</b></span>
@@ -138,37 +138,35 @@ const Calculator = () => {
       <Section heightValue={'0.8vh'} maxHeight={"0.8vh"} style={{"height" : "0.8vh"}}></Section>
       <Section backgroundColor="#fead00" ignore maxHeight={"50%"}>
         <Square>
-          <span style={{ color: '#ffffff', fontSize: '2.2vh', textAlign: 'center' }}><b>2</b></span>
+          <span style={{ color: '#111111', fontSize: '2.2vh', textAlign: 'center' }}><b>2</b></span>
         </Square>
         <VerticalStack>
           <SavingsSection
             step={2}
+            age={Number(startingAge) + Number(earlyLifeYears)}  
+            totalAmount={earlyLifeTotalSaved}
             monthlyCallback={earlyLifeMonthlySavingsChanged}
             yearsCallback={earlyLifeYearsChanged}
             min={0}
             max={1000}
             interval={100}
           />
-          <span
-            style={{
-              color: 'white',
-              fontSize: '3vh',
-              paddingBottom: '0.5vw',
-              marginTop: '5vh',
-              marginLeft: '3vw',
-              marginRight: '3vw',
-              textAlign: 'center',
-            }}>
-            You are <b>{Number(startingAge) + Number(earlyLifeYears)}</b> and you saved <b>${earlyLifeTotalSaved}</b>!
-          </span>
         </VerticalStack>
       </Section>
       <Section heightValue={'0.8vh'} maxHeight={"0.8vh"} style={{"height" : "0.8vh"}}></Section>
       <Section backgroundColor="#fead00" style={{ paddingBottom: '5vw' }} align="top"  maxHeight={"50%"}>
         <Square>
-          <span style={{ color: '#ffffff', fontSize: '2.2vh', textAlign: 'center' }}><b>3</b></span>
+          <span style={{ color: '#111111', fontSize: '2.2vh', textAlign: 'center' }}><b>3</b></span>
         </Square>
-        <SavingsSection step={3} monthlyCallback={selectBallerLifeSavings} yearsCallback={selectBallerLifeYears} min={0} max={5000} interval={500} />
+        <SavingsSection 
+          step={3} 
+          age={Number(startingAge) + Number(earlyLifeYears) + Number(ballerYears)}  
+          totalAmount={totalSavings}
+          monthlyCallback={selectBallerLifeSavings} 
+          yearsCallback={selectBallerLifeYears} 
+          min={0} 
+          max={5000} 
+          interval={500}/>
       </Section>
     </Container>
   );
@@ -198,13 +196,12 @@ const Section = styled.section`
 
 const Square = styled.div`
   position: absolute;
-  top: 0.5vh;
-  left: 1vw;
+  top: 0px;
+  left: 0px;
   width: 4vw;
   height: 2vh;
   padding: 1vh;
-  background-color: #0177bb;
-  border-radius: 1vh;
+  background-color: #ffffff;
   align-items: center;
   justify-content: center;
   text-align: center;

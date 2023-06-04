@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled, { css } from "styled-components";
 import SliderWithSnaps from "./SliderWithSnaps";
 
-const SavingsSection = ({step, monthlyCallback, yearsCallback, min, max, interval}) => {
+const SavingsSection = ({step, age, totalAmount, monthlyCallback, yearsCallback, min, max, interval}) => {
   return (
     <Container>
       <MonthlySavingsTitle>Number of years in <b>Step {step}</b></MonthlySavingsTitle>
@@ -20,6 +20,11 @@ const SavingsSection = ({step, monthlyCallback, yearsCallback, min, max, interva
         interval={interval}
         sign={'$'}
       />
+      <SpanContainer>
+        <span>
+          You are <b>{age}</b> and you saved <b>${totalAmount}</b>!
+        </span>
+      </SpanContainer>
     </Container>
   );
 }
@@ -28,6 +33,21 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`;
+
+const SpanContainer = styled.div`
+color: white;
+font-size: 3vh;
+padding-top: 4vh;
+padding-bottom: 0.5vh;
+text-align: center;
+display: flex;
+align-items: center;
+justify-content: center;
+
+  > b {
+    font-weight: bold;
+  }
 `;
 
 const MonthlySavingsTitle = styled.span`

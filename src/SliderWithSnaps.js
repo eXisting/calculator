@@ -23,9 +23,9 @@ const SliderWithSnaps = ({ callback, min, max, interval, sign }) => {
   }
 
   const selectedMarkStyle = {
-    fontWeight: 'bold',
-    height: '3vh',
-    color: '#ffffff',
+    fontWeight: 'regular',
+    height: '2.5vh',
+    color: '#0096FF',
   };
 
   const regularMarkStyle = {
@@ -46,7 +46,7 @@ const SliderWithSnaps = ({ callback, min, max, interval, sign }) => {
 
   return (
     <Container>
-      <div style={{ display: 'flex', marginTop: '0.75vh' }}>
+      <div style={{ display: 'flex', marginTop: '4vh' }}>
         {Array.from({ length: (max - min) / interval + 1 }).map((_, index) => {
           const mark = min + index * interval;
           const isMarkSelected = value === mark;
@@ -56,10 +56,10 @@ const SliderWithSnaps = ({ callback, min, max, interval, sign }) => {
 
           return (
             <div key={mark} style={{ position: 'relative', flex: '1' }}>
-              {isEdgeElement && (
+              {(isEdgeElement || isMarkSelected) && (
                 <div style={{
                     position: 'absolute',
-                    top: '3vh',
+                    top: '-4vh',
                     left: `${markPosition}%`,
                     transform: 'translateX(-50%)',
                     textAlign: 'center',
@@ -72,7 +72,7 @@ const SliderWithSnaps = ({ callback, min, max, interval, sign }) => {
               {index > 0 && <div
                 style={{
                   position: 'absolute',
-                  top: '1vh',
+                  top: '-1vh',
                   left: `${markPosition}%`,
                   transform: 'translateX(-50%)',
                   width: '1px',
