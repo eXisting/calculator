@@ -4,12 +4,12 @@ import SavingsSection from "./SavingsSection";
 
 const Calculator = () => {
   const [initialEarlyLifeAmount, setEarlyLifeInitialDeposit] = useState("5000");
-  const [startingAge, setStartingAge] = useState(15);
-  const [earlyLifeMonthlySavings, setEarlyLifeMonthlySavings] = useState(0);
-  const [earlyLifeYears, setEarlyLifeYears] = useState(0);
+  const [startingAge, setStartingAge] = useState(25);
+  const [earlyLifeMonthlySavings, setEarlyLifeMonthlySavings] = useState(300);
+  const [earlyLifeYears, setEarlyLifeYears] = useState(20);
   const [earlyLifeTotalSaved, setEarlyLifeTotal] = useState(0);
-  const [ballerYears, setBallerYears] = useState(0);
-  const [ballerSavings, setBallerSavings] = useState(0);
+  const [ballerYears, setBallerYears] = useState(20);
+  const [ballerSavings, setBallerSavings] = useState(1500);
   const [totalSavings, setTotalSavings] = useState("");
 
   useEffect(() => {
@@ -150,11 +150,13 @@ const Calculator = () => {
             min={0}
             max={1000}
             interval={100}
+            initialAgeValue={earlyLifeYears}
+            initialSavingsValue={earlyLifeMonthlySavings}
           />
         </VerticalStack>
       </Section>
       <Section heightValue={'0.8vh'} maxHeight={"0.8vh"} style={{"height" : "0.8vh"}}></Section>
-      <Section backgroundColor="#fead00" style={{ paddingBottom: '5vw' }} align="top"  maxHeight={"50%"}>
+      <Section backgroundColor="#fead00" style={{ paddingBottom: '10vw' }} align="top"  maxHeight={"50%"}>
         <Square>
           <span style={{ color: '#111111', fontSize: '2.2vh', textAlign: 'center' }}><b>3</b></span>
         </Square>
@@ -166,7 +168,10 @@ const Calculator = () => {
           yearsCallback={selectBallerLifeYears} 
           min={0} 
           max={5000} 
-          interval={500}/>
+          interval={500}
+          initialAgeValue={ballerYears}
+          initialSavingsValue={ballerSavings}
+          />
       </Section>
     </Container>
   );

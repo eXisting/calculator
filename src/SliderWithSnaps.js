@@ -3,8 +3,8 @@ import Slider from 'rc-slider';
 import styled, { css } from "styled-components";
 import 'rc-slider/assets/index.css';
 
-const SliderWithSnaps = ({ callback, min, max, interval, sign }) => {
-  const [value, setValue] = useState(min);
+const SliderWithSnaps = ({ callback, min, max, interval, sign, initialValue }) => {
+  const [value, setValue] = useState(initialValue);
 
   const handleSliderChange = (newValue) => {
     setValue(newValue);

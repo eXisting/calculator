@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled, { css } from "styled-components";
 import SliderWithSnaps from "./SliderWithSnaps";
 
-const SavingsSection = ({step, age, totalAmount, monthlyCallback, yearsCallback, min, max, interval}) => {
+const SavingsSection = ({step, age, totalAmount, monthlyCallback, yearsCallback, min, max, interval, initialAgeValue, initialSavingsValue}) => {
   return (
     <Container>
       <MonthlySavingsTitle>Number of years in <b>Step {step}</b></MonthlySavingsTitle>
@@ -11,6 +11,7 @@ const SavingsSection = ({step, age, totalAmount, monthlyCallback, yearsCallback,
           min={0} 
           max={20} 
           interval={5}
+          initialValue={initialAgeValue}
         />
       <NumberOfYears>What is your monthly savings?</NumberOfYears>
       <SliderWithSnaps
@@ -19,6 +20,7 @@ const SavingsSection = ({step, age, totalAmount, monthlyCallback, yearsCallback,
         max={max} 
         interval={interval}
         sign={'$'}
+        initialValue={initialSavingsValue}
       />
       <SpanContainer>
         <span>
