@@ -117,7 +117,7 @@ const Calculator = () => {
             />
           </HorizontalStack>
       </Section>
-      <Section heightValue={'0.8vh'} maxHeight={"0.8vh"} style={{"height" : "0.8vh"}}></Section>
+      <Section ignore maxHeight={"0.8vh"} style={{"height" : "0.8vh"}}></Section>
       <Section backgroundColor="#fead00" maxHeight={"8vh"} style={{"heigth" : "8vh"}}>
         <Square>
           <span style={{ color: '#111111', fontSize: '2.2vh', textAlign: 'center' }}><b>1</b></span>
@@ -135,7 +135,7 @@ const Calculator = () => {
           />
         </HorizontalStack>
       </Section>
-      <Section heightValue={'0.8vh'} maxHeight={"0.8vh"} style={{"height" : "0.8vh"}}></Section>
+      <Section ignore maxHeight={"0.8vh"} style={{"height" : "0.8vh"}}></Section>
       <Section backgroundColor="#fead00" ignore maxHeight={"50%"}>
         <Square>
           <span style={{ color: '#111111', fontSize: '2.2vh', textAlign: 'center' }}><b>2</b></span>
@@ -155,7 +155,7 @@ const Calculator = () => {
           />
         </VerticalStack>
       </Section>
-      <Section heightValue={'0.8vh'} maxHeight={"0.8vh"} style={{"height" : "0.8vh"}}></Section>
+      <Section ignore maxHeight={"0.8vh"} style={{"height" : "0.8vh"}}></Section>
       <Section backgroundColor="#fead00" style={{ paddingBottom: '10vw' }} align="top"  maxHeight={"50%"}>
         <Square>
           <span style={{ color: '#111111', fontSize: '2.2vh', textAlign: 'center' }}><b>3</b></span>
