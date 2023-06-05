@@ -24,13 +24,13 @@ const SliderWithSnaps = ({ callback, min, max, interval, sign, initialValue }) =
 
   const selectedMarkStyle = {
     fontWeight: 'regular',
-    height: '2.5vh',
+    height: '1.8vh',
     color: '#0096FF',
   };
 
   const regularMarkStyle = {
     fontWeight: 'regular',
-    height: '2.5vh',
+    height: '1.8vh',
     color: '#ffffff',
   };
 
@@ -46,7 +46,7 @@ const SliderWithSnaps = ({ callback, min, max, interval, sign, initialValue }) =
 
   return (
     <Container>
-      <div style={{ display: 'flex', marginTop: '4vh' }}>
+      <div style={{ display: 'flex', marginTop: '4.5vh' }}>
         {Array.from({ length: (max - min) / interval + 1 }).map((_, index) => {
           const mark = min + index * interval;
           const isMarkSelected = value === mark;
@@ -59,7 +59,7 @@ const SliderWithSnaps = ({ callback, min, max, interval, sign, initialValue }) =
               {(isEdgeElement || isMarkSelected) && (
                 <div style={{
                     position: 'absolute',
-                    top: '-4vh',
+                    top: '-4.5vh',
                     left: `${markPosition}%`,
                     transform: 'translateX(-50%)',
                     textAlign: 'center',
@@ -72,11 +72,11 @@ const SliderWithSnaps = ({ callback, min, max, interval, sign, initialValue }) =
               {index > 0 && <div
                 style={{
                   position: 'absolute',
-                  top: '-1vh',
+                  top: '-0.5vh',
                   left: `${markPosition}%`,
                   transform: 'translateX(-50%)',
                   width: '1px',
-                  height: '2vh',
+                  height: '1.2vh',
                   backgroundColor: '#111111',
                 }}
               />}
@@ -100,8 +100,8 @@ const SliderWithSnaps = ({ callback, min, max, interval, sign, initialValue }) =
 };
 
 const Container = styled.div`
-  margin-left: 8vh;
-  margin-right: 8vh;
+  margin-left: 8vw;
+  margin-right: 8vw;
 `;
 
 export default SliderWithSnaps;

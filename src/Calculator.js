@@ -88,26 +88,26 @@ const Calculator = () => {
   
   return (
     <Container>
-      <Section backgroundColor="#111111" ignore maxHeight={"15%"}>
+      <Section backgroundColor="#111111" ignore maxHeight={"10%"}>
         <VerticalStack style={{ padding: '0.2vw' }}>
           <ApplicationTitle>
             <b>3 Step Millionaire</b>
           </ApplicationTitle>
-          <span style={{ color: '#ffffff', fontSize: '2vh', textAlign: 'center' }}>
+          <span style={{ color: '#ffffff', fontSize: '1.5vh', textAlign: 'center' }}>
             <b>Wealth is built in life stages</b>
           </span>
         </VerticalStack>
       </Section>
-      <Section backgroundColor="#0476bb" ignore maxHeight={"15%"}>
+      <Section backgroundColor="#0476bb" ignore maxHeight={"10%"}>
         <HorizontalStack space="1vw">
-          <span style={{ color: '#ffffff', fontSize: '3vh', textAlign: 'center', marginRight: '2vw'}}>
+          <span style={{ color: '#ffffff', fontSize: '2vh', textAlign: 'center', marginRight: '2vw'}}>
             <b>Your total savings! ${totalSavings}</b>
           </span>
         </HorizontalStack>
       </Section>
-      <Section backgroundColor="#929292" ignore maxHeight={"35%"}>
+      <Section backgroundColor="#929292" ignore maxHeight={"25%"}>
           <HorizontalStack space="1vh" align="right">
-            <span style={{ color: '#ffffff', fontSize: '2.2vh', textAlign: 'right' }}><b>How old are you?</b></span>
+            <span style={{ color: '#ffffff', fontSize: '1.8vh', textAlign: 'right' }}><b>How old are you?</b></span>
             <StyledInput
               value={startingAge}
               selectTextOnFocus={true}
@@ -120,10 +120,10 @@ const Calculator = () => {
       <Section ignore maxHeight={"0.8vh"} style={{"height" : "0.8vh"}}></Section>
       <Section backgroundColor="#fead00" maxHeight={"8vh"} style={{"heigth" : "8vh"}}>
         <Square>
-          <span style={{ color: '#111111', fontSize: '2.2vh', textAlign: 'center' }}><b>1</b></span>
+          <span style={{ color: '#111111', fontSize: '1.5vh', textAlign: 'center' }}><b>1</b></span>
         </Square>
         <HorizontalStack space="1vh" align="right" style={{paddingLeft:"10vw"}}>
-          <span style={{ color: '#ffffff', fontSize: '2.2vh', textAlign: 'right' }}><b>Your current savings?</b></span>
+          <span style={{ color: '#ffffff', fontSize: '1.8vh', textAlign: 'right' }}><b>Your current savings?</b></span>
           <StyledInput
             value={initialEarlyLifeAmount === '0' ? '$0' : `$${initialEarlyLifeAmount}`}
             selectTextOnFocus={true}
@@ -138,7 +138,7 @@ const Calculator = () => {
       <Section ignore maxHeight={"0.8vh"} style={{"height" : "0.8vh"}}></Section>
       <Section backgroundColor="#fead00" ignore maxHeight={"50%"}>
         <Square>
-          <span style={{ color: '#111111', fontSize: '2.2vh', textAlign: 'center' }}><b>2</b></span>
+          <span style={{ color: '#111111', fontSize: '1.8vh', textAlign: 'center' }}><b>2</b></span>
         </Square>
         <VerticalStack>
           <SavingsSection
@@ -158,7 +158,7 @@ const Calculator = () => {
       <Section ignore maxHeight={"0.8vh"} style={{"height" : "0.8vh"}}></Section>
       <Section backgroundColor="#fead00" style={{ paddingBottom: '10vw' }} align="top"  maxHeight={"50%"}>
         <Square>
-          <span style={{ color: '#111111', fontSize: '2.2vh', textAlign: 'center' }}><b>3</b></span>
+          <span style={{ color: '#111111', fontSize: '1.8vh', textAlign: 'center' }}><b>3</b></span>
         </Square>
         <SavingsSection 
           step={3} 
@@ -242,7 +242,7 @@ const ApplicationTitle = styled.span`
   font-family: Roboto;
   font-style: normal;
   color: rgba(255, 255, 255, 1);
-  font-size: 3.5vh;
+  font-size: 2.5vh;
   text-align: center;
 `;
 
