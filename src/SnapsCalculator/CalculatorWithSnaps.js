@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import SavingsSection from "./SavingsSection";
 
-const Calculator = () => {
+const CalculatorWithSnaps = () => {
   const [initialEarlyLifeAmount, setEarlyLifeInitialDeposit] = useState("5000");
   const [startingAge, setStartingAge] = useState(25);
   const [earlyLifeMonthlySavings, setEarlyLifeMonthlySavings] = useState(300);
@@ -91,23 +91,23 @@ const Calculator = () => {
       <Section backgroundColor="#111111" ignore maxHeight={"10%"}>
         <VerticalStack style={{ padding: '0.2vw' }}>
           <ApplicationTitle>
-            <b>3 Step Millionaire</b>
+            <b>3 Phase Millionaire</b>
           </ApplicationTitle>
           <span style={{ color: '#ffffff', fontSize: '1.5vh', textAlign: 'center' }}>
-            <b>Wealth is built in life stages</b>
+            <b>TSavings + Early Life Savings + Later Life Savings</b>
           </span>
         </VerticalStack>
       </Section>
-      <Section backgroundColor="#0476bb" ignore maxHeight={"10%"}>
+      <Section backgroundColor="#0476bb" ignore maxHeight={"20%"} style={{"height":"12vh"}}>
         <HorizontalStack space="1vw">
-          <span style={{ color: '#ffffff', fontSize: '2vh', textAlign: 'center', marginRight: '2vw'}}>
-            <b>Your total savings! ${totalSavings}</b>
+          <span style={{ color: '#ffffff', fontSize: '4vh', textAlign: 'center', marginRight: '2vw'}}>
+            <b>Your total savings! <br></br> ${totalSavings}</b>
           </span>
         </HorizontalStack>
       </Section>
       <Section backgroundColor="#929292" ignore maxHeight={"25%"}>
-          <HorizontalStack space="1vh" align="right">
-            <span style={{ color: '#ffffff', fontSize: '1.8vh', textAlign: 'right' }}><b>How old are you?</b></span>
+          <HorizontalStack space="3vh" align="right">
+            <span style={{ color: '#ffffff', fontSize: '2vh', textAlign: 'right' }}><b>How old are you?</b></span>
             <StyledInput
               value={startingAge}
               selectTextOnFocus={true}
@@ -123,7 +123,7 @@ const Calculator = () => {
           <span style={{ color: '#111111', fontSize: '1.5vh', textAlign: 'center' }}><b>1</b></span>
         </Square>
         <HorizontalStack space="1vh" align="right" style={{paddingLeft:"10vw"}}>
-          <span style={{ color: '#ffffff', fontSize: '1.8vh', textAlign: 'right' }}><b>Your current savings?</b></span>
+          <span style={{ color: '#ffffff', fontSize: '1.8vh', textAlign: 'right' }}><b>What is your total cash today?</b></span>
           <StyledInput
             value={initialEarlyLifeAmount === '0' ? '$0' : `$${initialEarlyLifeAmount}`}
             selectTextOnFocus={true}
@@ -140,26 +140,30 @@ const Calculator = () => {
         <Square>
           <span style={{ color: '#111111', fontSize: '1.8vh', textAlign: 'center' }}><b>2</b></span>
         </Square>
-        <VerticalStack>
-          <SavingsSection
-            step={2}
-            age={Number(startingAge) + Number(earlyLifeYears)}  
-            totalAmount={earlyLifeTotalSaved}
-            monthlyCallback={earlyLifeMonthlySavingsChanged}
-            yearsCallback={earlyLifeYearsChanged}
-            min={0}
-            max={1000}
-            interval={100}
-            initialAgeValue={earlyLifeYears}
-            initialSavingsValue={earlyLifeMonthlySavings}
-          />
-        </VerticalStack>
+        <SectionTitle>
+          <span style={{ color: '#111111', fontSize: '1.5vh', textAlign: 'center' }}>In the 2nd phase of life, you save a little less.</span>
+        </SectionTitle>
+        <SavingsSection
+          step={2}
+          age={Number(startingAge) + Number(earlyLifeYears)}  
+          totalAmount={earlyLifeTotalSaved}
+          monthlyCallback={earlyLifeMonthlySavingsChanged}
+          yearsCallback={earlyLifeYearsChanged}
+          min={0}
+          max={1000}
+          interval={100}
+          initialAgeValue={earlyLifeYears}
+          initialSavingsValue={earlyLifeMonthlySavings}
+        />
       </Section>
       <Section ignore maxHeight={"0.8vh"} style={{"height" : "0.8vh"}}></Section>
       <Section backgroundColor="#fead00" style={{ paddingBottom: '10vw' }} align="top"  maxHeight={"50%"}>
         <Square>
           <span style={{ color: '#111111', fontSize: '1.8vh', textAlign: 'center' }}><b>3</b></span>
         </Square>
+        <SectionTitle>
+          <span style={{ color: '#111111', fontSize: '1.5vh', textAlign: 'center' }}>In the 3rd phase of life, you save more.</span>
+        </SectionTitle>
         <SavingsSection 
           step={3} 
           age={Number(startingAge) + Number(earlyLifeYears) + Number(ballerYears)}  
@@ -213,13 +217,28 @@ const Square = styled.div`
   display: flex;
 `;
 
+const SectionTitle = styled.div`
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: fit-content;
+  height: 2vh;
+  padding: 1vh;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+`;
+
 const VerticalStack = styled.div`
   display: flex;
   flex-direction: column;
   align-items: ${props => props.align ? props.align : "center"};
   justify-content: center;
-  margin-top: 0.5vh;
-  padding: 0.5vh;
+  margin-top: ${props => props.ignoreMarginTop ? '0px' : '0.5vh'};
+  padding: ${props => props.ignorePadding ? '0px' : '0.5vh'};
 
   > *:not(:last-child) {
     margin-bottom: ${props => props.space};
@@ -261,14 +280,4 @@ const StyledInput = styled.input`
   border-radius: 5px;
 `;
 
-const TotalSavingsResult = styled.span`
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 1);
-  font-size: 4vh;
-  text-align: center;
-  display: inline-block;
-`;
-
-export default Calculator;
+export default CalculatorWithSnaps;

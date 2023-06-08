@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
-import Calculator from './Calculator.js';
+import CalculatorWithSnaps from './SnapsCalculator/CalculatorWithSnaps.js';
 import styled from 'styled-components';
-export { default as Untitled } from "./Calculator.js";
 
 const RootApp = styled.div`
   width: 100vw;
@@ -14,7 +13,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <RootApp>
-      <Calculator />
+      <CalculatorWithSnaps />
     </RootApp>
   </React.StrictMode>
 );
