@@ -8,11 +8,8 @@ const HomePage = () => {
 
   const selectDesiredValue = value => {
     setSelectedValue(value === selectedValue ? '' : value);
+    navigate(`/calculated/${value}`);
   };
-
-  const calculate = () => {
-    navigate(`/calculated/${selectedValue}`);
-  }
 
   return (
     <Container>
@@ -70,7 +67,6 @@ const HomePage = () => {
             <Button active={selectedValue === 3000000} onClick={() => selectDesiredValue(3000000)}>$3,000,000</Button>
             <Button active={selectedValue === 5000000} onClick={() => selectDesiredValue(5000000)}>$5,000,000</Button>
           </HorizontalStack>
-         <Button style={{marginTop:"4vh"}} width={"25vh"} color='#3e3f42' onClick={() => calculate()}>Let’s go!</Button>
       </Section>
     </Container>
   );

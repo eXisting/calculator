@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import styled, { css } from "styled-components";
 import SavingsSection from "./SavingsSection";
+import { BsArrowLeft } from 'react-icons/bs';
 
 const CalculatorWithSnaps = ({initialGoal}) => {
   const [initialEarlyLifeAmount, setEarlyLifeInitialDeposit] = useState("5000");
@@ -115,6 +117,7 @@ const CalculatorWithSnaps = ({initialGoal}) => {
   return (
     <Container>
       <Section backgroundColor="#111111" ignore maxHeight={"10%"}>
+        <BackButton />
         <VerticalStack style={{ padding: '0.2vw' }}>
           <ApplicationTitle>
             <b>3 Phase Millionaire</b>
@@ -176,7 +179,7 @@ const CalculatorWithSnaps = ({initialGoal}) => {
           monthlyCallback={earlyLifeMonthlySavingsChanged}
           yearsCallback={earlyLifeYearsChanged}
           min={0}
-          max={1000}
+          max={10000}
           interval={100}
           initialAgeValue={earlyLifeYears}
           initialSavingsValue={earlyLifeMonthlySavings}
@@ -198,7 +201,7 @@ const CalculatorWithSnaps = ({initialGoal}) => {
           monthlyCallback={selectBallerLifeSavings} 
           yearsCallback={selectBallerLifeYears} 
           min={0} 
-          max={5000} 
+          max={10000} 
           interval={500}
           initialAgeValue={ballerYears}
           initialSavingsValue={ballerSavings}
@@ -208,6 +211,37 @@ const CalculatorWithSnaps = ({initialGoal}) => {
     </Container>
   );
 }
+
+const BackButton = () => {
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
+  return (
+    <BackButtonElement onClick={handleGoBack}>
+      <ArrowIcon />
+      Back
+    </BackButtonElement>
+  );
+};
+
+const BackButtonElement = styled.button`
+  position: absolute;
+  left: 0.1vw;
+  background: none;
+  border: none;
+  font-size: 2vh;
+  display: flex;
+  padding-left: 2vw;
+  color: white;
+  cursor: pointer;
+`;
+
+const ArrowIcon = styled(BsArrowLeft)`
+  margin-right: 0.5vw;
+`;
 
 const Container = styled.div`
   display: flex;

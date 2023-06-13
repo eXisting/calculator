@@ -11,7 +11,7 @@ const SavingsSection = ({age, totalAmount, monthlyCallback, yearsCallback, min, 
           <NumbericSnaps 
             callback={yearsCallback} 
             min={0} 
-            max={20} 
+            max={50} 
             interval={5}
             initialValue={initialAgeValue}
           />
