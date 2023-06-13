@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import SavingsSection from "./SavingsSection";
 
-const CalculatorWithSnaps = () => {
+const CalculatorWithSnaps = ({initialGoal}) => {
   const [initialEarlyLifeAmount, setEarlyLifeInitialDeposit] = useState("5000");
   const [startingAge, setStartingAge] = useState(25);
   const [earlyLifeMonthlySavings, setEarlyLifeMonthlySavings] = useState(300);
@@ -11,6 +11,10 @@ const CalculatorWithSnaps = () => {
   const [ballerYears, setBallerYears] = useState(20);
   const [ballerSavings, setBallerSavings] = useState(1500);
   const [totalSavings, setTotalSavings] = useState("");
+
+  useEffect(() => {
+    setSmallestCombination();
+  }, []);
 
   useEffect(() => {
     calculateSavings();
@@ -49,6 +53,28 @@ const CalculatorWithSnaps = () => {
     }
   };
 
+  const setSmallestCombination = () => {
+    if (initialGoal == 1000000) {
+      earlyStageDepositChanged("$5,000");
+      setEarlyLifeYears(15);
+      setEarlyLifeMonthlySavings(200);
+      setBallerYears(20);
+      setBallerSavings(500);
+    } else if (initialGoal == 3000000) {
+      earlyStageDepositChanged("$25,000");
+      setEarlyLifeYears(20);
+      setEarlyLifeMonthlySavings(200);
+      setBallerYears(20);
+      setBallerSavings(1000);
+    } else if (initialGoal == 5000000) {
+      earlyStageDepositChanged("25000");
+      setEarlyLifeYears(20);
+      setEarlyLifeMonthlySavings(400);
+      setBallerYears(20);
+      setBallerSavings(2000);
+    }
+  };
+  
   const selectBallerLifeSavings = (value) => {
     setBallerSavings(value);
   };
@@ -154,6 +180,7 @@ const CalculatorWithSnaps = () => {
           interval={100}
           initialAgeValue={earlyLifeYears}
           initialSavingsValue={earlyLifeMonthlySavings}
+          goal={initialGoal}
         />
       </Section>
       <Section ignore maxHeight={"0.8vh"} style={{"height" : "0.8vh"}}></Section>
@@ -175,6 +202,7 @@ const CalculatorWithSnaps = () => {
           interval={500}
           initialAgeValue={ballerYears}
           initialSavingsValue={ballerSavings}
+          goal={initialGoal}
           />
       </Section>
     </Container>

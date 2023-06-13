@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 
 
 const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLength }) => {
   const [value, setValue] = useState(initialValue);
+
+  useEffect(() => {
+    setValue(initialValue);
+  }, [initialValue]);
 
   const formatCurrency = (numericValue) => {
     if (sign === undefined) return numericValue;
