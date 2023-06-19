@@ -14,55 +14,65 @@ const HomePage = () => {
   return (
     <Container>
       <Section backgroundColor="#111111" ignore maxHeight={"10%"}>
-        <VerticalStack style={{ padding: '0.2vw' }}>
+        <VerticalStack style={{ padding: '2vh' }}>
           <ApplicationTitle>
-            <b>3 Phase Millionaire</b>
+            <b>Wealth Calculator</b>
           </ApplicationTitle>
-          <span style={{ color: '#ffffff', fontSize: '2vh', textAlign: 'center' }}>
-            <b>Total Savings + Early Life Savings + Later Life Savings</b>
-          </span>
         </VerticalStack>
       </Section>
-      <Section backgroundColor="#0476bb" ignore>
-        <VerticalStack style={{paddingTop:"2vh", paddingBottom:"3vh", paddingLeft:"8vw", paddingRight:"8vw"}}>
-          <span style={{ color: '#ffffff', fontSize: '5vh', textAlign: 'center'}}>
-            <b>Millionaire Facts</b>
+      <Section ignore>
+        <VerticalStack>
+          <SubHeaderText>
+            We will show you how to save more than $1,000,000!
+          </SubHeaderText>
+          <SubHeaderText>
+            But... It takes time and a little planning....
+          </SubHeaderText>
+        </VerticalStack>
+        <PaddingSectionDiv>
+          <span style={{ color: 'white', fontSize: '2.9vh', paddingLeft: '7vw', paddingRight: '7vw'}}>
+            <b>Did you know these facts about millionaires?</b>
           </span>
+        </PaddingSectionDiv>
+      </Section>
+      <Section backgroundColor="white" ignore>
+        <VerticalStack style={{paddingLeft:"8vw", paddingRight:"8vw"}}>
           <HorizontalStack>
             <BulletPointText>
               <CheckmarkIconComponent />
-              88% of self-made millionaires read at least 30 minutes every day
+              <span><b>88%</b> made their own wealth</span>
             </BulletPointText>
           </HorizontalStack>
           <HorizontalStack>
             <BulletPointText>
               <CheckmarkIconComponent />
-              86% of millionaires made their own wealth (not inherited)
+              <span><b>76%</b> started out as middle class or poor</span>
             </BulletPointText>
           </HorizontalStack>
           <HorizontalStack>
             <BulletPointText>
               <CheckmarkIconComponent />
-              78% started out as middle class or poor
+              <span><b>80%</b> didn't reach $1,000,000 until at least 50 years old</span>
             </BulletPointText>
           </HorizontalStack>
           <HorizontalStack>
             <BulletPointText>
               <CheckmarkIconComponent />
-              All save an average of 23 percent of their income
-            </BulletPointText>
-          </HorizontalStack>
-          <HorizontalStack>
-            <BulletPointText>
-              <CheckmarkIconComponent />
-              80% of didn’t reach $1,000,000 until at least 50 years old
+              <span>They save an average of <b>23%</b> of their income</span>
             </BulletPointText>
           </HorizontalStack>
         </VerticalStack>
       </Section>
-      <Section backgroundColor="#fead00" justify={"top"} style={{paddingBottom:'10vh'}}>
-        <span style={{ color: '#ffffff', fontSize: '3.5vh', textAlign: 'center', marginTop:"5vh"}}><b>How rich do you want to be?</b></span>
-          <HorizontalStack style={{marginTop:"4vh"}} space={"1.5vh"}>
+      <Section ignore>
+        <PaddingSectionDiv>
+          <span style={{ color: 'white', fontSize: '2.9vh', textAlign: 'center'}}>
+            <b>Choose how rich you wanna be!</b>
+          </span>
+        </PaddingSectionDiv>
+      </Section>
+      <Section justify={"top"} style={{paddingBottom:'10vh'}}>
+        <span style={{ color: 'black', fontSize: '2vh', textAlign: 'center', marginTop:"1vh"}}><i>Show me the formula how to get rich...</i></span>
+          <HorizontalStack style={{marginTop:"1vh"}} space={"1.5vh"}>
             <Button active={selectedValue === 1000000} onClick={() => selectDesiredValue(1000000)}>$1,000,000</Button>
             <Button active={selectedValue === 3000000} onClick={() => selectDesiredValue(3000000)}>$3,000,000</Button>
             <Button active={selectedValue === 5000000} onClick={() => selectDesiredValue(5000000)}>$5,000,000</Button>
@@ -96,11 +106,25 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 100vh;
+  height: 100%;
   max-height: 100%;
+  border: 0.2vh solid #000000;
   max-height: 100vh; /* Set the maximum height to screen height */
   overflow: auto; /* Enable scrolling when content overflows */
+  margin-right: 2vw;
+`;
+
+const PaddingSectionDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1vh;
+  padding-bottom: 1vh; 
+  margin-bottom: 0.5vh;
+  margin-top: 0.5vh;
+  text-align: center;
+  width: 100%;
+  background-color: ${props => (props.backgroundColor ? props.backgroundColor : "#9e9e9e")};
 `;
 
 const Section = styled.section`
@@ -110,7 +134,7 @@ const Section = styled.section`
   max-height: ${props => (props.maxHeight ? props.maxHeight : 'none')};
   justify-content: ${props => (props.justify ? props.justify : 'center')};
   align-items: ${props => props.align ? props.align : "center"}};
-  width: 100vw;
+  width: 100%;
   background-color: ${props => props.backgroundColor};
   position: relative;
 `;
@@ -121,6 +145,18 @@ const ApplicationTitle = styled.span`
   color: rgba(255, 255, 255, 1);
   font-size: 3vh;
   text-align: center;
+`;
+
+const SubHeaderText = styled.span`
+  font-family: Roboto;
+  font-style: normal;
+  color: black;
+  font-size: 2vh;
+  text-align: center;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  padding-top: 1.5vh;
+  padding-bottom: 1.5vh;
 `;
 
 const VerticalStack = styled.div`
@@ -151,16 +187,17 @@ const BulletPointText = styled.div`
   align-items: center;
   font-family: Roboto;
   font-style: normal;
-  color: rgba(255, 255, 255, 1);
-  font-size: 2.5vh;
+  color: back;
+  font-size: 2vh;
   text-align: left;
   width: 3wh;
 `;
 
 const Button = styled.button`
-  background-color: ${props => (props.active ? '#0476bb' : props.color ? props.color : '#9e9e9e')};
+  background-color: #0476bb;
   color: #ffffff;
   border: none;
+  border-radius: 1vh;
   height: 5vh;
   width: ${props => props.width ? props.width :"50%"};
   font-size: 2vh;

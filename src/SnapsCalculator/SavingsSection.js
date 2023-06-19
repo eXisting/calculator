@@ -7,7 +7,7 @@ const SavingsSection = ({age, totalAmount, monthlyCallback, yearsCallback, min, 
     <Container>
       <VerticalStack>
         <HorizontalStack>
-          <span style={{ color: '#ffffff', fontSize: '2.2vh', textAlign: 'right' }}><b>Number of years?</b></span>
+          <span style={{ fontSize: '2.2vh', textAlign: 'right' }}>Number of years?</span>
           <NumbericSnaps 
             callback={yearsCallback} 
             min={0} 
@@ -17,7 +17,7 @@ const SavingsSection = ({age, totalAmount, monthlyCallback, yearsCallback, min, 
           />
         </HorizontalStack>
         <HorizontalStack>
-          <span style={{ color: '#ffffff', fontSize: '2.2vh', textAlign: 'right' }}><b>Monthly savings?</b></span>
+          <span style={{ fontSize: '2.2vh', textAlign: 'right' }}>Monthly savings?</span>
           <NumbericSnaps 
             callback={monthlyCallback} 
             min={min} 
@@ -29,7 +29,7 @@ const SavingsSection = ({age, totalAmount, monthlyCallback, yearsCallback, min, 
         </HorizontalStack>
       </VerticalStack>
       <SpanContainer>
-        <span>
+        <span style={{color:"#0476bb"}}>
           You are <b>{age}</b> and you saved <b>${totalAmount}</b>!
         </span>
       </SpanContainer>
@@ -63,7 +63,7 @@ const VerticalStack = styled.div`
   flex-direction: column;
   align-items: ${props => props.align ? props.align : "center"};
   justify-content: center;
-  margin-top: 4vh;
+  margin-top: 1vh;
 
   > *:not(:last-child) {
     margin-bottom: ${props => props.space};
