@@ -4,111 +4,127 @@ import styled, { css } from "styled-components";
 import SavingsSection from "./SavingsSection";
 import { BsArrowLeft } from 'react-icons/bs';
 import NumbericSnaps from "./NumbericSnaps";
+import { useDispatch, useSelector } from "react-redux";
 
-const CalculatorWithSnaps = ({initialGoal}) => {
-  const [initialEarlyLifeAmount, setEarlyLifeInitialDeposit] = useState("5000");
-  const [startingAge, setStartingAge] = useState(25);
-  const [earlyLifeMonthlySavings, setEarlyLifeMonthlySavings] = useState(300);
-  const [earlyLifeYears, setEarlyLifeYears] = useState(20);
-  const [earlyLifeTotalSaved, setEarlyLifeTotal] = useState(0);
-  const [ballerYears, setBallerYears] = useState(20);
-  const [ballerSavings, setBallerSavings] = useState(1500);
-  const [totalSavings, setTotalSavings] = useState("");
+import { updateStartingSavings, updateStartingAge } from '../redux/initialValuesReducer';
+
+import {
+  updateMonthlyContribution as updateFirstDecadeMonthlyContribution,
+  updateAge as updateFirstDecadeAge,
+  updateTotalDecadeSavings as updateFirstDecadeTotalSavings,
+} from '../redux/decadeOneReducer';
+
+import {
+  updateMonthlyContribution as updateSecondDecadeMonthlyContribution,
+  updateAge as updateSecondDecadeAge,
+  updateTotalDecadeSavings as updateSecondDecadeTotalSavings,
+} from '../redux/decadeTwoReducer';
+
+import {
+  updateMonthlyContribution as updateThirdDecadeMonthlyContribution,
+  updateAge as updateThirdDecadeAge,
+  updateTotalDecadeSavings as updateThirdDecadeTotalSavings,
+} from '../redux/decadeThreeReducer';
+
+const CalculatorWithSnaps = () => {
+  const dispatch = useDispatch();
+
+  const {
+    startingSavings,
+    startingAge,
+  } = useSelector(
+    (state) => state.initialPage
+  );
+  
+  const {
+    monthlyContribution: decadeOneMonthlyContribution,
+    age: decadeOneAge,
+    totalDecadeSavings: decadeOneTotalSavings,
+  } = useSelector(
+    (state) => state.decadeOnePage
+  );
+
+  const {
+    monthlyContribution: decadeTwoMonthlyContribution,
+    age: decadeTwoAge,
+    totalDecadeSavings: decadeTwoTotalSavings,
+  } = useSelector(
+    (state) => state.decadeTwoPage
+  );
+
+  const {
+    monthlyContribution: decadeThreeMonthlyContribution,
+    age: decadeThreeAge,
+    totalDecadeSavings: decadeThreeTotalSavings,
+  } = useSelector(
+    (state) => state.decadeThreePage
+  );
 
   useEffect(() => {
-    setSmallestCombination();
-  }, []);
+    let age = Number(startingAge);
+
+    dispatch(updateFirstDecadeAge(age + 10));
+    dispatch(updateSecondDecadeAge(age + 20));
+    dispatch(updateThirdDecadeAge(age + 30));
+  }, [startingAge]);
 
   useEffect(() => {
-    calculateSavings();
-  }, [initialEarlyLifeAmount, earlyLifeMonthlySavings, earlyLifeTotalSaved, earlyLifeYears, ballerYears, ballerSavings]);
+    updateDecadeTotalSavings(decadeOneMonthlyContribution, startingSavings, updateFirstDecadeTotalSavings);
+  }, [decadeOneMonthlyContribution, startingAge, startingSavings]);
 
-  const calculateSavings = () => {
-    if (initialEarlyLifeAmount === '') {
-      setTotalSavings(0);
+  useEffect(() => {
+    updateDecadeTotalSavings(decadeTwoMonthlyContribution, decadeOneTotalSavings, updateSecondDecadeTotalSavings);
+  }, [decadeTwoMonthlyContribution, decadeOneTotalSavings]);
+
+  useEffect(() => {
+    updateDecadeTotalSavings(decadeThreeMonthlyContribution, decadeTwoTotalSavings, updateThirdDecadeTotalSavings);
+  }, [decadeThreeMonthlyContribution, decadeTwoTotalSavings]);
+
+  const updateDecadeTotalSavings = (contribution, savings, updateAction) => {
+    if (savings === 0 && contribution === 0) {
+      dispatch(updateAction(0));
       return;
     }
+
     const r = parseFloat(10) / 100;
     const n = 12;
     
-    var t = parseInt(earlyLifeYears);
-    var P = parseFloat(initialEarlyLifeAmount.replace(/,/g, '')); // Remove commas
+    var t = 10;
+    var P = parseFloat(savings.replace(/[^0-9]/g, ''));
 
-    var monthlyContributions = parseFloat(earlyLifeMonthlySavings);
-
-    const futureValue = P * Math.pow(1 + (r / n), n * t) + monthlyContributions * ((Math.pow(1 + (r / n), n * t) - 1) / (r / n));
+    const futureValue = P * Math.pow(1 + (r / n), n * t) + contribution * ((Math.pow(1 + (r / n), n * t) - 1) / (r / n));
 
     const saved = Math.round(futureValue).toLocaleString();
-    setEarlyLifeTotal(saved);
-
-    if (ballerSavings != null && ballerYears != null) {
-      const ballerLifeInitialDeposit = futureValue.toFixed(2);
-
-      P = parseFloat(ballerLifeInitialDeposit);
-      t = parseInt(ballerYears);
-      monthlyContributions = parseInt(ballerSavings);
-  
-      const total = P * Math.pow(1 + (r / n), n * t) + monthlyContributions * ((Math.pow(1 + (r / n), n * t) - 1) / (r / n));
-  
-      setTotalSavings(Math.round(total).toLocaleString());
-    } else {
-      setTotalSavings(saved);
-    }
+    dispatch(updateAction(saved));
   };
 
-  const setSmallestCombination = () => {
-    if (initialGoal == 1000000) {
-      earlyStageDepositChanged("$5,000");
-      setEarlyLifeYears(15);
-      setEarlyLifeMonthlySavings(200);
-      setBallerYears(20);
-      setBallerSavings(500);
-    } else if (initialGoal == 3000000) {
-      earlyStageDepositChanged("$25,000");
-      setEarlyLifeYears(20);
-      setEarlyLifeMonthlySavings(200);
-      setBallerYears(20);
-      setBallerSavings(1000);
-    } else if (initialGoal == 5000000) {
-      earlyStageDepositChanged("25000");
-      setEarlyLifeYears(20);
-      setEarlyLifeMonthlySavings(400);
-      setBallerYears(20);
-      setBallerSavings(2000);
-    }
-  };
-  
-  const selectBallerLifeSavings = (value) => {
-    setBallerSavings(value);
-  };
-
-  const selectBallerLifeYears = (value) => {
-    setBallerYears(value);
-  };
-
-  const earlyStageDepositChanged = (value) => {
+  const initialDepositChanged = (value) => {
     const numericValue = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
-    const formattedValue = numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, ','); // Add commas
-    setEarlyLifeInitialDeposit(formattedValue);
+    dispatch(updateStartingSavings(numericValue));
   };
 
-  const startingAgeChanged = (value) => {
-    const numericValue = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
-    setStartingAge(numericValue);
+  const initialAgeChanged = (value) => {
+    dispatch(updateStartingAge(value));
   };
 
-  const earlyLifeMonthlySavingsChanged = (value) => {
-    setEarlyLifeMonthlySavings(value);
+  const decadeOneContributionChanged = (value) => {
+    const numericValue = value.toString().replace(/[^0-9]/g, ''); // Remove non-numeric characters
+    dispatch(updateFirstDecadeMonthlyContribution(numericValue));
   };
 
-  const earlyLifeYearsChanged = (value) => {
-    setEarlyLifeYears(value);
+  const decadeTwoContributionChanged = (value) => {
+    const numericValue = value.toString().replace(/[^0-9]/g, ''); // Remove non-numeric characters
+    dispatch(updateSecondDecadeMonthlyContribution(numericValue));
+  };
+
+  const decadeThreeContributionChanged = (value) => {
+    const numericValue = value.toString().replace(/[^0-9]/g, ''); // Remove non-numeric characters
+    dispatch(updateThirdDecadeMonthlyContribution(numericValue));
   };
   
   return (
     <Container>
       <Section backgroundColor="#111111" ignore maxHeight={"10%"}>
-        <BackButton />
         <VerticalStack style={{ padding: '2vh' }}>
           <ApplicationTitle>
             <b>Wealth Calculator</b>
@@ -118,11 +134,12 @@ const CalculatorWithSnaps = ({initialGoal}) => {
       <Section backgroundColor="#0476bb" ignore maxHeight={"20%"} style={{"height":"12vh"}}>
         <HorizontalStack space="1vw">
           <span style={{ color: '#ffffff', fontSize: '4vh', textAlign: 'center', marginRight: '2vw'}}>
-            <b>Your total savings! <br></br> ${totalSavings}</b>
+            <b>Your total savings! <br></br> ${decadeThreeTotalSavings}</b>
           </span>
         </HorizontalStack>
       </Section>
-      <Section backgroundColor="#929292" ignore maxHeight={"25%"}>
+      <Section ignore maxHeight={"0.8vh"} style={{"height" : "0.8vh"}}></Section>
+      <Section backgroundColor="#808080" ignore maxHeight={"25%"}>
           <HorizontalStack space="3vh" align="right">
             <span style={{ color: '#ffffff', fontSize: '2vh', textAlign: 'right' }}><b>How old are you?</b></span>
             <StyledInput
@@ -130,68 +147,64 @@ const CalculatorWithSnaps = ({initialGoal}) => {
               selectTextOnFocus={true}
               maxLength={2}
               width={"10%"}
-              onInput={e => startingAgeChanged(e.target.value)}
+              onInput={e => initialAgeChanged(e.target.value)}
             />
           </HorizontalStack>
       </Section>
-      <Section ignore maxHeight={"0.8vh"} style={{"height" : "0.8vh"}}></Section>
-      <Section ignore style={{border:"1px solid #000000"}} customJustify="left">
-        <HorizontalStack customPadding={"0px"} space="1vw">
-          <Square><span style={{ color: 'white', fontSize: '1.8vh', textAlign: 'center'}}><b>1</b></span></Square>
-          <span style={{ color: 'black', fontSize: '1.8vh', textAlign: 'left' }}>What is your total savings today?</span>
-        </HorizontalStack>
-      </Section>
       <Section ignore style={{padding:"1vh"}}>
+        <HorizontalStack customPadding={"0px"}>
+          <span style={{ fontSize: '2.2vh', textAlign: 'right' }}>What are you total <br/>savings today?</span>
           <NumbericSnaps 
-            callback={earlyStageDepositChanged} 
-            min={0}
-            max={5000000} 
-            interval={1000}
-            sign={'$'}
-            initialValue={initialEarlyLifeAmount}
-            custom={true}
-          />
-      </Section>
-      <Section ignore style={{border:"1px solid #000000"}} customJustify="left">
-        <HorizontalStack customPadding={"0px"} space="1vw">
-          <Square><span style={{ color: 'white', fontSize: '1.8vh', textAlign: 'center'}}><b>2</b></span></Square>
-          <span style={{ color: 'black', fontSize: '1.8vh', textAlign: 'left' }}>In you're earlier life phase, save what you can!</span>
+              callback={initialDepositChanged} 
+              min={0} 
+              maxLength={15}
+              interval={1000}
+              sign={'$'}
+              initialValue={startingSavings}
+              custom={true}
+            />
         </HorizontalStack>
+      </Section>
+      <Section ignore style={{border:"1px solid #000000", height:"3vh"}} backgroundColor="#C0C0C0">
+        <span style={{ color: 'black', fontSize: '1.8vh', textAlign: 'center' }}>Decade 1</span>
       </Section>
       <Section ignore maxHeight={"50%"}>
         <SavingsSection
-          step={2}
-          age={Number(startingAge) + Number(earlyLifeYears)}  
-          totalAmount={earlyLifeTotalSaved}
-          monthlyCallback={earlyLifeMonthlySavingsChanged}
-          yearsCallback={earlyLifeYearsChanged}
+          age={decadeOneAge}  
+          totalAmount={decadeOneTotalSavings}
+          monthlyCallback={decadeOneContributionChanged}
           min={0}
           max={10000}
           interval={100}
-          initialAgeValue={earlyLifeYears}
-          initialSavingsValue={earlyLifeMonthlySavings}
-          goal={initialGoal}
+          initialSavingsValue={decadeOneMonthlyContribution}
         />
       </Section>
-      <Section ignore style={{border:"1px solid #000000"}} customJustify="left">
-        <HorizontalStack customPadding={"0px"} space="1vw">
-          <Square><span style={{ color: 'white', fontSize: '1.8vh', textAlign: 'center'}}><b>3</b></span></Square>
-          <span style={{ color: 'black', fontSize: '1.8vh', textAlign: 'left' }}>In the 3rd phase of life, you save more.</span>
-        </HorizontalStack>
+      <Section ignore style={{border:"1px solid #000000", height:"3vh"}} backgroundColor="#C0C0C0">
+        <span style={{ color: 'black', fontSize: '1.8vh', textAlign: 'center' }}>Decade 2</span>
       </Section>
-      <Section style={{ paddingBottom: '10vw' }} align="top"  maxHeight={"50%"}>
+      <Section ignore align="top" maxHeight={"50%"}>
         <SavingsSection 
-          step={3} 
-          age={Number(startingAge) + Number(earlyLifeYears) + Number(ballerYears)}  
-          totalAmount={totalSavings}
-          monthlyCallback={selectBallerLifeSavings} 
-          yearsCallback={selectBallerLifeYears} 
+          age={decadeTwoAge}  
+          totalAmount={decadeTwoTotalSavings}
+          monthlyCallback={decadeTwoContributionChanged} 
           min={0} 
           max={10000} 
           interval={500}
-          initialAgeValue={ballerYears}
-          initialSavingsValue={ballerSavings}
-          goal={initialGoal}
+          initialSavingsValue={decadeTwoMonthlyContribution}
+          />
+      </Section>
+      <Section ignore style={{border:"1px solid #000000", height:"3vh" }} backgroundColor="#C0C0C0">
+        <span style={{ color: 'black', fontSize: '1.8vh', textAlign: 'center' }}>Decade 3</span>
+      </Section>
+      <Section ignore align="top" maxHeight={"50%"}>
+        <SavingsSection 
+          age={decadeThreeAge}  
+          totalAmount={decadeThreeTotalSavings}
+          monthlyCallback={decadeThreeContributionChanged} 
+          min={0} 
+          max={10000} 
+          interval={500}
+          initialSavingsValue={decadeThreeMonthlyContribution}
           />
       </Section>
     </Container>

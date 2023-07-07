@@ -2,32 +2,20 @@ import React, { Component } from "react";
 import styled, { css } from "styled-components";
 import NumbericSnaps from "./NumbericSnaps";
 
-const SavingsSection = ({age, totalAmount, monthlyCallback, yearsCallback, min, max, interval, initialAgeValue, initialSavingsValue}) => {
+const SavingsSection = ({age, totalAmount, monthlyCallback, min, max, interval, initialSavingsValue}) => {
   return (
     <Container>
-      <VerticalStack>
-        <HorizontalStack>
-          <span style={{ fontSize: '2.2vh', textAlign: 'right' }}>Number of years?</span>
-          <NumbericSnaps 
-            callback={yearsCallback} 
-            min={0} 
-            max={50} 
-            interval={5}
-            initialValue={initialAgeValue}
-          />
-        </HorizontalStack>
-        <HorizontalStack>
-          <span style={{ fontSize: '2.2vh', textAlign: 'right' }}>Monthly savings?</span>
-          <NumbericSnaps 
-            callback={monthlyCallback} 
-            min={min} 
-            max={max} 
-            interval={interval}
-            sign={'$'}
-            initialValue={initialSavingsValue}
-          />
-        </HorizontalStack>
-      </VerticalStack>
+      <HorizontalStack style={{marginTop:"1vh"}}>
+        <span style={{ fontSize: '2.2vh', textAlign: 'right' }}>Monthly savings?</span>
+        <NumbericSnaps 
+          callback={monthlyCallback} 
+          min={min} 
+          max={max} 
+          interval={interval}
+          sign={'$'}
+          initialValue={initialSavingsValue}
+        />
+      </HorizontalStack>
       <SpanContainer>
         <span style={{color:"#0476bb"}}>
           You are <b>{age}</b> and you saved <b>${totalAmount}</b>!
@@ -46,8 +34,7 @@ const Container = styled.div`
 const SpanContainer = styled.div`
 color: white;
 font-size: 2vh;
-padding-top: 3vh;
-padding-bottom: 0.5vh;
+padding-bottom: 1.5vh;
 text-align: center;
 display: flex;
 align-items: center;

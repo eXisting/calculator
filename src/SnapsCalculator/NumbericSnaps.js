@@ -3,41 +3,23 @@ import styled, { css } from "styled-components";
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 
 
-const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLength, custom }) => {
+const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLength, custom, signAtTheEnd }) => {
   const [value, setValue] = useState(initialValue);
 
   const processInput = (inputValue) => {
-    let numericValue = inputValue;
-  
-    // Remove non-numeric characters and check for negative sign
-    if (sign) {
-      numericValue = inputValue.replace(/[^0-9-]/g, '');
-  
-      // Ensure that '-' is only at the start and not repeated
-      if (numericValue.indexOf('-') > 0) {
-        const firstMinusIndex = numericValue.indexOf('-');
-        numericValue = numericValue.substring(0, firstMinusIndex);
-      }
-    } else {
-      numericValue = inputValue.replace(/[^0-9]/g, '');
-    }
+    let numericValue = inputValue.replace(/[^0-9]/g, '');
   
     // Parse numericValue as a number
     let parsedValue = Number(numericValue);
   
     // Check if parsedValue is within the min and max boundaries
     if (parsedValue < min) {
-      parsedValue = min;
+      parsedValue = min.toString();
     } else if (parsedValue > max) {
-      parsedValue = max;
+      parsedValue = max.toString();
     }
   
-    // Format parsedValue with commas if sign is set
-    if (sign) {
-      parsedValue = parsedValue.toLocaleString();
-    }
-  
-    handleInputChange(parsedValue);
+    handleInputChange(parsedValue.toString());
   };  
 
   const resetValueOnFocus = () => {
@@ -49,6 +31,7 @@ const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLe
       setValue('0');
       callback('0');
     } else {
+      setValue(value);
       callback(value);
     }
   };
@@ -59,7 +42,8 @@ const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLe
 
   const formatCurrency = (numericValue) => {
     if (sign === undefined) return numericValue;
-    return `$${numericValue.toLocaleString()}`;
+    if (signAtTheEnd) return `${numericValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}${sign}`;
+    return `${sign}${numericValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
   };
 
   const handleInputChange = (parsedValue) => {
@@ -72,10 +56,14 @@ const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLe
       const numericValue = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
       const parsedValue = Number(numericValue);
       const newValue = parsedValue + Number(interval);
-  
-      if (newValue <= max) {
+
+      if (max === undefined || newValue <= max) {
         const formattedValue = formatCurrency(newValue.toString());
-        handleInputChange(formattedValue);
+        
+        if (formattedValue.length > maxLength)
+          return;
+
+        processInput(formattedValue);
       }
       return;
     }
@@ -98,7 +86,7 @@ const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLe
   
       if (newValue >= min) {
         const formattedValue = formatCurrency(newValue.toString());
-        handleInputChange(formattedValue);
+        processInput(formattedValue);
       }
       return;
     }
@@ -120,7 +108,7 @@ const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLe
         </StyledButton>
         <StyledInput 
           maxLength={maxLength}
-          width={"15vh"}
+          width={"20vh"}
           type="text"
           value={formatCurrency(value)}
           onInput={e => processInput(e.target.value)}
