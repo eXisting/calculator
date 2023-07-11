@@ -1,8 +1,6 @@
 import CalculatorWithSnaps from '../SnapsCalculator/CalculatorWithSnaps';
 
 const CalculatedPage = () => {
-
-
   return (
     <CalculatorWithSnaps />
   );

@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
-import styled, { css } from "styled-components";
+import React, { useEffect } from "react";
+import styled from "styled-components";
 import SavingsSection from "./SavingsSection";
-import { BsArrowLeft } from 'react-icons/bs';
 import NumbericSnaps from "./NumbericSnaps";
 import { useDispatch, useSelector } from "react-redux";
+import HeaderComponent from "../Common/HeaderComponent";
 
 import { updateStartingSavings, updateStartingAge } from '../redux/initialValuesReducer';
 
@@ -124,13 +123,7 @@ const CalculatorWithSnaps = () => {
   
   return (
     <Container>
-      <Section backgroundColor="#111111" ignore maxHeight={"10%"}>
-        <VerticalStack style={{ padding: '2vh' }}>
-          <ApplicationTitle>
-            <b>Wealth Calculator</b>
-          </ApplicationTitle>
-        </VerticalStack>
-      </Section>
+      <HeaderComponent hasBackButton></HeaderComponent>
       <Section backgroundColor="#0476bb" ignore maxHeight={"20%"} style={{"height":"12vh"}}>
         <HorizontalStack space="1vw">
           <span style={{ color: '#ffffff', fontSize: '4vh', textAlign: 'center', marginRight: '2vw'}}>
@@ -162,6 +155,7 @@ const CalculatorWithSnaps = () => {
               sign={'$'}
               initialValue={startingSavings}
               custom={true}
+              inputFieldHeight={"4vh"}
             />
         </HorizontalStack>
       </Section>
@@ -211,37 +205,6 @@ const CalculatorWithSnaps = () => {
   );
 }
 
-const BackButton = () => {
-  const navigate = useNavigate();
-
-  const handleGoBack = () => {
-    navigate(-1);
-  };
-
-  return (
-    <BackButtonElement onClick={handleGoBack}>
-      <ArrowIcon />
-      Back
-    </BackButtonElement>
-  );
-};
-
-const BackButtonElement = styled.button`
-  position: absolute;
-  left: 0.1vw;
-  background: none;
-  border: none;
-  font-size: 2vh;
-  display: flex;
-  padding-left: 2vw;
-  color: white;
-  cursor: pointer;
-`;
-
-const ArrowIcon = styled(BsArrowLeft)`
-  margin-right: 0.5vw;
-`;
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -263,34 +226,6 @@ const Section = styled.section`
   width: 100%;
   background-color: ${props => props.backgroundColor};
   position: relative;
-`;
-
-const Square = styled.div`
-  width: 4vw;
-  height: 2vh;
-  padding: 1vh;
-  background-color: #ffffff;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  display: flex;
-  border-right: 1px solid #000000;
-  background-color: #9e9e9e;
-`;
-
-const SectionTitle = styled.div`
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: fit-content;
-  height: 2vh;
-  padding: 1vh;
-  background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
 `;
 
 const VerticalStack = styled.div`
@@ -316,14 +251,6 @@ const HorizontalStack = styled.div`
   }
 
   justify-content: ${props => props.customJustify ? props.customJustify : "center"};
-`;
-
-const ApplicationTitle = styled.span`
-  font-family: Roboto;
-  font-style: normal;
-  color: rgba(255, 255, 255, 1);
-  font-size: 2.5vh;
-  text-align: center;
 `;
 
 const StyledInput = styled.input`

@@ -1,26 +1,42 @@
-import React, { useState } from 'react';
-import styled, { css } from "styled-components";
+import React, { useEffect } from "react";
+import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
-import HeaderComponent from '../Common/HeaderComponent';
+import { useDispatch, useSelector } from "react-redux";
+import HeaderComponent from "../Common/HeaderComponent";
 
-const WelcomeSavingsFormulaPage = () => {
+const DecadeThreePrepage = () => {
   const navigate = useNavigate();
 
   const nextPage = () => {
-    navigate(`/initial-data`);
+    navigate(`/decade-three`);
   };
   
   return (
     <Container>
       <HeaderComponent hasBackButton={true}></HeaderComponent>
-      <Section ignore width="80%" backgroundColor="#0476bb" style={{marginTop:"2vh", marginBottom:"10vh"}}>
-        <span style={{ color: 'white', fontSize: '4vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
-          <b>Becoming wealthy is more about saving than your income level.</b>
+      <Section backgroundColor="white" ignore maxHeight="10%">
+        <span style={{ fontSize: '4vh', paddingTop:"2vh", textAlign:"center"}}>
+          <b>DECADE Three</b>
         </span>
       </Section>
-      <Section ignore style={{marginBottom:"10vh"}}>
-        <span style={{ color: 'black', fontSize: '3vh', paddingLeft: '10vw', paddingRight: '10vw', paddingTop:"1.5vh", textAlign:"center"}}>
-          <i>....double a penny each day for 31 days, and you’ll have $10,737,418. <br/><br/> That is compound interest!</i>
+      <Section ignore width="80%">
+        <HorizontalStack>
+          <DecadeHNumber>1</DecadeHNumber>
+          <DecadeHNumber>2</DecadeHNumber>
+          <DecadeHNumber style={{backgroundColor:"black", color:"white"}}>3</DecadeHNumber>
+        </HorizontalStack>
+      </Section>
+      <Section backgroundColor="white" ignore maxHeight="10%" style={{marginTop:"5vh"}}>
+        <span style={{ color:"#0476bb", fontSize: '2.8vh', paddingLeft: '7vw', paddingRight: '7vw', textAlign:"center"}}>
+          The third decade is the most important wealth building time period!
+        </span>
+      </Section>
+      <Section backgroundColor="white" ignore style={{marginTop:"10vh"}}>
+        <span style={{ color:"black", fontSize: '2.8vh', paddingLeft: '7vw', paddingRight: '7vw', textAlign:"center"}}>
+          <i>Double a penny each day for 27 days and you get $671,088.64...</i>
+        </span>
+        <span style={{ color:"black", fontSize: '2.8vh', paddingLeft: '7vw', paddingRight: '7vw', textAlign:"center"}}>
+          <i><br/>...Double it just <b>FOUR</b> more days (or 31 total), and you get $10,737,418!</i>
         </span>
       </Section>
       <Section justify={"top"} style={{paddingTop:'5vh'}}>
@@ -90,22 +106,32 @@ const VerticalStack = styled.div`
 const HorizontalStack = styled.div`
   display: flex;
   align-items: center;
-  padding: 1vh;
-  
+
   > *:not(:last-child) {
     margin-right: ${props => props.space};
   }
+
+  justify-content: center; /* Updated value */
 `;
 
-const BulletPointText = styled.div`
-  display: flex;
-  align-items: center;
+const DecadeHNumber = styled.div`
   font-family: Roboto;
   font-style: normal;
-  color: back;
-  font-size: 2vh;
-  text-align: left;
-  width: 3wh;
+  font-weight: 400;
+  color: black;
+  font-size: 2.5vh;
+  background-color: #white;
+  text-align: center;
+  border-width: 0px;
+  border: 1px solid #000000;
+  border-radius: 0.5vh;
+  margin-top: 0;
+
+  height: 5vh;
+  width: 12vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Button = styled.button`
@@ -120,4 +146,4 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-export default WelcomeSavingsFormulaPage;
+export default DecadeThreePrepage;

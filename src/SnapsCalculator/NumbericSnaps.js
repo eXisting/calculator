@@ -3,7 +3,8 @@ import styled, { css } from "styled-components";
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 
 
-const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLength, custom, signAtTheEnd }) => {
+const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLength, custom, signAtTheEnd, 
+  disableControls, inputFieldWidth, inputFieldHeight }) => {
   const [value, setValue] = useState(initialValue);
 
   const processInput = (inputValue) => {
@@ -103,21 +104,32 @@ const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLe
 
   return (
     <HorizontalStack space={"0.9vw"}>
-        <StyledButton onClick={decrement}>
+        {!disableControls && 
+        <StyledButton 
+          onClick={decrement}
+          width={inputFieldWidth}
+          height={inputFieldHeight}
+        >
           <AiOutlineMinus />
-        </StyledButton>
+        </StyledButton>}
         <StyledInput 
           maxLength={maxLength}
-          width={"20vh"}
+          width={inputFieldWidth}
+          height={inputFieldHeight}
           type="text"
           value={formatCurrency(value)}
           onInput={e => processInput(e.target.value)}
           onFocus={resetValueOnFocus}
           onBlur={handleBlur}
         />
-         <StyledButton onClick={increment}>
+        {!disableControls && 
+         <StyledButton 
+          onClick={increment}
+          width={inputFieldWidth}
+          height={inputFieldHeight}
+        >
           <AiOutlinePlus />
-        </StyledButton>
+        </StyledButton>}
       </HorizontalStack>
   );
 };
@@ -127,15 +139,15 @@ const StyledInput = styled.input`
   font-style: normal;
   font-weight: bold; /* Change font-weight to bold */
   color: rgba(0, 0, 0, 1);
-  font-size: 2.5vh;
+  font-size: 3vh;
   background-color: white;
   text-align: center;
   border-width: 0px;
   margin-top: 0;
-  width: ${props => props.width};
-  height: 4vh;
+  width: ${props => props.width ? props.width : '20vh'};
+  height: ${props => props.height ? props.height : '6vh'};
   border-radius: 0.5vh;
-  border: 1px solid #000000;
+  border: 0.2vh solid #000000;
 `;
 
 const StyledButton = styled.button`
@@ -143,7 +155,7 @@ const StyledButton = styled.button`
   font-style: normal;
   font-weight: 400;
   color: white;
-  font-size: 2.5vh;
+  font-size: 3vh;
   background-color: #0476bb;
   text-align: center;
   border-width: 0px;
@@ -151,7 +163,8 @@ const StyledButton = styled.button`
   border-radius: 0.5vh;
   margin-top: 0;
   
-  height: 4vh;
+  width: ${props => props.width ? props.width : '6vh'};
+  height: ${props => props.height ? props.height : '6vh'};
   display: flex;
   align-items: center;
   justify-content: center;

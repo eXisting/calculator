@@ -14,6 +14,7 @@ import CalculatedPage from './Routes/CalculatedPage';
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './redux/store';
+import DecadeThreePrepage from './Routes/DecadeThreePrepage';
 
 const RootApp = styled.div`
   width: 100vw;
@@ -34,6 +35,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               <Route path="/decade-one" element={<DecadeOnePage />} />
               <Route path="/decade-two" element={<DecadeTwoPage />} />
               <Route path="/decade-three" element={<DecadeThreePage />} />
+              <Route path="/decade-threeprepage" element={<DecadeThreePrepage />} />
               <Route path="/pre-result" element={<PreResultPage />} />
               <Route path="/calculated" element={<CalculatedPage />} />
             </Routes>

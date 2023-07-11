@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import NumbericSnaps from "../SnapsCalculator/NumbericSnaps";
 import { useDispatch, useSelector } from 'react-redux';
 import { updateStartingSavings, updateStartingAge } from '../redux/initialValuesReducer';
+import HeaderComponent from '../Common/HeaderComponent';
 
 const InitialValuesPage = () => {
   const navigate = useNavigate();
@@ -28,36 +29,30 @@ const InitialValuesPage = () => {
   
   return (
     <Container>
-      <Section backgroundColor="#111111" ignore maxHeight={"10%"}>
-        <VerticalStack style={{ padding: '1vh' }}>
-          <ApplicationTitle>
-            <b>Wealth Calculator</b>
-          </ApplicationTitle>
-        </VerticalStack>
-      </Section>
-      <Section ignore>
-        <PaddingSectionDiv>
-          <span style={{ color: '#0476bb', fontSize: '3vh', paddingLeft: '7vw', paddingRight: '7vw'}}>
-            <b>Let’s be rich!</b>
-          </span>
-        </PaddingSectionDiv>
+      <HeaderComponent hasBackButton={true}></HeaderComponent>
+      <Section ignore width="80%" backgroundColor="#0476bb" style={{marginTop:"2vh", marginBottom:"4vh"}}>
+        <span style={{ color: 'white', fontSize: '4vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
+          <b>Are you ready to see <br/> how to get rich?</b>
+        </span>
       </Section>
       <Section backgroundColor="white" ignore maxHeight="10%">
-        <span style={{ fontSize: '3vh', paddingLeft: '7vw', paddingRight: '7vw', paddingBottom:"5vh", textAlign:"center"}}>
+        <span style={{ fontSize: '2.5vh', paddingLeft: '7vw', paddingRight: '7vw', paddingBottom:"5vh", textAlign:"center"}}>
           <b>Our income increases as we get older, which means we can save more each decade!</b>
         </span>
       </Section>
       <Section backgroundColor="white" ignore>
         <VerticalStack style={{paddingLeft:"8vw", paddingRight:"8vw"}} space="2vh">
-          <span style={{ fontSize: '3vh', textAlign:"center"}}>How old are you?</span>
+          <span style={{ fontSize: '2.5vh', textAlign:"center"}}>How old are you?</span>
           <NumbericSnaps
             callback={saveAge}
             min={0} 
             max={50} 
             interval={5}
             initialValue={startingAge}
+            disableControls={true}
+            inputFieldWidth={"80%"}
           />
-          <span style={{ fontSize: '3vh', textAlign:"center"}}>How much money do you have saved?</span>
+          <span style={{ fontSize: '2.5vh', textAlign:"center"}}>How much money do you have saved?</span>
           <NumbericSnaps 
             callback={saveSavings}
             min={0} 
@@ -66,10 +61,12 @@ const InitialValuesPage = () => {
             initialValue={startingSavings}
             sign={'$'}
             custom={true}
+            disableControls={true}
+            inputFieldWidth={"80%"}
           />
         </VerticalStack>
       </Section>
-      <Section justify={"top"} style={{paddingTop:'5vh'}}>
+      <Section justify={"top"} style={{marginTop:'2vh'}}>
         <Button onClick={nextPage}>Next</Button>
       </Section>
     </Container>
@@ -107,17 +104,9 @@ const Section = styled.section`
   max-height: ${props => (props.maxHeight ? props.maxHeight : 'none')};
   justify-content: ${props => (props.justify ? props.justify : 'center')};
   align-items: ${props => props.align ? props.align : "center"}};
-  width: 100%;
+  width: ${props => (props.width ? props.width : "100%")};
   background-color: ${props => props.backgroundColor};
   position: relative;
-`;
-
-const ApplicationTitle = styled.span`
-  font-family: Roboto;
-  font-style: normal;
-  color: rgba(255, 255, 255, 1);
-  font-size: 2vh;
-  text-align: center;
 `;
 
 const VerticalStack = styled.div`

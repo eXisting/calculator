@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled, { css } from "styled-components";
 import { useNavigate } from 'react-router-dom';
+import HeaderComponent from '../Common/HeaderComponent';
 
 const WelcomeThingsToKnowPage = () => {
   const navigate = useNavigate();
@@ -11,65 +12,57 @@ const WelcomeThingsToKnowPage = () => {
   
   return (
     <Container>
-      <Section backgroundColor="#111111" ignore maxHeight={"10%"}>
-        <VerticalStack style={{ padding: '1vh' }}>
-          <ApplicationTitle>
-            <b>Wealth Calculator</b>
-          </ApplicationTitle>
-        </VerticalStack>
-      </Section>
-      <Section ignore>
-        <PaddingSectionDiv>
-          <span style={{ color: '#0476bb', fontSize: '3vh', paddingLeft: '7vw', paddingRight: '7vw'}}>
-            <b>The 10 Commandments of Wealth</b>
-          </span>
-        </PaddingSectionDiv>
+      <HeaderComponent hasBackButton={true}></HeaderComponent>
+      <Section ignore width="80%" backgroundColor="#0476bb" style={{marginTop:"2vh"}}>
+        <span style={{ color: 'white', fontSize: '4vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
+          <b>The 10 Commandments of Wealth</b>
+        </span>
       </Section>
       <Section backgroundColor="white" ignore style={{fontSize:"2.2vh"}}>
         <VerticalStack style={{paddingLeft:"4vw", paddingRight:"4vw"}}>
           <HorizontalStack space="3vh">
-            <span>1.</span>
+            <span style={{color:"#0476bb"}}>(1)</span>
             <span>Anyone can save millions</span>
           </HorizontalStack>
           <HorizontalStack space="3vh">
-            <span>2.</span>
+            <span style={{color:"#0476bb"}}>(2)</span>
             <span>The earlier you save, the less impact on lifestyle</span>
           </HorizontalStack>
           <HorizontalStack space="3vh">
-            <span>3.</span>
+            <span style={{color:"#0476bb"}}>(3)</span>
             <span>It’s nearly impossible to become rich without time</span>
           </HorizontalStack>
           <HorizontalStack space="3vh">
-            <span>4.</span>
+            <span style={{color:"#0476bb"}}>(4)</span>
             <span>Compounding interest is a wealth building mathematical gift</span>
           </HorizontalStack>
           <HorizontalStack space="3vh">
-            <span>5.</span>
+            <span style={{color:"#0476bb"}}>(5)</span>
             <span>Where to invest is not complicated</span>
           </HorizontalStack>
           <HorizontalStack space="3vh">
-            <span>6.</span>
+            <span style={{color:"#0476bb"}}>(6)</span>
             <span>We must save first, then spend the rest</span>
           </HorizontalStack>
           <HorizontalStack space="3vh">
-            <span>7.</span>
+            <span style={{color:"#0476bb"}}>(7)</span>
             <span>The only path to wealth is ownership, a business or stocks</span>
           </HorizontalStack>
           <HorizontalStack space="3vh">
-            <span>8.</span>
+            <span style={{color:"#0476bb"}}>(8.)</span>
             <span>Savings must be automatic and grow with your income</span>
           </HorizontalStack>
           <HorizontalStack space="3vh">
-            <span>9.</span>
+            <span style={{color:"#0476bb"}}>(9.)</span>
             <span>Saving requires a one-time plan, not a life long decision making process</span>
           </HorizontalStack>
           <HorizontalStack space="3vh">
-            <span>10.</span>
+            <span style={{color:"#0476bb"}}>(10)</span>
             <span>Being wealthy is more fun than not being wealthy</span>
           </HorizontalStack>
         </VerticalStack>
       </Section>
-      <Section justify={"top"} style={{paddingTop:'5vh'}}>
+      <Section justify={"top"} style={{marginTop:'2vh', marginBottom:'15vh'}}>
         <Button onClick={nextPage}>Next</Button>
       </Section>
     </Container>
@@ -97,7 +90,7 @@ const PaddingSectionDiv = styled.div`
   margin-bottom: 0.5vh;
   margin-top: 0.5vh;
   text-align: center;
-  width: 100%;
+  width: 80%;
 `;
 
 const Section = styled.section`
@@ -107,17 +100,9 @@ const Section = styled.section`
   max-height: ${props => (props.maxHeight ? props.maxHeight : 'none')};
   justify-content: ${props => (props.justify ? props.justify : 'center')};
   align-items: ${props => props.align ? props.align : "center"}};
-  width: 100%;
+  width: ${props => (props.width ? props.width : "100%")};
   background-color: ${props => props.backgroundColor};
   position: relative;
-`;
-
-const ApplicationTitle = styled.span`
-  font-family: Roboto;
-  font-style: normal;
-  color: rgba(255, 255, 255, 1);
-  font-size: 2vh;
-  text-align: center;
 `;
 
 const VerticalStack = styled.div`

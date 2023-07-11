@@ -14,6 +14,7 @@ const SavingsSection = ({age, totalAmount, monthlyCallback, min, max, interval, 
           interval={interval}
           sign={'$'}
           initialValue={initialSavingsValue}
+          inputFieldHeight={"4vh"}
         />
       </HorizontalStack>
       <SpanContainer>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled, { css } from "styled-components";
 import { useNavigate } from 'react-router-dom';
+import HeaderComponent from '../Common/HeaderComponent';
 
 const WelcomePage = () => {
   const navigate = useNavigate();
@@ -11,22 +12,14 @@ const WelcomePage = () => {
   
   return (
     <Container>
-      <Section backgroundColor="#111111" ignore maxHeight={"10%"}>
-        <VerticalStack style={{ padding: '1vh' }}>
-          <ApplicationTitle>
-            <b>Wealth Calculator</b>
-          </ApplicationTitle>
-        </VerticalStack>
-      </Section>
-      <Section ignore>
-        <PaddingSectionDiv>
-          <span style={{ color: '#0476bb', fontSize: '3vh', paddingLeft: '7vw', paddingRight: '7vw'}}>
-            <b>Everyone can be wealthy!</b>
-          </span>
-        </PaddingSectionDiv>
+      <HeaderComponent hasBackButton={false}></HeaderComponent>
+      <Section ignore width="80%" backgroundColor="#0476bb" style={{marginTop:"2vh", marginBottom:"4vh"}}>
+        <span style={{ color: 'white', fontSize: '4vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
+          <b>Everyone can be <br/> wealthy!</b>
+        </span>
       </Section>
       <Section backgroundColor="white" ignore maxHeight="10%">
-        <span style={{ fontSize: '3vh', paddingLeft: '7vw', paddingRight: '7vw', textAlign:"center"}}>
+        <span style={{ fontSize: '4vh', paddingLeft: '7vw', paddingRight: '7vw', textAlign:"center"}}>
           <b>Millionaire myth busters!</b>
         </span>
       </Section>
@@ -58,31 +51,15 @@ const WelcomePage = () => {
           </HorizontalStack>
         </VerticalStack>
       </Section>
-      <Section justify={"top"} style={{paddingTop:'5vh'}}>
+      <Section justify={"top"} style={{marginTop:'2vh'}}>
         <Button onClick={nextPage}>Next</Button>
       </Section>
     </Container>
   );
 }
 
-const CheckmarkIcon = styled.svg`
-  width: 4vh;
-  height: 4vh;
-  margin-right: 5px;
-  align-self: flex-start;
-`;
-
-const CheckmarkPath = styled.path`
-  fill-rule: evenodd;
-`;
-
 const CheckmarkIconComponent = () => (
-  <CheckmarkIcon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-    <CheckmarkPath
-      fill="currentColor"
-      d="M5.646 10.854a.5.5 0 0 1-.708 0L2.146 7.354a.5.5 0 0 1 .708-.708l2.646 2.646 6.646-6.646a.5.5 0 1 1 .708.708L5.646 10.854z"
-    />
-  </CheckmarkIcon>
+  <span style={{fontSize:"4vh", paddingRight:"2vw"}}>✓</span>
 );
 
 const Container = styled.div`
@@ -97,36 +74,16 @@ const Container = styled.div`
   margin-right: 2vw;
 `;
 
-const PaddingSectionDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 5vh;
-  padding-bottom: 10vh; 
-  margin-bottom: 0.5vh;
-  margin-top: 0.5vh;
-  text-align: center;
-  width: 100%;
-`;
-
 const Section = styled.section`
   flex: ${props => (props.ignore ? 'none' : '1')};
   flex-direction: column; /* Add this line */
   display: flex;
   max-height: ${props => (props.maxHeight ? props.maxHeight : 'none')};
   justify-content: ${props => (props.justify ? props.justify : 'center')};
-  align-items: ${props => props.align ? props.align : "center"}};
-  width: 100%;
+  align-items: ${props => props.align ? props.align : "center"};
+  width: ${props => (props.width ? props.width : "100%")};
   background-color: ${props => props.backgroundColor};
   position: relative;
-`;
-
-const ApplicationTitle = styled.span`
-  font-family: Roboto;
-  font-style: normal;
-  color: rgba(255, 255, 255, 1);
-  font-size: 2vh;
-  text-align: center;
 `;
 
 const VerticalStack = styled.div`
@@ -158,7 +115,7 @@ const BulletPointText = styled.div`
   font-family: Roboto;
   font-style: normal;
   color: back;
-  font-size: 2vh;
+  font-size: 3vh;
   text-align: left;
   width: 3wh;
 `;

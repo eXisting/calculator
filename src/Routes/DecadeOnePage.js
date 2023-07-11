@@ -12,6 +12,7 @@ import {
   updatePercents,
   updateAge,
 } from '../redux/decadeOneReducer';
+import HeaderComponent from "../Common/HeaderComponent";
 
 const DecadeOnePage = () => {
   const dispatch = useDispatch();
@@ -77,30 +78,26 @@ const DecadeOnePage = () => {
   
   return (
     <Container>
-      <Section backgroundColor="#111111" ignore maxHeight={"10%"}>
-        <VerticalStack style={{ padding: '1vh' }}>
-          <ApplicationTitle>
-            <b>Wealth Calculator</b>
-          </ApplicationTitle>
-        </VerticalStack>
-      </Section>
+      <HeaderComponent hasBackButton={true}></HeaderComponent>
       <Section backgroundColor="white" ignore maxHeight="10%">
-        <span style={{ fontSize: '4vh', paddingTop:"5vh", textAlign:"center"}}>
+        <span style={{ fontSize: '4vh', paddingTop:"2vh", textAlign:"center"}}>
           <b>DECADE One</b>
         </span>
       </Section>
-      <Section ignore maxHeight="10%">
-        <span style={{ color: '#0476bb', fontSize: '2.6vh', paddingLeft: '7vw', paddingRight: '7vw'}}>
-          <b>Let’s start building your millions!</b>
-        </span>
+      <Section ignore width="80%">
+        <HorizontalStack>
+          <DecadeHNumber style={{backgroundColor:"black", color:"white"}}>1</DecadeHNumber>
+          <DecadeHNumber>2</DecadeHNumber>
+          <DecadeHNumber>3</DecadeHNumber>
+        </HorizontalStack>
       </Section>
       <Section backgroundColor="white" ignore maxHeight="10%" style={{marginTop:"5vh"}}>
-        <span style={{ fontSize: '2.5vh', paddingLeft: '7vw', paddingRight: '7vw', textAlign:"center"}}>
-          <b>Your goal should be to save a minimum <br/> of 15% of income during each decade.</b>
+        <span style={{ fontSize: '2.8vh', paddingLeft: '7vw', paddingRight: '7vw', textAlign:"center"}}>
+          Your goal should be to save a minimum <br/> of 15% of income during each decade.
         </span>
       </Section>
       <Section backgroundColor="white" ignore maxHeight="10%">
-        <span style={{ fontSize: '2.5vh', paddingTop:"5vh", textAlign:"center"}}>
+        <span style={{ color:"#0476bb", fontSize: '2.8vh', paddingTop:"5vh", textAlign:"center"}}>
           Your savings between the ages of {startingAge} to {age}.
         </span>
       </Section>
@@ -119,6 +116,7 @@ const DecadeOnePage = () => {
               initialValue={decadeIncome}
               sign={'$'}
               custom={true}
+              inputFieldHeight={"4vh"}
             />
             <NumbericSnaps 
               callback={updatePercentSavings}
@@ -128,17 +126,18 @@ const DecadeOnePage = () => {
               initialValue={savingsPercentage}
               sign={'%'}
               signAtTheEnd={true}
+              inputFieldHeight={"4vh"}
             />
           </VerticalStack>
         </HorizontalStack>
-        <span style={{ fontSize: '1.6vh', textAlign: 'center' }}><b>You’re saving ${monthlyContribution} each month?</b></span>
+        <span style={{ fontSize: '2.2vh', textAlign: 'center' }}><b>You’re saving ${monthlyContribution} each month?</b></span>
       </Section>
-      <Section ignore maxHeight="10%" style={{paddingTop:"5vh"}}>
-        <span style={{ color: '#0476bb', fontSize: '3vh', paddingLeft: '7vw', paddingRight: '7vw', textAlign:"center"}}>
-          <b>You’re {age} and already saved ${totalDecadeSavings}!</b>
+      <Section ignore maxHeight="10%" style={{marginTop:"2vh"}}>
+        <span style={{ color: '#0476bb', fontSize: '2.8vh', paddingLeft: '7vw', paddingRight: '7vw', textAlign:"center"}}>
+          You’re {age} and already saved ${totalDecadeSavings}!
         </span>
       </Section>
-      <Section justify={"top"} style={{paddingTop:'5vh'}}>
+      <Section justify={"top"} style={{marginTop:'2vh'}}>
         <Button onClick={nextPage}>Next</Button>
       </Section>
     </Container>
@@ -164,17 +163,9 @@ const Section = styled.section`
   max-height: ${props => (props.maxHeight ? props.maxHeight : 'none')};
   justify-content: ${props => (props.justify ? props.justify : 'center')};
   align-items: ${props => props.align ? props.align : "center"}};
-  width: 100%;
+  width: ${props => (props.width ? props.width : "100%")};
   background-color: ${props => props.backgroundColor};
   position: relative;
-`;
-
-const ApplicationTitle = styled.span`
-  font-family: Roboto;
-  font-style: normal;
-  color: rgba(255, 255, 255, 1);
-  font-size: 2vh;
-  text-align: center;
 `;
 
 const VerticalStack = styled.div`
@@ -211,6 +202,26 @@ const Button = styled.button`
   font-size: 2vh;
   padding: 1vh;
   cursor: pointer;
+`;
+
+const DecadeHNumber = styled.div`
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 400;
+  color: black;
+  font-size: 2.5vh;
+  background-color: #white;
+  text-align: center;
+  border-width: 0px;
+  border: 1px solid #000000;
+  border-radius: 0.5vh;
+  margin-top: 0;
+
+  height: 5vh;
+  width: 12vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default DecadeOnePage;

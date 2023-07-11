@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
+import HeaderComponent from "../Common/HeaderComponent";
 
 const PreResultPage = () => {
 
@@ -12,45 +13,24 @@ const PreResultPage = () => {
   
   return (
     <Container>
-      <Section backgroundColor="#111111" ignore maxHeight={"10%"}>
-        <VerticalStack style={{ padding: '1vh' }}>
-          <ApplicationTitle>
-            <b>Wealth Calculator</b>
-          </ApplicationTitle>
-        </VerticalStack>
-      </Section>
-      <Section ignore maxHeight="10%" style={{marginTop:"10vh"}}>
-        <span style={{ color: '#0476bb', fontSize: '2.6vh', paddingLeft: '7vw', paddingRight: '7vw', textAlign:"center"}}>
-          <b>Saving more money early and longer has a substantial effect on wealth.</b>
+      <HeaderComponent hasBackButton={true}></HeaderComponent>
+      <Section backgroundColor="white" ignore style={{marginTop:"50%"}} width="90%">
+        <span style={{ fontSize: '3vh', textAlign:"center"}}>
+          Can you save more money each month?
         </span>
       </Section>
-      <Section backgroundColor="white" ignore maxHeight="10%" style={{marginTop:"5vh"}}>
-        <span style={{ color: '#0476bb', fontSize: '2.6vh', paddingLeft: '7vw', paddingRight: '7vw'}}>
-          <b>Adjust the numbers for each decade and see how much it changes your wealth.</b>
+      <Section backgroundColor="white" ignore style={{marginTop:"2vh"}} width="90%">
+        <span style={{ fontSize: '3vh', textAlign:"center"}}>
+          Do you want to be more wealthy?
         </span>
       </Section>
-      <Section backgroundColor="white" ignore>
-        <VerticalStack>
-          <span style={{ fontSize: '2.5vh', textAlign:"center"}}>
-            _______________________________
-          </span>
-          <span style={{ fontSize: '2.5vh', textAlign:"center"}}>
-            Double a penny each day for 27 days and you get $671,088.64.
-          </span>
-        </VerticalStack>
+      <Section backgroundColor="white" ignore style={{marginTop:"2vh"}} width="90%">
+        <span style={{ fontSize: '3vh', textAlign:"center"}}>
+          Move the numbers in the 1st decade to see the greatest increase in wealth!
+        </span>
       </Section>
-      <Section backgroundColor="white" ignore style={{paddingTop:"1vh"}}>
-        <VerticalStack>
-          <span style={{ fontSize: '2.5vh', textAlign:"center"}}>
-            Double it just <b>FOUR</b> more days, and you get $10,737,418!
-          </span>
-          <span style={{ fontSize: '2.5vh', textAlign:"center"}}>
-            _______________________________
-          </span>
-        </VerticalStack>
-      </Section>
-      <Section justify={"top"} style={{paddingTop:'5vh'}}>
-        <Button onClick={nextPage}>Next</Button>
+      <Section justify={"top"} style={{marginTop:'12vh'}}>
+        <Button onClick={nextPage}>Let's go!</Button>
       </Section>
     </Container>
   );
@@ -95,17 +75,9 @@ const Section = styled.section`
   max-height: ${props => (props.maxHeight ? props.maxHeight : 'none')};
   justify-content: ${props => (props.justify ? props.justify : 'center')};
   align-items: ${props => props.align ? props.align : "center"}};
-  width: 100%;
+  width: ${props => (props.width ? props.width : "100%")};
   background-color: ${props => props.backgroundColor};
   position: relative;
-`;
-
-const ApplicationTitle = styled.span`
-  font-family: Roboto;
-  font-style: normal;
-  color: rgba(255, 255, 255, 1);
-  font-size: 2vh;
-  text-align: center;
 `;
 
 const VerticalStack = styled.div`
