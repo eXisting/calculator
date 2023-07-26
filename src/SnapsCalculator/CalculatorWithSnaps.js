@@ -168,7 +168,8 @@ const CalculatorWithSnaps = () => {
           totalAmount={decadeOneTotalSavings}
           monthlyCallback={decadeOneContributionChanged}
           min={0}
-          max={10000}
+          symbolsCountMax={15} 
+          customFormula={true}
           interval={100}
           initialSavingsValue={decadeOneMonthlyContribution}
         />
@@ -182,7 +183,8 @@ const CalculatorWithSnaps = () => {
           totalAmount={decadeTwoTotalSavings}
           monthlyCallback={decadeTwoContributionChanged} 
           min={0} 
-          max={10000} 
+          symbolsCountMax={15} 
+          customFormula={true}
           interval={500}
           initialSavingsValue={decadeTwoMonthlyContribution}
           />
@@ -196,7 +198,8 @@ const CalculatorWithSnaps = () => {
           totalAmount={decadeThreeTotalSavings}
           monthlyCallback={decadeThreeContributionChanged} 
           min={0} 
-          max={10000} 
+          symbolsCountMax={15} 
+          customFormula={true}
           interval={500}
           initialSavingsValue={decadeThreeMonthlyContribution}
           />

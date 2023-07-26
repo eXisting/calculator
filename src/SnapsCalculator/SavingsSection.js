@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled, { css } from "styled-components";
 import NumbericSnaps from "./NumbericSnaps";
 
-const SavingsSection = ({age, totalAmount, monthlyCallback, min, max, interval, initialSavingsValue}) => {
+const SavingsSection = ({age, totalAmount, monthlyCallback, min, symbolsCountMax, customFormula, interval, initialSavingsValue}) => {
   return (
     <Container>
       <HorizontalStack style={{marginTop:"1vh"}}>
@@ -10,11 +10,12 @@ const SavingsSection = ({age, totalAmount, monthlyCallback, min, max, interval, 
         <NumbericSnaps 
           callback={monthlyCallback} 
           min={min} 
-          max={max} 
           interval={interval}
           sign={'$'}
           initialValue={initialSavingsValue}
           inputFieldHeight={"4vh"}
+          maxLength={symbolsCountMax}
+          custom={customFormula}
         />
       </HorizontalStack>
       <SpanContainer>

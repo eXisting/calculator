@@ -84,7 +84,7 @@ const DecadeTwoPage = () => {
       <HeaderComponent hasBackButton={true}></HeaderComponent>
       <Section backgroundColor="white" ignore maxHeight="10%">
         <span style={{ fontSize: '4vh', paddingTop:"2vh", textAlign:"center"}}>
-          <b>DECADE Two</b>
+          <b>Decade 2</b>
         </span>
       </Section>
       <Section ignore width="80%">

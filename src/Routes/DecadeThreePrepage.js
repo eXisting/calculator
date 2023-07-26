@@ -16,7 +16,7 @@ const DecadeThreePrepage = () => {
       <HeaderComponent hasBackButton={true}></HeaderComponent>
       <Section backgroundColor="white" ignore maxHeight="10%">
         <span style={{ fontSize: '4vh', paddingTop:"2vh", textAlign:"center"}}>
-          <b>DECADE Three</b>
+          <b>Decade 3</b>
         </span>
       </Section>
       <Section ignore width="80%">

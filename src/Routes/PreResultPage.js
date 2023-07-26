@@ -14,7 +14,7 @@ const PreResultPage = () => {
   return (
     <Container>
       <HeaderComponent hasBackButton={true}></HeaderComponent>
-      <Section backgroundColor="white" ignore style={{marginTop:"50%"}} width="90%">
+      <Section backgroundColor="white" ignore style={{marginTop:"15vh"}} width="90%">
         <span style={{ fontSize: '3vh', textAlign:"center"}}>
           Can you save more money each month?
         </span>

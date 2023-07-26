@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
-import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 
 
 const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLength, custom, signAtTheEnd, 
@@ -54,7 +53,7 @@ const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLe
 
   const increment = () => {
     if (custom) {
-      const numericValue = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+      const numericValue = value.toString().replace(/[^0-9]/g, ''); // Remove non-numeric characters
       const parsedValue = Number(numericValue);
       const newValue = parsedValue + Number(interval);
 
@@ -81,7 +80,7 @@ const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLe
 
   const decrement = () => {
     if (custom) {
-      const numericValue = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+      const numericValue = value.toString().replace(/[^0-9]/g, ''); // Remove non-numeric characters
       const parsedValue = Number(numericValue);
       const newValue = parsedValue - Number(interval);
   
@@ -103,14 +102,14 @@ const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLe
   };
 
   return (
-    <HorizontalStack space={"0.9vw"}>
+    <HorizontalStack space={"0.3vh"}>
         {!disableControls && 
         <StyledButton 
           onClick={decrement}
           width={inputFieldWidth}
           height={inputFieldHeight}
         >
-          <AiOutlineMinus />
+          -
         </StyledButton>}
         <StyledInput 
           maxLength={maxLength}
@@ -128,7 +127,7 @@ const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLe
           width={inputFieldWidth}
           height={inputFieldHeight}
         >
-          <AiOutlinePlus />
+          +
         </StyledButton>}
       </HorizontalStack>
   );
@@ -163,8 +162,8 @@ const StyledButton = styled.button`
   border-radius: 0.5vh;
   margin-top: 0;
   
-  width: ${props => props.width ? props.width : '6vh'};
-  height: ${props => props.height ? props.height : '6vh'};
+  width: ${props => props.width ? props.width : '4vh'};
+  height: ${props => props.height ? props.height : '4vh'};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -178,7 +177,7 @@ const StyledButton = styled.button`
 const HorizontalStack = styled.div`
   display: flex;
   align-items: center;
-  padding: 1vh;
+  padding: 0.5vh;
 
   > *:not(:last-child) {
     margin-right: ${props => props.space};
