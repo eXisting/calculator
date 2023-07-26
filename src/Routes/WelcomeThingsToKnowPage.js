@@ -79,6 +79,8 @@ const Container = styled.div`
   max-height: 100vh; /* Set the maximum height to screen height */
   overflow: auto; /* Enable scrolling when content overflows */
   margin-right: 2vw;
+  font-family: Tahoma;
+  font-style: normal;
 `;
 
 const PaddingSectionDiv = styled.div`

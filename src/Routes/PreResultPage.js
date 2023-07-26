@@ -66,6 +66,8 @@ const Container = styled.div`
   max-height: 100vh; /* Set the maximum height to screen height */
   overflow: auto; /* Enable scrolling when content overflows */
   margin-right: 2vw;
+  font-family: Tahoma;
+  font-style: normal;
 `;
 
 const Section = styled.section`
@@ -107,8 +109,6 @@ const HorizontalStack = styled.div`
 const BulletPointText = styled.div`
   display: flex;
   align-items: center;
-  font-family: Roboto;
-  font-style: normal;
   color: back;
   font-size: 2vh;
   text-align: left;

@@ -134,7 +134,7 @@ const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLe
 };
 
 const StyledInput = styled.input`
-  font-family: Roboto;
+  font-family: Tahoma;
   font-style: normal;
   font-weight: bold; /* Change font-weight to bold */
   color: rgba(0, 0, 0, 1);
@@ -150,7 +150,7 @@ const StyledInput = styled.input`
 `;
 
 const StyledButton = styled.button`
-  font-family: Roboto;
+  font-family: Tahoma;
   font-style: normal;
   font-weight: 400;
   color: white;

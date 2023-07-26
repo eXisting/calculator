@@ -13,9 +13,14 @@ const WelcomeSavingsFormulaPage = () => {
   return (
     <Container>
       <HeaderComponent hasBackButton={true}></HeaderComponent>
-      <Section ignore width="80%" backgroundColor="#0476bb" style={{marginTop:"2vh", marginBottom:"10vh"}}>
+      <Section ignore width="80%" backgroundColor="#0476bb" style={{marginTop:"2vh", marginBottom:"1vh"}}>
         <span style={{ color: 'white', fontSize: '4vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
-          <b>Becoming wealthy is more about saving than your income level.</b>
+          <b>Rich people know something about money!</b>
+        </span>
+      </Section>
+      <Section ignore width="40%"  style={{marginBottom:"2vh"}}>
+        <span style={{ color: '#0476bb', fontSize: '3vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
+          <b>It compounds over time</b>
         </span>
       </Section>
       <Section ignore style={{marginBottom:"10vh"}}>
@@ -60,6 +65,8 @@ const Container = styled.div`
   max-height: 100vh; /* Set the maximum height to screen height */
   overflow: auto; /* Enable scrolling when content overflows */
   margin-right: 2vw;
+  font-family: Tahoma;
+  font-style: normal;
 `;
 
 const Section = styled.section`
@@ -100,8 +107,6 @@ const HorizontalStack = styled.div`
 const BulletPointText = styled.div`
   display: flex;
   align-items: center;
-  font-family: Roboto;
-  font-style: normal;
   color: back;
   font-size: 2vh;
   text-align: left;

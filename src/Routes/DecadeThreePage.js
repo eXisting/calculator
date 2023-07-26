@@ -177,6 +177,8 @@ const Container = styled.div`
   max-height: 100vh; /* Set the maximum height to screen height */
   overflow: auto; /* Enable scrolling when content overflows */
   margin-right: 2vw;
+  font-family: Tahoma;
+  font-style: normal;
 `;
 
 const Section = styled.section`
@@ -216,8 +218,8 @@ const HorizontalStack = styled.div`
 `;
 
 const DecadeHNumber = styled.div`
-  font-family: Roboto;
-  font-style: normal;
+font-family: Tahoma;
+font-style: normal;
   font-weight: 400;
   color: black;
   font-size: 2.5vh;

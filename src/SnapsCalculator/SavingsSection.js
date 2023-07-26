@@ -31,6 +31,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-family: Tahoma;
+  font-style: normal;
 `;
 
 const SpanContainer = styled.div`

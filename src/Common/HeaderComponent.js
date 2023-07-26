@@ -40,7 +40,7 @@ const VerticalStack = styled.div`
 `;
 
 const ApplicationTitle = styled.span`
-  font-family: Roboto;
+  font-family: Tahoma;
   font-style: normal;
   color: rgba(255, 255, 255, 1);
   font-size: 2.5vh;

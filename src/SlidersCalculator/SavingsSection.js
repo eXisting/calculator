@@ -35,6 +35,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-family: Tahoma;
+  font-style: normal;
 `;
 
 const SpanContainer = styled.div`
@@ -53,8 +55,6 @@ justify-content: center;
 `;
 
 const NumberOfYears = styled.span`
-  font-family: Roboto;
-  font-style: normal;
   font-weight: 400;
   color: rgba(255, 255, 255, 1);
   width: 100vw;
@@ -71,8 +71,6 @@ const NumberOfYears = styled.span`
 `;
 
 const CurrentSavings = styled.span`
-  font-family: Roboto;
-  font-style: normal;
   font-weight: 400;
   color: rgba(255, 255, 255, 1);
   width: 100vw;

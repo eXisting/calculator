@@ -186,6 +186,8 @@ const Container = styled.div`
   max-height: 100%;
   max-height: 100vh; /* Set the maximum height to screen height */
   overflow: auto; /* Enable scrolling when content overflows */
+  font-family: Tahoma;
+  font-style: normal;
 `;
 
 const Section = styled.section`
@@ -239,16 +241,12 @@ const HorizontalStack = styled.div`
 `;
 
 const ApplicationTitle = styled.span`
-  font-family: Roboto;
-  font-style: normal;
   color: rgba(255, 255, 255, 1);
   font-size: 2.5vh;
   text-align: center;
 `;
 
 const StyledInput = styled.input`
-  font-family: Roboto;
-  font-style: normal;
   font-weight: 400;
   color: rgba(0, 0, 0, 1);
   font-size: 1.8vh;
@@ -262,8 +260,6 @@ const StyledInput = styled.input`
 `;
 
 const TotalSavingsResult = styled.span`
-  font-family: Roboto;
-  font-style: normal;
   font-weight: 400;
   color: rgba(255, 255, 255, 1);
   font-size: 4vh;

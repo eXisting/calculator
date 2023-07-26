@@ -218,6 +218,8 @@ const Container = styled.div`
   max-height: 100vh; /* Set the maximum height to screen height */
   overflow: auto; /* Enable scrolling when content overflows */
   margin-right: 2vw;
+  font-family: Tahoma;
+  font-style: normal;
 `;
 
 const Section = styled.section`
@@ -257,8 +259,6 @@ const HorizontalStack = styled.div`
 `;
 
 const StyledInput = styled.input`
-  font-family: Roboto;
-  font-style: normal;
   font-weight: 400;
   color: rgba(0, 0, 0, 1);
   font-size: 1.8vh;
