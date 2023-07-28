@@ -135,8 +135,8 @@ const DecadeHNumber = styled.div`
 `;
 
 const Button = styled.button`
-  background-color: #0476bb;
-  color: #ffffff;
+  background-color: #f5a338;
+  color: #000000;
   border: none;
   border-radius: 1vh;
   height: 5vh;
@@ -144,6 +144,8 @@ const Button = styled.button`
   font-size: 2vh;
   padding: 1vh;
   cursor: pointer;
+  position: fixed;
+  bottom: 20px;
 `;
 
 export default DecadeThreePrepage;

@@ -102,14 +102,14 @@ const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLe
   };
 
   return (
-    <HorizontalStack space={"0.3vh"}>
-        {!disableControls && 
-        <StyledButton 
-          onClick={decrement}
+    <HorizontalStack space={"1vh"}>
+      {!disableControls && 
+         <StyledButton 
+          onClick={increment}
           width={inputFieldWidth}
           height={inputFieldHeight}
         >
-          -
+          +
         </StyledButton>}
         <StyledInput 
           maxLength={maxLength}
@@ -121,14 +121,15 @@ const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLe
           onFocus={resetValueOnFocus}
           onBlur={handleBlur}
         />
-        {!disableControls && 
-         <StyledButton 
-          onClick={increment}
+      {!disableControls && 
+        <StyledButton 
+          onClick={decrement}
           width={inputFieldWidth}
           height={inputFieldHeight}
         >
-          +
+          -
         </StyledButton>}
+        
       </HorizontalStack>
   );
 };
@@ -158,8 +159,7 @@ const StyledButton = styled.button`
   background-color: #0476bb;
   text-align: center;
   border-width: 0px;
-  border: 1px solid #000000;
-  border-radius: 0.5vh;
+  border-radius: 2vh;
   margin-top: 0;
   
   width: ${props => props.width ? props.width : '4vh'};

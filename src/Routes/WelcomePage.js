@@ -7,23 +7,23 @@ const WelcomePage = () => {
   const navigate = useNavigate();
 
   const nextPage = () => {
-    navigate(`/welcome-things-to-know`);
+    navigate(`/welcome-savings-formula`);
   };
   
   return (
     <Container>
       <HeaderComponent hasBackButton={false}></HeaderComponent>
-      <Section ignore width="80%" backgroundColor="#0476bb" style={{marginTop:"2vh", marginBottom:"4vh"}}>
+      <Section ignore width="80%" backgroundColor="#0476bb" style={{marginTop:"2vh", marginBottom:"2vh"}}>
         <span style={{ color: 'white', fontSize: '4vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
           Everyone can be wealthy!
         </span>
       </Section>
-      <Section backgroundColor="white" ignore maxHeight="10%">
+      <Section backgroundColor="white" ignore maxHeight="10%" style={{marginTop:"2vh", marginBottom:"6vh"}}>
         <span style={{ fontSize: '4vh', paddingLeft: '7vw', paddingRight: '7vw', textAlign:"center"}}>
           Millionaire myth busters!
         </span>
       </Section>
-      <Section backgroundColor="white" ignore>
+      <Section backgroundColor="white" ignore style={{marginTop:"2vh", marginBottom:"8vh"}}>
         <VerticalStack style={{paddingLeft:"8vw", paddingRight:"8vw"}}>
           <HorizontalStack>
             <BulletPointText>
@@ -51,7 +51,7 @@ const WelcomePage = () => {
           </HorizontalStack>
         </VerticalStack>
       </Section>
-      <Section justify={"top"} style={{marginTop:'2vh'}}>
+      <Section justify={"top"} style={{marginTop:"2vh", marginBottom:"2vh"}}>
         <Button onClick={nextPage}>Let’s prove it -{'>'}</Button>
       </Section>
     </Container>
@@ -130,6 +130,8 @@ const Button = styled.button`
   font-size: 3vh;
   padding: 1vh;
   cursor: pointer;
+  position: fixed;
+  bottom: 20px;
 `;
 
 export default WelcomePage;

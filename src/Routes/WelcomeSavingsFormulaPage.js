@@ -2,34 +2,63 @@ import React, { useState } from 'react';
 import styled, { css } from "styled-components";
 import { useNavigate } from 'react-router-dom';
 import HeaderComponent from '../Common/HeaderComponent';
+import PennyImage from '../Media/penny.jpg';
 
 const WelcomeSavingsFormulaPage = () => {
   const navigate = useNavigate();
 
   const nextPage = () => {
-    navigate(`/initial-data`);
+    navigate(`/savings-graph`);
   };
   
   return (
     <Container>
       <HeaderComponent hasBackButton={true}></HeaderComponent>
-      <Section ignore width="80%" backgroundColor="#0476bb" style={{marginTop:"2vh", marginBottom:"1vh"}}>
+      <Section ignore width="85%" backgroundColor="#0476bb" style={{marginTop:"2vh", marginBottom:"1vh"}}>
         <span style={{ color: 'white', fontSize: '4vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
-          <b>Rich people know something about money!</b>
+          Rich people know something about money!
         </span>
       </Section>
-      <Section ignore width="40%"  style={{marginBottom:"2vh"}}>
+      <Section ignore width="80%"  style={{marginBottom:"2vh"}}>
         <span style={{ color: '#0476bb', fontSize: '3vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
-          <b>It compounds over time</b>
+          <i><b>It compounds over time.</b></i>
         </span>
       </Section>
-      <Section ignore style={{marginBottom:"10vh"}}>
-        <span style={{ color: 'black', fontSize: '3vh', paddingLeft: '10vw', paddingRight: '10vw', paddingTop:"1.5vh", textAlign:"center"}}>
-          <i>....double a penny each day for 31 days, and you’ll have $10,737,418. <br/><br/> That is compound interest!</i>
+      <Section ignore>
+        <span style={{ color: 'black', fontSize: '3vh', paddingLeft: '8vh', paddingRight: '8vh', textAlign:"center"}}>
+          Let’s start with a penny...
         </span>
       </Section>
-      <Section justify={"top"} style={{paddingTop:'5vh'}}>
-        <Button onClick={nextPage}>Next</Button>
+      <Section>
+        <Image src={PennyImage} alt="Simple penny" />
+      </Section>
+      <Section ignore style={{marginBottom:"2vh"}}>
+        <span style={{ color: 'black', fontSize: '3vh', paddingLeft: '8vh', paddingRight: '8vh', textAlign:"center"}}>
+          <i>Double it for <b>27</b> days</i>
+        </span>
+      </Section>
+      <Section ignore style={{marginBottom:"2vh"}}>
+        <span style={{ color: '#0476bb', fontSize: '4vh', paddingLeft: '8vh', paddingRight: '8vh', textAlign:"center"}}>
+          <b><i>You have $671,088</i></b>
+        </span>
+      </Section>
+      <Section ignore style={{marginBottom:"2vh"}}>
+        <span style={{ color: 'black', fontSize: '3vh', paddingLeft: '8vh', paddingRight: '8vh', paddingTop:"1.5vh", textAlign:"center"}}>
+          <i>...Double it just <b>FOUR</b> more days</i>
+        </span>
+      </Section>
+      <Section ignore style={{marginBottom:"2vh"}}>
+        <span style={{ color: '#0476bb', fontSize: '4vh', paddingLeft: '8vh', paddingRight: '8vh', paddingTop:"1.5vh", textAlign:"center"}}>
+        <b><i>You have $10,737,418</i></b>
+        </span>
+      </Section>
+      <Section ignore style={{marginBottom:"2vh"}}>
+        <span style={{ color: 'black', fontSize: '3vh', paddingLeft: '6vh', paddingRight: '6vh', paddingTop:"1.5vh", textAlign:"center"}}>
+          <i>That’s $10,066,329 more in FOUR days</i>
+        </span>
+      </Section>
+      <Section justify={"top"} ignore style={{paddingTop:'6vh', paddingBottom:'4vh'}}>
+        <Button onClick={nextPage}>How does this happen? -{'>'}</Button>
       </Section>
     </Container>
   );
@@ -81,48 +110,35 @@ const Section = styled.section`
   position: relative;
 `;
 
-const VerticalStack = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: ${props => props.align ? props.align : "left"};
-  justify-content: left;
-  margin-top: ${props => props.ignoreMarginTop ? '0px' : '0.5vh'};
-  padding: ${props => props.ignorePadding ? '0px' : '0.5vh'};
-
-  > *:not(:last-child) {
-    margin-bottom: ${props => props.space};
-  }
-`;
-
-const HorizontalStack = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 1vh;
-  
-  > *:not(:last-child) {
-    margin-right: ${props => props.space};
-  }
-`;
-
-const BulletPointText = styled.div`
-  display: flex;
-  align-items: center;
-  color: back;
-  font-size: 2vh;
-  text-align: left;
-  width: 3wh;
-`;
-
 const Button = styled.button`
-  background-color: #0476bb;
-  color: #ffffff;
+  background-color: #f5a338;
+  color: #000000;
   border: none;
   border-radius: 1vh;
-  height: 5vh;
-  width: ${props => props.width ? props.width :"50%"};
-  font-size: 2vh;
+  height: 6vh;
+  width: ${props => props.width ? props.width :"70%"};
+  font-size: 3vh;
   padding: 1vh;
   cursor: pointer;
+  position: fixed;
+  bottom: 20px;
+`;
+
+const Image = styled.img`
+  width: 100%; /* Default width for all views */
+
+  /* Custom width for horizontal view (landscape) */
+  @media (orientation: landscape) {
+    width: 10%; /* Adjust the width as needed */
+  }
+
+  /* Custom width for vertical view (portrait) */
+  @media (orientation: portrait) {
+    width: 20%; /* Adjust the width as needed */
+  }
+
+  justifyContent: center;
+  alignItems: center;
 `;
 
 export default WelcomeSavingsFormulaPage;

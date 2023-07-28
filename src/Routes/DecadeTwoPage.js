@@ -76,41 +76,35 @@ const DecadeTwoPage = () => {
   };
 
   const nextPage = () => {
-    navigate(`/decade-threeprepage`);
+    navigate(`/decade-three`);
   };
   
   return (
     <Container>
       <HeaderComponent hasBackButton={true}></HeaderComponent>
       <Section backgroundColor="white" ignore maxHeight="10%">
-        <span style={{ fontSize: '4vh', paddingTop:"2vh", textAlign:"center"}}>
+        <span style={{ fontSize: '4vh', marginTop:"7vh", textAlign:"center"}}>
           <b>Decade 2</b>
         </span>
       </Section>
-      <Section ignore width="80%">
+      <Section ignore width="80%" style={{ marginTop:"2vh"}}>
         <HorizontalStack>
           <DecadeHNumber>1</DecadeHNumber>
           <DecadeHNumber style={{backgroundColor:"black", color:"white"}}>2</DecadeHNumber>
           <DecadeHNumber>3</DecadeHNumber>
         </HorizontalStack>
       </Section>
-      <Section backgroundColor="white" ignore maxHeight="10%" style={{marginTop:"5vh"}}>
-        <span style={{ fontSize: '2.8vh', paddingLeft: '7vw', paddingRight: '7vw', textAlign:"center"}}>
-          In your second decade, the money really starts growing!
-        </span>
-      </Section>
-      <Section backgroundColor="white" ignore maxHeight="10%">
-        <span style={{ color:"#0476bb", fontSize: '2.8vh', paddingTop:"5vh", textAlign:"center"}}>
+      <Section backgroundColor="white" ignore maxHeight="10%" width="85%" >
+        <span style={{ color:"#0476bb", fontSize: '2.8vh', paddingTop:"7vh", marginBottom:"3vh", textAlign:"center"}}>
           Your savings between the ages of {decadeOneAge} to {decadeTwoAge}.
         </span>
       </Section>
-      <Section backgroundColor="white" ignore style={{width:"90%", paddingTop:"2vh"}}>
-        <HorizontalStack>
-          <VerticalStack align="end" space="2vh">
-            <span style={{ fontSize: '1.6vh', textAlign: 'right', color: 'gray' }}>What is your average <br/>income estimate for the decade?</span>
-            <span style={{ fontSize: '1.6vh', textAlign: 'right', color: 'gray' }}>What % of your income?</span>
-          </VerticalStack>
+      <Section backgroundColor="white" ignore style={{width:"90%", paddingTop:"4vh"}}>
           <VerticalStack align="center">
+          <Section ignore style={{paddingBottom:"4vh"}}>
+            <span style={{ fontSize: '2.5vh', textAlign: 'center', color: 'gray', marginBottom:"1vh" }}>
+              Estimate your 10 year average income
+            </span>
             <NumbericSnaps 
               callback={updateDecadeValue}
               min={0} 
@@ -121,6 +115,10 @@ const DecadeTwoPage = () => {
               custom={true}
               inputFieldHeight={"4vh"}
             />
+            </Section>
+            <span style={{ fontSize: '2.5vh', textAlign: 'center', color: 'gray', marginBottom:"1vh", marginTop:"2vh" }}>
+              What % of your income can you save?
+            </span>
             <NumbericSnaps 
               callback={updatePercentSavings}
               min={0} 
@@ -132,16 +130,17 @@ const DecadeTwoPage = () => {
               inputFieldHeight={"4vh"}
             />
           </VerticalStack>
-        </HorizontalStack>
-        <span style={{ fontSize: '2.2vh', textAlign: 'center' }}><b>You’re saving ${monthlyContribution} each month?</b></span>
+        <span style={{ fontSize: '3vh', textAlign: 'center', marginTop:"4vh" }}>
+          You’re saving ${monthlyContribution} each month?
+        </span>
       </Section>
-      <Section ignore maxHeight="10%" style={{marginTop:"2vh"}}>
+      <Section ignore maxHeight="10%" style={{marginTop:"7vh"}}>
         <span style={{ color: '#0476bb', fontSize: '2.8vh', paddingLeft: '7vw', paddingRight: '7vw', textAlign:"center"}}>
           You’re {decadeTwoAge} and already saved ${decadeTwoTotalSavings}!
         </span>
       </Section>
-      <Section justify={"top"} style={{marginTop:"2vh"}}>
-        <Button onClick={nextPage}>Next</Button>
+      <Section justify={"top"} style={{marginTop:'2vh'}}>
+        <Button onClick={nextPage}>Let’s save more -{">"}</Button>
       </Section>
     </Container>
   );
@@ -225,7 +224,7 @@ const DecadeHNumber = styled.div`
   text-align: center;
   border-width: 0px;
   border: 1px solid #000000;
-  border-radius: 0.5vh;
+  border-radius: 0.1vh;
   margin-top: 0;
 
   height: 5vh;
@@ -236,15 +235,17 @@ const DecadeHNumber = styled.div`
 `;
 
 const Button = styled.button`
-  background-color: #0476bb;
-  color: #ffffff;
+  background-color: #f5a338;
+  color: #000000;
   border: none;
   border-radius: 1vh;
-  height: 5vh;
+  height: 6vh;
   width: ${props => props.width ? props.width :"50%"};
-  font-size: 2vh;
+  font-size: 3vh;
   padding: 1vh;
   cursor: pointer;
+  position: fixed;
+  bottom: 20px;
 `;
 
 export default DecadeTwoPage;

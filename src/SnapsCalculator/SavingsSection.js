@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import styled, { css } from "styled-components";
 import NumbericSnaps from "./NumbericSnaps";
 
-const SavingsSection = ({age, totalAmount, monthlyCallback, min, symbolsCountMax, customFormula, interval, initialSavingsValue}) => {
+const SavingsSection = ({fromAge,toAge, totalAmount, monthlyCallback, min, symbolsCountMax, customFormula, interval, initialSavingsValue}) => {
   return (
     <Container>
-      <HorizontalStack style={{marginTop:"1vh"}}>
+      <HorizontalStack style={{marginTop:"1vh"}} space={"2vh"}>
         <span style={{ fontSize: '2.2vh', textAlign: 'right' }}>Monthly savings?</span>
-        <NumbericSnaps 
+        <NumbericSnaps
           callback={monthlyCallback} 
           min={min} 
           interval={interval}
@@ -20,7 +20,7 @@ const SavingsSection = ({age, totalAmount, monthlyCallback, min, symbolsCountMax
       </HorizontalStack>
       <SpanContainer>
         <span style={{color:"#0476bb"}}>
-          You are <b>{age}</b> and you saved <b>${totalAmount}</b>!
+          Your savings between {fromAge} to {toAge} and you saved ${totalAmount}!
         </span>
       </SpanContainer>
     </Container>
@@ -38,7 +38,7 @@ const Container = styled.div`
 const SpanContainer = styled.div`
 color: white;
 font-size: 2vh;
-padding-bottom: 1.5vh;
+padding: 2vh;
 text-align: center;
 display: flex;
 align-items: center;

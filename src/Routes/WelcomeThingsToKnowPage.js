@@ -140,6 +140,8 @@ const Button = styled.button`
   font-size: 2vh;
   padding: 1vh;
   cursor: pointer;
+  position: fixed;
+  bottom: 20px;
 `;
 
 export default WelcomeThingsToKnowPage;

@@ -139,14 +139,14 @@ const CalculatorWithSnaps = () => {
               value={startingAge}
               selectTextOnFocus={true}
               maxLength={2}
-              width={"10%"}
+              width={"40%"}
               onInput={e => initialAgeChanged(e.target.value)}
             />
           </HorizontalStack>
       </Section>
       <Section ignore style={{padding:"1vh"}}>
-        <HorizontalStack customPadding={"0px"}>
-          <span style={{ fontSize: '2.2vh', textAlign: 'right' }}>What are you total <br/>savings today?</span>
+        <HorizontalStack customPadding={"0px"} space={"1vh"}>
+          <span style={{ fontSize: '2.2vh', textAlign: 'center' }}>What are you total <br/>savings today?</span>
           <NumbericSnaps 
               callback={initialDepositChanged} 
               min={0} 
@@ -159,12 +159,13 @@ const CalculatorWithSnaps = () => {
             />
         </HorizontalStack>
       </Section>
-      <Section ignore style={{border:"1px solid #000000", height:"3vh"}} backgroundColor="#C0C0C0">
-        <span style={{ color: 'black', fontSize: '1.8vh', textAlign: 'center' }}>Decade 1</span>
+      <Section ignore style={{border:"1px solid #000000", height:"4vh"}} backgroundColor="#C0C0C0">
+        <span style={{ color: 'black', fontSize: '2.5vh', textAlign: 'center' }}><b>Decade 1</b></span>
       </Section>
       <Section ignore maxHeight={"50%"}>
         <SavingsSection
-          age={decadeOneAge}  
+          fromAge={decadeOneAge}
+          toAge={decadeOneAge + 10}  
           totalAmount={decadeOneTotalSavings}
           monthlyCallback={decadeOneContributionChanged}
           min={0}
@@ -174,12 +175,13 @@ const CalculatorWithSnaps = () => {
           initialSavingsValue={decadeOneMonthlyContribution}
         />
       </Section>
-      <Section ignore style={{border:"1px solid #000000", height:"3vh"}} backgroundColor="#C0C0C0">
-        <span style={{ color: 'black', fontSize: '1.8vh', textAlign: 'center' }}>Decade 2</span>
+      <Section ignore style={{border:"1px solid #000000", height:"4vh"}} backgroundColor="#C0C0C0">
+        <span style={{ color: 'black', fontSize: '2.5vh', textAlign: 'center' }}><b>Decade 2</b></span>
       </Section>
       <Section ignore align="top" maxHeight={"50%"}>
-        <SavingsSection 
-          age={decadeTwoAge}  
+        <SavingsSection
+          fromAge={decadeTwoAge}
+          toAge={decadeTwoAge + 10}   
           totalAmount={decadeTwoTotalSavings}
           monthlyCallback={decadeTwoContributionChanged} 
           min={0} 
@@ -189,12 +191,13 @@ const CalculatorWithSnaps = () => {
           initialSavingsValue={decadeTwoMonthlyContribution}
           />
       </Section>
-      <Section ignore style={{border:"1px solid #000000", height:"3vh" }} backgroundColor="#C0C0C0">
-        <span style={{ color: 'black', fontSize: '1.8vh', textAlign: 'center' }}>Decade 3</span>
+      <Section ignore style={{border:"1px solid #000000", height:"4vh" }} backgroundColor="#C0C0C0">
+        <span style={{ color: 'black', fontSize: '2.5vh', textAlign: 'center' }}><b>Decade 3</b></span>
       </Section>
-      <Section ignore align="top" maxHeight={"50%"}>
+      <Section ignore align="top" maxHeight={"50%"} >
         <SavingsSection 
-          age={decadeThreeAge}  
+          fromAge={decadeThreeAge}
+          toAge={decadeThreeAge + 10}  
           totalAmount={decadeThreeTotalSavings}
           monthlyCallback={decadeThreeContributionChanged} 
           min={0} 
@@ -231,6 +234,7 @@ const Section = styled.section`
   width: 100%;
   background-color: ${props => props.backgroundColor};
   position: relative;
+  padding: '2vh'
 `;
 
 const VerticalStack = styled.div`
@@ -261,14 +265,14 @@ const HorizontalStack = styled.div`
 const StyledInput = styled.input`
   font-weight: 400;
   color: rgba(0, 0, 0, 1);
-  font-size: 1.8vh;
+  font-size: 2.2vh;
   background-color: white;
   text-align: center;
   border-width: 0px;
   margin-top: 0;
   width: ${props => props.width};
   height: 3vh;
-  border-radius: 5px;
+  border-radius: 1px;
 `;
 
 export default CalculatorWithSnaps;

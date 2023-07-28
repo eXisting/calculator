@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import WelcomePage from './Routes/WelcomePage';
-import WelcomeThingsToKnowPage from './Routes/WelcomeThingsToKnowPage';
 import WelcomeSavingsFormulaPage from './Routes/WelcomeSavingsFormulaPage';
+import SavingsGraphPage from './Routes/SavingsGraphPage';
+import WealthRulesPage from './Routes/WealthRulesPage';
 import InitialValuesPage from './Routes/InitialValuesPage';
 import DecadeOnePage from './Routes/DecadeOnePage';
 import DecadeTwoPage from './Routes/DecadeTwoPage';
@@ -14,7 +15,6 @@ import CalculatedPage from './Routes/CalculatedPage';
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './redux/store';
-import DecadeThreePrepage from './Routes/DecadeThreePrepage';
 
 const RootApp = styled.div`
   width: 100vw;
@@ -29,13 +29,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <RootApp>
             <Routes>
               <Route path="/" element={<WelcomePage store={store}/>} />
-              <Route path="/welcome-things-to-know" element={<WelcomeThingsToKnowPage />} />
               <Route path="/welcome-savings-formula" element={<WelcomeSavingsFormulaPage />} />
+              <Route path="/savings-graph" element={<SavingsGraphPage />} />
+              <Route path="/wealth-rules" element={<WealthRulesPage />} /> 
               <Route path="/initial-data" element={<InitialValuesPage />} />
               <Route path="/decade-one" element={<DecadeOnePage />} />
               <Route path="/decade-two" element={<DecadeTwoPage />} />
               <Route path="/decade-three" element={<DecadeThreePage />} />
-              <Route path="/decade-threeprepage" element={<DecadeThreePrepage />} />
               <Route path="/pre-result" element={<PreResultPage />} />
               <Route path="/calculated" element={<CalculatedPage />} />
             </Routes>

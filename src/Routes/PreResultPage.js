@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect }  from "react";
 import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
 import HeaderComponent from "../Common/HeaderComponent";
+import { useDispatch, useSelector } from "react-redux";
 
 const PreResultPage = () => {
 
@@ -10,27 +11,40 @@ const PreResultPage = () => {
   const nextPage = () => {
     navigate(`/calculated`);
   };
+
+  const {
+    monthlyContribution: decadeThreeMonthlyContribution,
+    age: decadeThreeAge,
+    totalDecadeSavings: decadeThreeTotalSavings,
+  } = useSelector(
+    (state) => state.decadeThreePage
+  );
   
   return (
     <Container>
       <HeaderComponent hasBackButton={true}></HeaderComponent>
-      <Section backgroundColor="white" ignore style={{marginTop:"15vh"}} width="90%">
-        <span style={{ fontSize: '3vh', textAlign:"center"}}>
-          Can you save more money each month?
+      <Section ignore width="80%" backgroundColor="#0476bb" style={{marginTop:"2vh", marginBottom:"2vh"}}>
+        <span style={{ color: 'white', fontSize: '4vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
+          Congratulations, you’re wealthy!
         </span>
       </Section>
-      <Section backgroundColor="white" ignore style={{marginTop:"2vh"}} width="90%">
-        <span style={{ fontSize: '3vh', textAlign:"center"}}>
-          Do you want to be more wealthy?
+      <Section backgroundColor="white" ignore style={{marginTop:"10vh"}} width="90%">
+        <span style={{ fontSize: '4vh', textAlign:"center"}}>
+          You have
         </span>
       </Section>
-      <Section backgroundColor="white" ignore style={{marginTop:"2vh"}} width="90%">
-        <span style={{ fontSize: '3vh', textAlign:"center"}}>
-          Move the numbers in the 1st decade to see the greatest increase in wealth!
+      <Section backgroundColor="white" ignore style={{marginTop:"5vh", marginBottom:"2vh"}} width="90%">
+        <span style={{ fontSize: '8vh', textAlign:"center" }}>
+          <b>${decadeThreeTotalSavings}</b>
+        </span>
+      </Section>
+      <Section backgroundColor="white" ignore style={{marginTop:"17vh"}} width="90%">
+        <span style={{ fontSize: '4vh', textAlign:"center"}}>
+          Can you save more, usually the answer is, yes!
         </span>
       </Section>
       <Section justify={"top"} style={{marginTop:'12vh'}}>
-        <Button onClick={nextPage}>Let's go!</Button>
+        <Button onClick={nextPage}>Increase savings -{">"}</Button>
       </Section>
     </Container>
   );
@@ -82,49 +96,18 @@ const Section = styled.section`
   position: relative;
 `;
 
-const VerticalStack = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: ${props => props.align ? props.align : "left"};
-  justify-content: left;
-  margin-top: ${props => props.ignoreMarginTop ? '0px' : '0.5vh'};
-  padding: ${props => props.ignorePadding ? '0px' : '0.5vh'};
-
-  > *:not(:last-child) {
-    margin-bottom: ${props => props.space};
-  }
-`;
-
-const HorizontalStack = styled.div`
-  display: flex;
-  align-items: center;
-
-  > *:not(:last-child) {
-    margin-right: ${props => props.space};
-  }
-
-  justify-content: center; /* Updated value */
-`;
-
-const BulletPointText = styled.div`
-  display: flex;
-  align-items: center;
-  color: back;
-  font-size: 2vh;
-  text-align: left;
-  width: 3wh;
-`;
-
 const Button = styled.button`
-  background-color: #0476bb;
-  color: #ffffff;
+  background-color: #f5a338;
+  color: #000000;
   border: none;
   border-radius: 1vh;
-  height: 5vh;
+  height: 6vh;
   width: ${props => props.width ? props.width :"50%"};
-  font-size: 2vh;
+  font-size: 3vh;
   padding: 1vh;
   cursor: pointer;
+  position: fixed;
+  bottom: 20px;
 `;
 
 export default PreResultPage;

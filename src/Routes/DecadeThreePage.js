@@ -82,35 +82,31 @@ const DecadeThreePage = () => {
   return (
     <Container>
       <HeaderComponent hasBackButton={true}></HeaderComponent>
+
+
       <Section backgroundColor="white" ignore maxHeight="10%">
-        <span style={{ fontSize: '4vh', paddingTop:"2vh", textAlign:"center"}}>
+        <span style={{ fontSize: '4vh', marginTop:"7vh", textAlign:"center"}}>
           <b>Decade 3</b>
         </span>
       </Section>
-      <Section ignore width="80%">
+      <Section ignore width="80%" style={{ marginTop:"2vh"}}>
         <HorizontalStack>
           <DecadeHNumber>1</DecadeHNumber>
           <DecadeHNumber>2</DecadeHNumber>
           <DecadeHNumber style={{backgroundColor:"black", color:"white"}}>3</DecadeHNumber>
         </HorizontalStack>
       </Section>
-      <Section backgroundColor="white" ignore maxHeight="10%" style={{marginTop:"5vh"}}>
-        <span style={{ fontSize: '2.8vh', paddingLeft: '7vw', paddingRight: '7vw', textAlign:"center"}}>
-          The third decade is the most important wealth building time period!
-        </span>
-      </Section>
-      <Section backgroundColor="white" ignore maxHeight="10%">
-        <span style={{ color:"#0476bb", fontSize: '2.8vh', paddingTop:"5vh", textAlign:"center"}}>
+      <Section backgroundColor="white" ignore maxHeight="10%" width="85%" >
+        <span style={{ color:"#0476bb", fontSize: '2.8vh', paddingTop:"7vh", marginBottom:"3vh", textAlign:"center"}}>
           Your savings between the ages of {decadeTwoAge} to {decadeThreeAge}.
         </span>
       </Section>
-      <Section backgroundColor="white" ignore style={{width:"90%", paddingTop:"2vh"}}>
-        <HorizontalStack>
-          <VerticalStack align="end" space="2vh">
-            <span style={{ fontSize: '1.6vh', textAlign: 'right', color: 'gray' }}>What is your average <br/>income estimate for the decade?</span>
-            <span style={{ fontSize: '1.6vh', textAlign: 'right', color: 'gray' }}>What % of your income?</span>
-          </VerticalStack>
+      <Section backgroundColor="white" ignore style={{width:"90%", paddingTop:"4vh"}}>
           <VerticalStack align="center">
+          <Section ignore style={{paddingBottom:"4vh"}}>
+            <span style={{ fontSize: '2.5vh', textAlign: 'center', color: 'gray', marginBottom:"1vh" }}>
+              Estimate your 10 year average income
+            </span>
             <NumbericSnaps 
               callback={updateDecadeValue}
               min={0} 
@@ -121,6 +117,10 @@ const DecadeThreePage = () => {
               custom={true}
               inputFieldHeight={"4vh"}
             />
+            </Section>
+            <span style={{ fontSize: '2.5vh', textAlign: 'center', color: 'gray', marginBottom:"1vh", marginTop:"2vh" }}>
+              What % of your income can you save?
+            </span>
             <NumbericSnaps 
               callback={updatePercentSavings}
               min={0} 
@@ -132,16 +132,12 @@ const DecadeThreePage = () => {
               inputFieldHeight={"4vh"}
             />
           </VerticalStack>
-        </HorizontalStack>
-        <span style={{ fontSize: '2.2vh', textAlign: 'center' }}><b>You’re saving ${monthlyContribution} each month?</b></span>
-      </Section>
-      <Section ignore maxHeight="10%" style={{marginTop:"2vh"}}>
-        <span style={{ color: '#0476bb', fontSize: '2.8vh', paddingLeft: '7vw', paddingRight: '7vw', textAlign:"center"}}>
-          You’re {decadeThreeAge} and already saved ${decadeThreeTotalSavings}!
+        <span style={{ fontSize: '3vh', textAlign: 'center', marginTop:"4vh" }}>
+          You’re saving ${monthlyContribution} each month?
         </span>
       </Section>
-      <Section justify={"top"} style={{marginTop:"2vh"}}>
-        <Button onClick={nextPage}>Next</Button>
+      <Section justify={"top"} style={{marginTop:'2vh'}}>
+        <Button onClick={nextPage}>Let’s save more -{">"}</Button>
       </Section>
     </Container>
   );
@@ -218,8 +214,8 @@ const HorizontalStack = styled.div`
 `;
 
 const DecadeHNumber = styled.div`
-font-family: Tahoma;
-font-style: normal;
+  font-family: Tahoma;
+  font-style: normal;
   font-weight: 400;
   color: black;
   font-size: 2.5vh;
@@ -238,15 +234,17 @@ font-style: normal;
 `;
 
 const Button = styled.button`
-  background-color: #0476bb;
-  color: #ffffff;
+  background-color: #f5a338;
+  color: #000000;
   border: none;
   border-radius: 1vh;
-  height: 5vh;
+  height: 6vh;
   width: ${props => props.width ? props.width :"50%"};
-  font-size: 2vh;
+  font-size: 3vh;
   padding: 1vh;
   cursor: pointer;
+  position: fixed;
+  bottom: 20px;
 `;
 
 export default DecadeThreePage;

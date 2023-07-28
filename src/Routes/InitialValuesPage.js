@@ -32,17 +32,12 @@ const InitialValuesPage = () => {
       <HeaderComponent hasBackButton={true}></HeaderComponent>
       <Section ignore width="80%" backgroundColor="#0476bb" style={{marginTop:"2vh", marginBottom:"4vh"}}>
         <span style={{ color: 'white', fontSize: '4vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
-          <b>Are you ready to see <br/> how to get rich?</b>
+          Let’s calculate your wealth!
         </span>
       </Section>
-      <Section backgroundColor="white" ignore maxHeight="10%">
-        <span style={{ fontSize: '2.5vh', paddingLeft: '7vw', paddingRight: '7vw', paddingBottom:"5vh", textAlign:"center"}}>
-          <b>Our income increases as we get older, which means we can save more each decade!</b>
-        </span>
-      </Section>
-      <Section backgroundColor="white" ignore>
+      <Section backgroundColor="white" ignore style={{marginTop:"7vh", marginBottom:"4vh"}}>
         <VerticalStack style={{paddingLeft:"8vw", paddingRight:"8vw"}} space="2vh">
-          <span style={{ fontSize: '2.5vh', textAlign:"center"}}>How old are you?</span>
+          <span style={{ fontSize: '3.5vh', textAlign:"center"}}>How old are you?</span>
           <NumbericSnaps
             callback={saveAge}
             min={0} 
@@ -52,7 +47,7 @@ const InitialValuesPage = () => {
             disableControls={true}
             inputFieldWidth={"80%"}
           />
-          <span style={{ fontSize: '2.5vh', textAlign:"center"}}>How much money do you have saved?</span>
+          <span style={{ fontSize: '3.5vh', textAlign:"center", marginTop:"7vh"}}>How much money do you have saved?</span>
           <NumbericSnaps 
             callback={saveSavings}
             min={0} 
@@ -67,7 +62,7 @@ const InitialValuesPage = () => {
         </VerticalStack>
       </Section>
       <Section justify={"top"} style={{marginTop:'2vh'}}>
-        <Button onClick={nextPage}>Next</Button>
+        <Button onClick={nextPage}>Let’s get rich -{'>'}</Button>
       </Section>
     </Container>
   );
@@ -125,15 +120,17 @@ const VerticalStack = styled.div`
 `;
 
 const Button = styled.button`
-  background-color: #0476bb;
-  color: #ffffff;
+  background-color: #f5a338;
+  color: #000000;
   border: none;
   border-radius: 1vh;
-  height: 5vh;
-  width: ${props => props.width ? props.width :"50%"};
-  font-size: 2vh;
+  height: 6vh;
+  width: ${props => props.width ? props.width :"45%"};
+  font-size: 3vh;
   padding: 1vh;
   cursor: pointer;
+  position: fixed;
+  bottom: 20px;
 `;
 
 export default InitialValuesPage;

@@ -1,0 +1,140 @@
+import React, { useEffect } from "react";
+import styled, { css } from "styled-components";
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import NumbericSnaps from "../SnapsCalculator/NumbericSnaps";
+import HeaderComponent from '../Common/HeaderComponent';
+import { updateTotalSavings } from '../redux/savingGraphReducer';
+
+const WelcomeSavingsGraphPage = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const {
+    monthlySavings,
+    totalSavings,
+  } = useSelector((state) => state.graphPage);
+
+  const nextPage = () => {
+    navigate(`/wealth-rules`);
+  };
+
+  const saveMounthlySavings = value => {
+    const numericValue = value.replace(/[^0-9]/g, '');
+    dispatch(updateTotalSavings(numericValue))
+  };
+
+  useEffect(() => {
+    calculateSavings();
+  }, [ totalSavings ]);
+
+  const calculateSavings = () => {
+    const saved = (monthlySavings * 40 * 12).toLocaleString();
+    dispatch(updateTotalSavings(saved));
+  };
+  
+  return (
+    <Container>
+      <HeaderComponent hasBackButton={true}></HeaderComponent>
+      <Section ignore width="85%" backgroundColor="#0476bb" style={{marginTop:"2vh", marginBottom:"1vh"}}>
+        <span style={{ color: 'white', fontSize: '4vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
+          The same is true for your money
+        </span>
+      </Section>
+      <Section ignore width="85%" backgroundColor="#c4c4c4" style={{marginBottom:"2vh"}}>
+        <span style={{ color: 'black', fontSize: '3vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
+          Let’s start easy and save $100 per month for 40 years.
+        </span>
+      </Section>
+      <Section backgroundColor="white" ignore style={{width:"90%", paddingTop:"2vh"}}>
+        <HorizontalStack>
+          <VerticalStack align="center">
+            <NumbericSnaps 
+              callback={saveMounthlySavings}
+              min={0} 
+              maxLength={15} 
+              interval={100}
+              initialValue={monthlySavings}
+              sign={'$'}
+              custom={true}
+              inputFieldHeight={"4vh"}
+            />
+          </VerticalStack>
+        </HorizontalStack>
+      </Section>
+      <Section ignore style={{marginBottom:"2vh"}}>
+        <span style={{ color: 'black', fontSize: '3vh', paddingLeft: '8vh', paddingRight: '8vh', textAlign:"center"}}>
+          You’ve saved {totalSavings}!
+        </span>
+      </Section>
+      <Section justify={"top"} ignore style={{paddingTop:'6vh', paddingBottom:'4vh'}}>
+        <Button onClick={nextPage}>Let’s be more wealthy -{">"}</Button>
+      </Section>
+    </Container>
+  );
+}
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  max-height: 100%;
+  border: 0.2vh solid #000000;
+  max-height: 100vh; /* Set the maximum height to screen height */
+  overflow: auto; /* Enable scrolling when content overflows */
+  margin-right: 2vw;
+  font-family: Tahoma;
+  font-style: normal;
+`;
+
+const Section = styled.section`
+  flex: ${props => (props.ignore ? 'none' : '1')};
+  flex-direction: column; /* Add this line */
+  display: flex;
+  max-height: ${props => (props.maxHeight ? props.maxHeight : 'none')};
+  justify-content: ${props => (props.justify ? props.justify : 'center')};
+  align-items: ${props => props.align ? props.align : "center"}};
+  width: ${props => (props.width ? props.width : "100%")};
+  background-color: ${props => props.backgroundColor};
+  position: relative;
+`;
+
+const VerticalStack = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: ${props => props.align ? props.align : "left"};
+  justify-content: left;
+  margin-top: ${props => props.ignoreMarginTop ? '0px' : '0.5vh'};
+  padding: ${props => props.ignorePadding ? '0px' : '0.5vh'};
+
+  > *:not(:last-child) {
+    margin-bottom: ${props => props.space};
+  }
+`;
+
+const HorizontalStack = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 1vh;
+  
+  > *:not(:last-child) {
+    margin-right: ${props => props.space};
+  }
+`;
+
+const Button = styled.button`
+  background-color: #f5a338;
+  color: #000000;
+  border: none;
+  border-radius: 1vh;
+  height: 6vh;
+  width: ${props => props.width ? props.width :"70%"};
+  font-size: 3vh;
+  padding: 1vh;
+  cursor: pointer;
+  position: fixed;
+  bottom: 20px;
+`;
+
+export default WelcomeSavingsGraphPage;
