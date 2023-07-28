@@ -12,27 +12,27 @@ const WelcomeWealthRulesPage = () => {
   return (
     <Container>
       <HeaderComponent hasBackButton={true}></HeaderComponent>
-      <Section ignore width="85%" backgroundColor="#0476bb" style={{marginTop:"2vh", marginBottom:"4vh"}}>
+      <Section ignore width="85%" backgroundColor="#0476bb" style={{marginTop:"6vh", marginBottom:"12vh"}}>
         <span style={{ color: 'white', fontSize: '4vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
           Now, let’s really get rich!
         </span>
       </Section>
-      <Section width="85%" style={{marginBottom:"1vh", marginTop:"4vh", paddingTop:"10vh"}}>
-        <span style={{ color: 'black', fontSize: '3vh', paddingLeft: '8vh', paddingRight: '8vh', textAlign:"center"}}>
+      <Section ignore width="85%" style={{marginBottom:"7vh"}}>
+        <span style={{ color: 'black', fontSize: '3vh', paddingLeft: '1vh', paddingRight: '1vh', textAlign:"center"}}>
           Think about savings by decade, where each decade you earn and save more.
         </span>
       </Section>
-      <Section width="85%" style={{marginBottom:"1vh"}}>
-        <span style={{ color: 'black', fontSize: '3vh', paddingLeft: '8vh', paddingRight: '8vh', textAlign:"center"}}>
+      <Section ignore width="85%" style={{marginBottom:"7vh"}}>
+        <span style={{ color: 'black', fontSize: '3vh', paddingLeft: '1vh', paddingRight: '1vh', textAlign:"center"}}>
           The longer we save, the less we need to save monthly.
         </span>
       </Section>
-      <Section width="85%" style={{marginBottom:"10vh"}}>
-        <span style={{ color: 'black', fontSize: '3vh', paddingLeft: '8vh', paddingRight: '8vh', textAlign:"center"}}>
+      <Section ignore width="85%" style={{marginBottom:"10vh"}}>
+        <span style={{ color: 'black', fontSize: '3vh', paddingLeft: '1vh', paddingRight: '1vh', textAlign:"center"}}>
           Most millionaires save at least 15% of their income.
         </span>
       </Section>
-      <Section justify={"top"} ignore style={{paddingTop:'6vh', paddingBottom:'4vh'}}>
+      <Section justify={"top"} ignore style={{marginTop:"5vh"}}>
         <Button onClick={nextPage}>Save by decade -{">"}</Button>
       </Section>
     </Container>
@@ -73,10 +73,7 @@ const Button = styled.button`
   height: 6vh;
   width: ${props => props.width ? props.width :"70%"};
   font-size: 3vh;
-  padding: 1vh;
   cursor: pointer;
-  position: fixed;
-  bottom: 20px;
 `;
 
 export default WelcomeWealthRulesPage;

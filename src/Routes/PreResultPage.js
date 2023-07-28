@@ -23,27 +23,27 @@ const PreResultPage = () => {
   return (
     <Container>
       <HeaderComponent hasBackButton={true}></HeaderComponent>
-      <Section ignore width="80%" backgroundColor="#0476bb" style={{marginTop:"2vh", marginBottom:"2vh"}}>
+      <Section ignore width="80%" backgroundColor="#0476bb" style={{marginTop:"4vh", marginBottom:"2vh"}}>
         <span style={{ color: 'white', fontSize: '4vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
           Congratulations, you’re wealthy!
         </span>
       </Section>
-      <Section backgroundColor="white" ignore style={{marginTop:"10vh"}} width="90%">
+      <Section backgroundColor="white" ignore style={{marginTop:"7vh"}} width="90%">
         <span style={{ fontSize: '4vh', textAlign:"center"}}>
           You have
         </span>
       </Section>
-      <Section backgroundColor="white" ignore style={{marginTop:"5vh", marginBottom:"2vh"}} width="90%">
+      <Section backgroundColor="white" ignore style={{marginTop:"4vh", marginBottom:"2vh"}} width="90%">
         <span style={{ fontSize: '8vh', textAlign:"center" }}>
           <b>${decadeThreeTotalSavings}</b>
         </span>
       </Section>
-      <Section backgroundColor="white" ignore style={{marginTop:"17vh"}} width="90%">
+      <Section backgroundColor="white" ignore style={{marginTop:"11vh"}} width="90%">
         <span style={{ fontSize: '4vh', textAlign:"center"}}>
           Can you save more, usually the answer is, yes!
         </span>
       </Section>
-      <Section justify={"top"} style={{marginTop:'12vh'}}>
+      <Section justify={"top"} style={{marginTop:'12vh'}} width="120vw">
         <Button onClick={nextPage}>Increase savings -{">"}</Button>
       </Section>
     </Container>
@@ -106,8 +106,6 @@ const Button = styled.button`
   font-size: 3vh;
   padding: 1vh;
   cursor: pointer;
-  position: fixed;
-  bottom: 20px;
 `;
 
 export default PreResultPage;

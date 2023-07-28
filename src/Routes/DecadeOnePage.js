@@ -84,21 +84,21 @@ const DecadeOnePage = () => {
           <b>Decade 1</b>
         </span>
       </Section>
-      <Section ignore width="80%" style={{ marginTop:"2vh"}}>
+      <Section ignore width="80%" style={{ marginTop:"2vh", marginBottom:"3vh"}}>
         <HorizontalStack>
           <DecadeHNumber style={{backgroundColor:"black", color:"white"}}>1</DecadeHNumber>
           <DecadeHNumber>2</DecadeHNumber>
           <DecadeHNumber>3</DecadeHNumber>
         </HorizontalStack>
       </Section>
-      <Section backgroundColor="white" ignore maxHeight="10%" width="85%" >
-        <span style={{ color:"#0476bb", fontSize: '2.8vh', paddingTop:"7vh", marginBottom:"3vh", textAlign:"center"}}>
+      <Section backgroundColor="white" ignore maxHeight="10%" width="95%" >
+        <span style={{ color:"#0476bb", fontSize: '2.5vh', paddingTop:"7vh", marginBottom:"3vh", textAlign:"center"}}>
           Your savings between the ages of {startingAge} to {age}.
         </span>
       </Section>
-      <Section backgroundColor="white" ignore style={{width:"90%", paddingTop:"4vh"}}>
+      <Section backgroundColor="white" ignore style={{width:"90%", paddingTop:"1vh"}}>
           <VerticalStack align="center">
-          <Section ignore style={{paddingBottom:"4vh"}}>
+          <Section ignore style={{paddingBottom:"2vh"}}>
             <span style={{ fontSize: '2.5vh', textAlign: 'center', color: 'gray', marginBottom:"1vh" }}>
               Estimate your 10 year average income
             </span>
@@ -113,7 +113,7 @@ const DecadeOnePage = () => {
               inputFieldHeight={"4vh"}
             />
             </Section>
-            <span style={{ fontSize: '2.5vh', textAlign: 'center', color: 'gray', marginBottom:"1vh", marginTop:"2vh" }}>
+            <span style={{ fontSize: '2.5vh', textAlign: 'center', color: 'gray', marginBottom:"1vh"}}>
               What % of your income can you save?
             </span>
             <NumbericSnaps 
@@ -131,12 +131,12 @@ const DecadeOnePage = () => {
           You’re saving ${monthlyContribution} each month?
         </span>
       </Section>
-      <Section ignore maxHeight="10%" style={{marginTop:"7vh"}}>
-        <span style={{ color: '#0476bb', fontSize: '2.8vh', paddingLeft: '7vw', paddingRight: '7vw', textAlign:"center"}}>
+      <Section ignore maxHeight="10%" style={{marginTop:"4vh"}}>
+        <span style={{ color: '#0476bb', fontSize: '2.5vh', paddingLeft: '1vw', paddingRight: '1vw', textAlign:"center"}}>
           You’re {age} and already saved ${totalDecadeSavings}!
         </span>
       </Section>
-      <Section justify={"top"} style={{marginTop:'2vh'}}>
+      <Section justify={"top"} style={{marginTop:'8vh'}} width="120vw">
         <Button onClick={nextPage}>Let’s save more -{">"}</Button>
       </Section>
     </Container>
@@ -203,8 +203,6 @@ const Button = styled.button`
   font-size: 3vh;
   padding: 1vh;
   cursor: pointer;
-  position: fixed;
-  bottom: 20px;
 `;
 
 const DecadeHNumber = styled.div`

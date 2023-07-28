@@ -30,24 +30,23 @@ const InitialValuesPage = () => {
   return (
     <Container>
       <HeaderComponent hasBackButton={true}></HeaderComponent>
-      <Section ignore width="80%" backgroundColor="#0476bb" style={{marginTop:"2vh", marginBottom:"4vh"}}>
+      <Section ignore width="80%" backgroundColor="#0476bb" style={{marginTop:"4vh", marginBottom:"10vh"}}>
         <span style={{ color: 'white', fontSize: '4vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
           Let’s calculate your wealth!
         </span>
       </Section>
-      <Section backgroundColor="white" ignore style={{marginTop:"7vh", marginBottom:"4vh"}}>
-        <VerticalStack style={{paddingLeft:"8vw", paddingRight:"8vw"}} space="2vh">
-          <span style={{ fontSize: '3.5vh', textAlign:"center"}}>How old are you?</span>
+      <Section backgroundColor="white" ignore style={{marginBottom:"10vh"}}>
+        <VerticalStack style={{paddingLeft:"4vw", paddingRight:"4vw"}} space="2vh">
+          <span style={{ fontSize: '4vh', textAlign:"center"}}>How old are you?</span>
           <NumbericSnaps
             callback={saveAge}
             min={0} 
             max={50} 
             interval={5}
             initialValue={startingAge}
-            disableControls={true}
-            inputFieldWidth={"80%"}
+            inputFieldHeight={"4vh"}
           />
-          <span style={{ fontSize: '3.5vh', textAlign:"center", marginTop:"7vh"}}>How much money do you have saved?</span>
+          <span style={{ fontSize: '4vh', textAlign:"center", marginTop:"8vh"}}>How much money do you have saved?</span>
           <NumbericSnaps 
             callback={saveSavings}
             min={0} 
@@ -56,12 +55,11 @@ const InitialValuesPage = () => {
             initialValue={startingSavings}
             sign={'$'}
             custom={true}
-            disableControls={true}
-            inputFieldWidth={"80%"}
+            inputFieldHeight={"4vh"}
           />
         </VerticalStack>
       </Section>
-      <Section justify={"top"} style={{marginTop:'2vh'}}>
+      <Section ignore justify={"top"} style={{marginTop:'2vh'}} width="120vw">
         <Button onClick={nextPage}>Let’s get rich -{'>'}</Button>
       </Section>
     </Container>
@@ -127,10 +125,7 @@ const Button = styled.button`
   height: 6vh;
   width: ${props => props.width ? props.width :"45%"};
   font-size: 3vh;
-  padding: 1vh;
   cursor: pointer;
-  position: fixed;
-  bottom: 20px;
 `;
 
 export default InitialValuesPage;

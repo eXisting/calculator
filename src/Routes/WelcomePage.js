@@ -23,7 +23,7 @@ const WelcomePage = () => {
           Millionaire myth busters!
         </span>
       </Section>
-      <Section backgroundColor="white" ignore style={{marginTop:"2vh", marginBottom:"8vh"}}>
+      <Section backgroundColor="white" ignore style={{marginTop:"2vh", marginBottom:"4vh"}}>
         <VerticalStack style={{paddingLeft:"8vw", paddingRight:"8vw"}}>
           <HorizontalStack>
             <BulletPointText>
@@ -51,7 +51,7 @@ const WelcomePage = () => {
           </HorizontalStack>
         </VerticalStack>
       </Section>
-      <Section justify={"top"} style={{marginTop:"2vh", marginBottom:"2vh"}}>
+      <Section justify={"top"} style={{marginTop:"2vh"}}>
         <Button onClick={nextPage}>Let’s prove it -{'>'}</Button>
       </Section>
     </Container>
@@ -130,8 +130,6 @@ const Button = styled.button`
   font-size: 3vh;
   padding: 1vh;
   cursor: pointer;
-  position: fixed;
-  bottom: 20px;
 `;
 
 export default WelcomePage;

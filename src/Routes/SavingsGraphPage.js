@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import NumbericSnaps from "../SnapsCalculator/NumbericSnaps";
 import HeaderComponent from '../Common/HeaderComponent';
+import Graph from '../GraphicalComponents/Graph';
 import { 
   updateTotalSavings,
   updateMonthlySavings,
@@ -33,24 +34,29 @@ const WelcomeSavingsGraphPage = () => {
   }, [monthlySavings, yearsInterval]);
 
   const calculateSavings = () => {
-    const saved = (monthlySavings * yearsInterval * 12).toLocaleString();
+    const r = parseFloat(10) / 100;
+    const n = 12;
+
+    const futureValue = monthlySavings * ((Math.pow(1 + (r / n), n * yearsInterval) - 1) / (r / n));
+
+    const saved = Math.round(futureValue).toLocaleString();
     dispatch(updateTotalSavings(saved));
   };
   
   return (
     <Container>
       <HeaderComponent hasBackButton={true}></HeaderComponent>
-      <Section ignore width="85%" backgroundColor="#0476bb" style={{marginTop:"2vh", marginBottom:"1vh"}}>
+      <Section ignore width="85%" backgroundColor="#0476bb" style={{marginTop:"2vh", marginBottom:"2vh"}}>
         <span style={{ color: 'white', fontSize: '4vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
           The same is true for your money
         </span>
       </Section>
-      <Section ignore width="85%" backgroundColor="#c4c4c4" style={{marginBottom:"2vh"}}>
+      <Section ignore width="85%" backgroundColor="#c4c4c4">
         <span style={{ color: 'black', fontSize: '3vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
           Let’s start easy and save $100 per month for 40 years.
         </span>
       </Section>
-      <Section backgroundColor="white" ignore style={{width:"90%", paddingTop:"2vh"}}>
+      <Section backgroundColor="white" ignore style={{width:"90%"}}>
         <HorizontalStack>
           <VerticalStack align="center">
             <NumbericSnaps 
@@ -71,7 +77,15 @@ const WelcomeSavingsGraphPage = () => {
           You’ve saved {totalSavings}!
         </span>
       </Section>
-      <Section justify={"top"} ignore style={{paddingTop:'6vh', paddingBottom:'4vh'}}>
+      <Section style={{ maxHeight: '40vh', width: '40vh' }}>
+        <Graph 
+          toYears={yearsInterval}
+          stepYears={5}
+          compoundingInterest={10}
+          monthlySavings={monthlySavings}
+        ></Graph>
+      </Section>
+      <Section justify={"top"} ignore style={{paddingTop:'1vh'}}>
         <Button onClick={nextPage}>Let’s be more wealthy -{">"}</Button>
       </Section>
     </Container>
@@ -137,8 +151,6 @@ const Button = styled.button`
   font-size: 3vh;
   padding: 1vh;
   cursor: pointer;
-  position: fixed;
-  bottom: 20px;
 `;
 
 export default WelcomeSavingsGraphPage;
