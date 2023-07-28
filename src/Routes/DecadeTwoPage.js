@@ -94,7 +94,7 @@ const DecadeTwoPage = () => {
           <DecadeHNumber>3</DecadeHNumber>
         </HorizontalStack>
       </Section>
-      <Section backgroundColor="white" ignore maxHeight="10%" width="90%" >
+      <Section backgroundColor="white" ignore maxHeight="10%" width="95%" >
         <span style={{ color:"#0476bb", fontSize: '2.5vh', paddingTop:"7vh", marginBottom:"3vh", textAlign:"center"}}>
           Your savings between the ages of {decadeOneAge} to {decadeTwoAge}.
         </span>
