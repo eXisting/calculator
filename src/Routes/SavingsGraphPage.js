@@ -4,7 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import NumbericSnaps from "../SnapsCalculator/NumbericSnaps";
 import HeaderComponent from '../Common/HeaderComponent';
-import { updateTotalSavings } from '../redux/savingGraphReducer';
+import { 
+  updateTotalSavings,
+  updateMonthlySavings,
+} from '../redux/savingGraphReducer';
 
 const WelcomeSavingsGraphPage = () => {
   const navigate = useNavigate();
@@ -13,6 +16,7 @@ const WelcomeSavingsGraphPage = () => {
   const {
     monthlySavings,
     totalSavings,
+    yearsInterval,
   } = useSelector((state) => state.graphPage);
 
   const nextPage = () => {
@@ -21,15 +25,15 @@ const WelcomeSavingsGraphPage = () => {
 
   const saveMounthlySavings = value => {
     const numericValue = value.replace(/[^0-9]/g, '');
-    dispatch(updateTotalSavings(numericValue))
+    dispatch(updateMonthlySavings(numericValue))
   };
 
   useEffect(() => {
     calculateSavings();
-  }, [ totalSavings ]);
+  }, [monthlySavings, yearsInterval]);
 
   const calculateSavings = () => {
-    const saved = (monthlySavings * 40 * 12).toLocaleString();
+    const saved = (monthlySavings * yearsInterval * 12).toLocaleString();
     dispatch(updateTotalSavings(saved));
   };
   
