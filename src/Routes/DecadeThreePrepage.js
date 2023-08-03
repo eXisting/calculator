@@ -19,7 +19,7 @@ const DecadeThreePrepage = () => {
           <b>Decade 3</b>
         </span>
       </Section>
-      <Section ignore width="80%">
+      <Section ignore width="85%">
         <HorizontalStack>
           <DecadeHNumber>1</DecadeHNumber>
           <DecadeHNumber>2</DecadeHNumber>
@@ -39,7 +39,7 @@ const DecadeThreePrepage = () => {
           <i><br/>...Double it just <b>FOUR</b> more days (or 31 total), and you get $10,737,418!</i>
         </span>
       </Section>
-      <Section justify={"top"} style={{paddingTop:'5vh'}}>
+      <Section ignore justify={"top"} style={{marginTop:'4vh'}}>
         <Button onClick={nextPage}>Next</Button>
       </Section>
     </Container>
@@ -140,8 +140,8 @@ const Button = styled.button`
   border: none;
   border-radius: 1vh;
   height: 5vh;
-  width: ${props => props.width ? props.width :"50%"};
-  font-size: 2vh;
+  width: ${props => props.width ? props.width :"70%"};
+  font-size: 2.5vh;
   padding: 1vh;
   cursor: pointer;
   position: fixed;

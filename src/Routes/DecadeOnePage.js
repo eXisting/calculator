@@ -80,11 +80,11 @@ const DecadeOnePage = () => {
     <Container>
       <HeaderComponent hasBackButton={true}></HeaderComponent>
       <Section backgroundColor="white" ignore maxHeight="10%">
-        <span style={{ fontSize: '4vh', marginTop:"7vh", textAlign:"center"}}>
+        <span style={{ fontSize: '4vh', marginTop:"2vh", textAlign:"center"}}>
           <b>Decade 1</b>
         </span>
       </Section>
-      <Section ignore width="80%" style={{ marginTop:"2vh", marginBottom:"3vh"}}>
+      <Section ignore width="85%" style={{ marginTop:"2vh", marginBottom:"3vh"}}>
         <HorizontalStack>
           <DecadeHNumber style={{backgroundColor:"black", color:"white"}}>1</DecadeHNumber>
           <DecadeHNumber>2</DecadeHNumber>
@@ -92,7 +92,7 @@ const DecadeOnePage = () => {
         </HorizontalStack>
       </Section>
       <Section backgroundColor="white" ignore maxHeight="10%" width="95%" >
-        <span style={{ color:"#0476bb", fontSize: '2.5vh', paddingTop:"7vh", marginBottom:"3vh", textAlign:"center"}}>
+        <span style={{ color:"#0476bb", fontSize: '2.5vh', textAlign:"center"}}>
           Your savings between the ages of {startingAge} to {age}.
         </span>
       </Section>
@@ -127,16 +127,16 @@ const DecadeOnePage = () => {
               inputFieldHeight={"4vh"}
             />
           </VerticalStack>
-        <span style={{ fontSize: '3vh', textAlign: 'center', marginTop:"4vh" }}>
+        <span style={{ fontSize: '3vh', textAlign: 'center', marginTop:"2vh" }}>
           You’re saving ${monthlyContribution} each month?
         </span>
       </Section>
-      <Section ignore maxHeight="10%" style={{marginTop:"4vh"}}>
+      <Section ignore maxHeight="10%" style={{marginTop:"2vh"}}>
         <span style={{ color: '#0476bb', fontSize: '2.5vh', paddingLeft: '1vw', paddingRight: '1vw', textAlign:"center"}}>
           You’re {age} and already saved ${totalDecadeSavings}!
         </span>
       </Section>
-      <Section justify={"top"} style={{marginTop:'8vh'}} width="120vw">
+      <Section ignore justify={"top"} style={{marginTop:'4vh'}}>
         <Button onClick={nextPage}>Let’s save more -{">"}</Button>
       </Section>
     </Container>
@@ -199,8 +199,8 @@ const Button = styled.button`
   border: none;
   border-radius: 1vh;
   height: 6vh;
-  width: ${props => props.width ? props.width :"50%"};
-  font-size: 3vh;
+  width: ${props => props.width ? props.width :"70%"};
+  font-size: 2.5vh;
   padding: 1vh;
   cursor: pointer;
 `;

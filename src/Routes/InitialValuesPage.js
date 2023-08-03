@@ -30,12 +30,12 @@ const InitialValuesPage = () => {
   return (
     <Container>
       <HeaderComponent hasBackButton={true}></HeaderComponent>
-      <Section ignore width="80%" backgroundColor="#0476bb" style={{marginTop:"4vh", marginBottom:"10vh"}}>
+      <Section ignore width="85%" backgroundColor="#0476bb" style={{marginTop:"2vh", marginBottom:"4vh"}}>
         <span style={{ color: 'white', fontSize: '4vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
           Let’s calculate your wealth!
         </span>
       </Section>
-      <Section backgroundColor="white" ignore style={{marginBottom:"10vh"}}>
+      <Section backgroundColor="white" ignore>
         <VerticalStack style={{paddingLeft:"4vw", paddingRight:"4vw"}} space="2vh">
           <span style={{ fontSize: '4vh', textAlign:"center"}}>How old are you?</span>
           <NumbericSnaps
@@ -46,7 +46,7 @@ const InitialValuesPage = () => {
             initialValue={startingAge}
             inputFieldHeight={"4vh"}
           />
-          <span style={{ fontSize: '4vh', textAlign:"center", marginTop:"8vh"}}>How much money do you have saved?</span>
+          <span style={{ fontSize: '4vh', textAlign:"center"}}>How much money do you have saved?</span>
           <NumbericSnaps 
             callback={saveSavings}
             min={0} 
@@ -59,7 +59,7 @@ const InitialValuesPage = () => {
           />
         </VerticalStack>
       </Section>
-      <Section ignore justify={"top"} style={{marginTop:'2vh'}} width="120vw">
+      <Section ignore justify={"top"} style={{marginTop:'4vh'}}>
         <Button onClick={nextPage}>Let’s get rich -{'>'}</Button>
       </Section>
     </Container>
@@ -123,8 +123,8 @@ const Button = styled.button`
   border: none;
   border-radius: 1vh;
   height: 6vh;
-  width: ${props => props.width ? props.width :"45%"};
-  font-size: 3vh;
+  width: ${props => props.width ? props.width :"70%"};
+  font-size: 2.5vh;
   cursor: pointer;
 `;
 

@@ -20,24 +20,24 @@ const WelcomeSavingsFormulaPage = () => {
         </span>
       </Section>
       <Section ignore width="80%"  style={{marginBottom:"2vh"}}>
-        <span style={{ color: '#0476bb', fontSize: '3vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
+        <span style={{ color: '#0476bb', fontSize: '3vh', textAlign:"center"}}>
           <i><b>It compounds over time.</b></i>
         </span>
       </Section>
-      <Section ignore>
+      <Section ignore style={{marginBottom:"2vh"}}>
         <span style={{ color: 'black', fontSize: '2.9vh', paddingLeft: '2vh', paddingRight: '2vh', textAlign:"center"}}>
           Let’s start with a penny...
         </span>
       </Section>
-      <Section maxHeight="15vh">
+      <Section ignore maxHeight="15vh">
         <Image src={PennyImage} alt="Simple penny" />
       </Section>
-      <Section ignore style={{marginBottom:"3vh"}}>
+      <Section ignore style={{marginBottom:"1vh", marginTop:"1vh"}}>
         <span style={{ color: 'black', fontSize: '2.9vh', paddingLeft: '2vh', paddingRight: '2vh', textAlign:"center"}}>
           <i>Double it for <b>27</b> days</i>
         </span>
       </Section>
-      <Section ignore style={{marginBottom:"3vh"}}>
+      <Section ignore>
         <span style={{ color: '#0476bb', fontSize: '4vh', paddingLeft: '2vh', paddingRight: '2vh', textAlign:"center"}}>
           <b><i>You have $671,088</i></b>
         </span>
@@ -47,17 +47,17 @@ const WelcomeSavingsFormulaPage = () => {
           <i>...Double it just <b>FOUR</b> more days</i>
         </span>
       </Section>
-      <Section ignore style={{marginBottom:"3vh"}}>
+      <Section ignore>
         <span style={{ color: '#0476bb', fontSize: '4vh', paddingLeft: '2vh', paddingRight: '2vh', textAlign:"center"}}>
         <b><i>You have $10,737,418</i></b>
         </span>
       </Section>
-      <Section ignore style={{marginBottom:"7vh"}}>
+      <Section ignore>
         <span style={{ color: 'black', fontSize: '2.9vh', paddingLeft: '1vh', paddingRight: '1vh', textAlign:"center"}}>
           <i>That’s $10,066,329 more in FOUR days</i>
         </span>
       </Section>
-      <Section justify={"top"} ignore style={{}}>
+      <Section justify={"top"} ignore style={{marginTop:"4vh"}}>
         <Button onClick={nextPage}>How does this happen? -{'>'}</Button>
       </Section>
     </Container>
@@ -117,7 +117,7 @@ const Button = styled.button`
   border-radius: 1vh;
   height: 6vh;
   width: ${props => props.width ? props.width :"70%"};
-  font-size: 3vh;
+  font-size: 2.5vh;
   cursor: pointer;
 `;
 

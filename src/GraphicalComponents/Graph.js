@@ -23,6 +23,11 @@ ChartJS.register(
 
 const Graph = ({ toYears, stepYears, compoundingInterest, monthlySavings }) => {
 
+    const formatTickValue = (value) => {
+        console.log(value);
+        return `$${value.toLocaleString()}`
+    };
+
     const generateYearsCheckpoints = () => {
         let array = new Array (toYears / stepYears + 1);
 
@@ -75,31 +80,38 @@ const Graph = ({ toYears, stepYears, compoundingInterest, monthlySavings }) => {
             position: "top",
         },
         },
+        scales: {
+            y: {
+              ticks: {
+                callback: formatTickValue,
+              },
+            },
+          },
     };
   
     const data = {
-    labels: generateYearsCheckpoints(),
-    datasets: [
-    {
-        label: 'Contributions',
-        data: contributionsCheckpoints(),
-        borderColor: 'rgb(53, 162, 235)',
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
-        borderWidth: 10,
-        borderJoinStyle: 'round',
-        pointRadius: 0,
-        tension: 0.2,
-    },
-    {
-        label: 'Total Saved',
-        data: savingsCheckpoints(),
-        borderColor: 'rgb(18, 204, 46)',
-        backgroundColor: 'rgba(18, 204, 46, 0.5)',
-        borderWidth: 10,
-        borderJoinStyle: 'round',
-        pointRadius: 0,
-        tension: 0.2,
-    },
+        labels: generateYearsCheckpoints(),
+        datasets: [
+        {
+            label: 'Contributions',
+            data: contributionsCheckpoints(),
+            borderColor: 'rgb(53, 162, 235)',
+            backgroundColor: 'rgba(53, 162, 235, 0.5)',
+            borderWidth: 2,
+            borderJoinStyle: 'round',
+            pointRadius: 0,
+            tension: 0.2,
+        },
+        {
+            label: 'Total Saved',
+            data: savingsCheckpoints(),
+            borderColor: 'rgb(18, 204, 46)',
+            backgroundColor: 'rgba(18, 204, 46, 0.5)',
+            borderWidth: 2,
+            borderJoinStyle: 'round',
+            pointRadius: 0,
+            tension: 0.2,
+        },
     ],
   };
 

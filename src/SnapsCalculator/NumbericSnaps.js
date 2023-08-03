@@ -104,12 +104,11 @@ const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLe
   return (
     <HorizontalStack space={"1vh"}>
       {!disableControls && 
-         <StyledButton 
-          onClick={increment}
+        <StyledButton 
+          onClick={decrement}
           width={inputFieldWidth}
-          height={inputFieldHeight}
-        >
-          +
+          height={inputFieldHeight}>
+          -
         </StyledButton>}
         <StyledInput 
           maxLength={maxLength}
@@ -123,13 +122,12 @@ const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLe
         />
       {!disableControls && 
         <StyledButton 
-          onClick={decrement}
+          onClick={increment}
           width={inputFieldWidth}
           height={inputFieldHeight}
         >
-          -
+          +
         </StyledButton>}
-        
       </HorizontalStack>
   );
 };
