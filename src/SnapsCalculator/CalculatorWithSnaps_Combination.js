@@ -71,14 +71,17 @@ const CalculatorWithSnapsCombination = () => {
     const [yearsFrist, contributionFirst] = calculateMinimumYearsForFutureValue(firstTargetValue, startingSavings, 750);
     const calculatedInFirst = calculateSavings(contributionFirst, yearsFrist, startingSavings);
 
-    const [yearsSecond, contributionSecond] = calculateMinimumYearsForFutureValue(desiredResult, calculatedInFirst, 2000);
+    let secondData = [0, 0];
+
+    if (calculatedInFirst < desiredResult)
+      secondData = calculateMinimumYearsForFutureValue(desiredResult, calculatedInFirst, 2000);
 
     dispatch(updateFirstDecadeAge(yearsFrist));
-    dispatch(updateSecondDecadeAge(yearsSecond));
+    dispatch(updateSecondDecadeAge(secondData[0]));
     setFirstAgeInterval(yearsFrist);
-    setSecondAgeInterval(yearsSecond);
+    setSecondAgeInterval(secondData[0]);
     dispatch(updateFirstDecadeMonthlyContribution(contributionFirst));
-    dispatch(updateSecondDecadeMonthlyContribution(contributionSecond));
+    dispatch(updateSecondDecadeMonthlyContribution(secondData[1]));
   };
 
   function calculateMinimumYearsForFutureValue(futureValue, principal, maxContribution) {
@@ -86,11 +89,27 @@ const CalculatorWithSnapsCombination = () => {
     const n = 12; // Compounding frequency per year
     const r = 10 / 100; // Convert rate to decimal form
 
-    if (principal == desiredResult * 0.15)
-      return [20, 0]
+    if (principal >= futureValue)
+    {
+      if (futureValue == desiredResult * 0.15  && principal != desiredResult)
+      for (let years = 1; years <= maxYears; years++) {
+        const compoundTerm = Math.pow(1 + r / n, n * years);
+        const contributionPart = principal * compoundTerm;
 
+        if (contributionPart >= desiredResult) {
+          return [years, 0];
+        }
+
+        if (years === maxYears) {
+          maxYears ++;
+        }
+      }
+
+      return [0, 0];
+    }
+    
   
-    for (let years = 0; years <= maxYears; years++) {
+    for (let years = 1; years <= maxYears; years++) {
       for (let contribution = 0; contribution <= maxContribution; contribution += 50) {
         const compoundTerm = Math.pow(1 + r / n, n * years);
         const contributionPart = (contribution * (compoundTerm - 1)) * (n / r) + principal * compoundTerm;
