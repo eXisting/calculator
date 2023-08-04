@@ -12,6 +12,7 @@ import DecadeTwoPage from './Routes/DecadeTwoPage';
 import DecadeThreePage from './Routes/DecadeThreePage';
 import PreResultPage from './Routes/PreResultPage';
 import CalculatedPage from './Routes/CalculatedPage';
+import FollowSteps from './Routes/FollowSteps';
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './redux/store';
@@ -29,15 +30,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <RootApp>
             <Routes>
               <Route path="/" element={<WelcomePage store={store}/>} />
-              <Route path="/welcome-savings-formula" element={<WelcomeSavingsFormulaPage />} />
-              <Route path="/savings-graph" element={<SavingsGraphPage />} />
-              <Route path="/wealth-rules" element={<WealthRulesPage />} /> 
               <Route path="/initial-data" element={<InitialValuesPage />} />
               <Route path="/decade-one" element={<DecadeOnePage />} />
               <Route path="/decade-two" element={<DecadeTwoPage />} />
               <Route path="/decade-three" element={<DecadeThreePage />} />
               <Route path="/pre-result" element={<PreResultPage />} />
               <Route path="/calculated" element={<CalculatedPage />} />
+              <Route path="/follow-steps" element={<FollowSteps />} />
             </Routes>
           </RootApp>
         </Router>

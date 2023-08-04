@@ -2,25 +2,39 @@ import React, { Component } from "react";
 import styled, { css } from "styled-components";
 import NumbericSnaps from "./NumbericSnaps";
 
-const SavingsSection = ({fromAge,toAge, totalAmount, monthlyCallback, min, symbolsCountMax, customFormula, interval, initialSavingsValue}) => {
+const SavingsSection = ({age, totalAge, totalAmount, monthlyCallback, yearsCallback, min, symbolsCountMax, customFormula, interval, initialSavingsValue}) => {
   return (
     <Container>
-      <HorizontalStack style={{marginTop:"1vh"}} space={"2vh"}>
-        <span style={{ fontSize: '2.2vh', textAlign: 'right' }}>Monthly savings?</span>
-        <NumbericSnaps
-          callback={monthlyCallback} 
-          min={min} 
-          interval={interval}
-          sign={'$'}
-          initialValue={initialSavingsValue}
-          inputFieldHeight={"4vh"}
-          maxLength={symbolsCountMax}
-          custom={customFormula}
-        />
-      </HorizontalStack>
+      <VerticalStack style={{margin:"2vh"}}>
+        <HorizontalStack style={{marginTop:"1vh"}} space={"2vh"}>
+          <span style={{ color: "gray",fontSize: '2vh', textAlign: 'right', width:"30vw" }}>Number of years?</span>
+          <NumbericSnaps
+            callback={yearsCallback} 
+            min={0} 
+            max={50}
+            interval={5}
+            initialValue={age}
+            inputFieldHeight={"4vh"}
+            maxLength={2}
+          />
+        </HorizontalStack>
+        <HorizontalStack style={{marginTop:"1vh"}} space={"2vh"}>
+          <span style={{ color: "gray", fontSize: '2vh', textAlign: 'right', width:"30vw" }}>Average Monthly savings</span>
+          <NumbericSnaps
+            callback={monthlyCallback} 
+            min={min} 
+            interval={interval}
+            sign={'$'}
+            initialValue={initialSavingsValue}
+            inputFieldHeight={"4vh"}
+            maxLength={symbolsCountMax}
+            custom={customFormula}
+          />
+        </HorizontalStack>
+      </VerticalStack>
       <SpanContainer>
-        <span style={{color:"#0476bb"}}>
-          Your savings between {fromAge} to {toAge} and you saved ${totalAmount}!
+        <span style={{color:"#0476bb", fontSize:"2.5vh"}}>
+          You are {totalAge} and you saved ${totalAmount}!
         </span>
       </SpanContainer>
     </Container>
@@ -38,7 +52,7 @@ const Container = styled.div`
 const SpanContainer = styled.div`
 color: white;
 font-size: 2vh;
-padding: 2vh;
+margin-bottom: 2vh;
 text-align: center;
 display: flex;
 align-items: center;

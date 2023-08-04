@@ -7,23 +7,18 @@ const WelcomePage = () => {
   const navigate = useNavigate();
 
   const nextPage = () => {
-    navigate(`/welcome-savings-formula`);
+    navigate(`/initial-data`);
   };
   
   return (
     <Container>
       <HeaderComponent hasBackButton={false}></HeaderComponent>
-      <Section ignore width="85%" backgroundColor="#0476bb" style={{marginTop:"2vh", marginBottom:"2vh"}}>
-        <span style={{ color: 'white', fontSize: '4vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
-          Everyone can be wealthy!
+      <Section ignore width="85%" backgroundColor="#0476bb" style={{marginTop:"2vh", marginBottom:"0.5vh"}}>
+        <span style={{ color: 'white', fontSize: '3.5vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
+          Did you know these facts about millionaires?
         </span>
       </Section>
-      <Section backgroundColor="white" ignore maxHeight="10%" style={{marginTop:"2vh", marginBottom:"1vh"}}>
-        <span style={{ fontSize: '4vh', paddingLeft: '7vw', paddingRight: '7vw', textAlign:"center"}}>
-          Millionaire myth busters!
-        </span>
-      </Section>
-      <Section backgroundColor="white" ignore style={{marginTop:"2vh", marginBottom:"3vh"}}>
+      <Section backgroundColor="white" ignore style={{marginBottom:"1vh"}}>
         <VerticalStack style={{paddingLeft:"8vw", paddingRight:"8vw"}}>
           <HorizontalStack>
             <BulletPointText>
@@ -46,12 +41,21 @@ const WelcomePage = () => {
           <HorizontalStack>
             <BulletPointText>
               <CheckmarkIconComponent />
-              <span>80% didn't reach $1,000,000 until at least 50 years old</span>
+              <span>Millionaires all know something about math.</span>
             </BulletPointText>
           </HorizontalStack>
+          <HorizontalStack>
+            <BulletPointText>
+              <CheckmarkIconComponent />
+              <span>Investing your money in an index fund has averaged 10% return for the last 30, 40 & 80 years</span>
+            </BulletPointText>
+          </HorizontalStack>
+          <span style={{ fontSize: '3.5vh', textAlign:"center", marginTop:"2vh"}}>
+            The bottom line is <br/> everyone can be wealthy!
+          </span>
         </VerticalStack>
       </Section>
-      <Section justify={"top"}>
+      <Section justify={"top"} style={{marginTop:"2vh"}}>
         <Button onClick={nextPage}>Let’s prove it -{'>'}</Button>
       </Section>
     </Container>
@@ -115,7 +119,7 @@ const BulletPointText = styled.div`
   display: flex;
   align-items: center;
   color: back;
-  font-size: 3vh;
+  font-size: 2.5vh;
   text-align: left;
   width: 3wh;
 `;

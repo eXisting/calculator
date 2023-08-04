@@ -3,7 +3,11 @@ import styled, { css } from "styled-components";
 import { useNavigate } from 'react-router-dom';
 import NumbericSnaps from "../SnapsCalculator/NumbericSnaps";
 import { useDispatch, useSelector } from 'react-redux';
-import { updateStartingSavings, updateStartingAge } from '../redux/initialValuesReducer';
+import { 
+  updateStartingSavings, 
+  updateStartingAge,
+  updateDesiredResult
+} from '../redux/initialValuesReducer';
 import HeaderComponent from '../Common/HeaderComponent';
 
 const InitialValuesPage = () => {
@@ -15,8 +19,9 @@ const InitialValuesPage = () => {
     startingAge,
   } = useSelector((state) => state.initialPage);
   
-  const nextPage = () => {
-    navigate(`/decade-one`);
+  const nextPage = (value) => {
+    saveDesiredResult(value);
+    navigate(`/calculated`);
   };
 
   const saveAge = value => {
@@ -25,6 +30,10 @@ const InitialValuesPage = () => {
 
   const saveSavings = value => {
     dispatch(updateStartingSavings(value))
+  };
+
+  const saveDesiredResult = value => {
+    dispatch(updateDesiredResult(value));
   };
   
   return (
@@ -59,8 +68,17 @@ const InitialValuesPage = () => {
           />
         </VerticalStack>
       </Section>
-      <Section ignore justify={"top"} style={{marginTop:'4vh'}}>
-        <Button onClick={nextPage}>Let’s get rich -{'>'}</Button>
+      <Section ignore width="95%" backgroundColor="#909090" style={{marginTop:"3vh", marginBottom:"0.5vh"}}>
+        <span style={{ color: 'white', fontSize: '3.5vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
+          How rich do you want to be?
+        </span>
+      </Section>
+      <Section justify={"top"} style={{marginTop:'4vh'}}>
+        <HorizontalStack space="1vh">
+          <Button onClick={() => nextPage(1000000)}>$1,000,000</Button>
+          <Button onClick={() => nextPage(3000000)}>$3,000,000</Button>
+          <Button onClick={() => nextPage(5000000)}>$5,000,000</Button>
+        </HorizontalStack>
       </Section>
     </Container>
   );
@@ -117,13 +135,29 @@ const VerticalStack = styled.div`
   }
 `;
 
+const HorizontalStack = styled.div`
+  display: flex;
+  align-items: center;
+
+  > *:not(:last-child) {
+    margin-right: ${props => props.space};
+  }
+
+  justify-content: ${props => props.customJustify ? props.customJustify : "center"};
+`;
+
 const Button = styled.button`
+  display: flex;
+  flex-direction: column;
   background-color: #f5a338;
+  align-items: center;
+  justify-content: center;
+  padding: 2vh;
+  width: 30%;
   color: #000000;
   border: none;
   border-radius: 1vh;
   height: 6vh;
-  width: ${props => props.width ? props.width :"70%"};
   font-size: 2.5vh;
   cursor: pointer;
 `;
