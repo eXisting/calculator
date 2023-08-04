@@ -21,7 +21,7 @@ ChartJS.register(
     Legend
 );
 
-const Graph = ({ toYears, stepYears, compoundingInterest, monthlySavings }) => {
+const Graph = ({ toYears, stepYears, compoundingInterest, monthlySavings, defaultMaxY }) => {
 
     const formatTickValue = (value) => {
         console.log(value);
@@ -78,6 +78,11 @@ const Graph = ({ toYears, stepYears, compoundingInterest, monthlySavings }) => {
         plugins: {
         legend: {
             position: "top",
+            labels: {
+                filter: (legendItem, chartData) => {
+                  return legendItem.text !== 'Hidden';
+                },
+            }
         },
         },
         scales: {
@@ -108,6 +113,16 @@ const Graph = ({ toYears, stepYears, compoundingInterest, monthlySavings }) => {
             borderColor: 'rgb(18, 204, 46)',
             backgroundColor: 'rgba(18, 204, 46, 0.5)',
             borderWidth: 2,
+            borderJoinStyle: 'round',
+            pointRadius: 0,
+            tension: 0.2,
+        },
+        {
+            label: 'Hidden',
+            data: [defaultMaxY],
+            borderColor: 'rgba(18, 204, 46, 0)',
+            backgroundColor: 'rgba(18, 204, 46, 0)',
+            borderWidth: 0,
             borderJoinStyle: 'round',
             pointRadius: 0,
             tension: 0.2,

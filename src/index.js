@@ -31,6 +31,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Routes>
               <Route path="/" element={<WelcomePage store={store}/>} />
               <Route path="/initial-data" element={<InitialValuesPage />} />
+              <Route path="/savings-graph" element={<SavingsGraphPage />} />
               <Route path="/decade-one" element={<DecadeOnePage />} />
               <Route path="/decade-two" element={<DecadeTwoPage />} />
               <Route path="/decade-three" element={<DecadeThreePage />} />

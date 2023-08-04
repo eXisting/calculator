@@ -7,7 +7,7 @@ const WelcomePage = () => {
   const navigate = useNavigate();
 
   const nextPage = () => {
-    navigate(`/initial-data`);
+    navigate(`/savings-graph`);
   };
   
   return (

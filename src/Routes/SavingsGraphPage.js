@@ -21,7 +21,7 @@ const WelcomeSavingsGraphPage = () => {
   } = useSelector((state) => state.graphPage);
 
   const nextPage = () => {
-    navigate(`/wealth-rules`);
+    navigate(`/initial-data`);
   };
 
   const saveMounthlySavings = value => {
@@ -83,6 +83,7 @@ const WelcomeSavingsGraphPage = () => {
           stepYears={5}
           compoundingInterest={10}
           monthlySavings={monthlySavings}
+          defaultMaxY={6000000}
         ></Graph>
       </Section>
       <Section justify={"top"} ignore style={{paddingTop:'1vh'}}>

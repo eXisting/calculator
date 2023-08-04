@@ -67,54 +67,46 @@ const CalculatorWithSnapsCombination = () => {
   }, [decadeTwoMonthlyContribution, secondAgeInterval, decadeOneTotalSavings]);
 
   const setSmallestCombination = () => {
-    var monthlyFirst;
-    var monthlySecond;
+    const firstTargetValue = desiredResult * 0.15;
+    const [yearsFrist, contributionFirst] = calculateMinimumYearsForFutureValue(firstTargetValue, startingSavings, 750);
+    const calculatedInFirst = calculateSavings(contributionFirst, yearsFrist, startingSavings);
 
-    const firstTargetValue = desiredResult * 0.20;
-    const secondTargetValue = desiredResult * 0.80;
+    const [yearsSecond, contributionSecond] = calculateMinimumYearsForFutureValue(desiredResult, calculatedInFirst, 2000);
 
-    var y1 = calculateYearsNeeded(firstTargetValue, startingSavings);
-    monthlyFirst = calculateRequiredSavings(firstTargetValue, startingSavings, y1).toFixed();
-    const savingsOut = calculateSavings(monthlyFirst, y1, startingSavings);
-    var y2 = calculateYearsNeeded(secondTargetValue, savingsOut);
-    monthlySecond = calculateRequiredSavings(secondTargetValue, savingsOut, y2).toFixed();
-    console.log(y2);
-    console.log(monthlySecond);
+    dispatch(updateFirstDecadeAge(yearsFrist));
+    dispatch(updateSecondDecadeAge(yearsSecond));
+    setFirstAgeInterval(yearsFrist);
+    setSecondAgeInterval(yearsSecond);
+    dispatch(updateFirstDecadeMonthlyContribution(contributionFirst));
+    dispatch(updateSecondDecadeMonthlyContribution(contributionSecond));
+  };
 
-    if (desiredResult === 1000000) {
-      
+  function calculateMinimumYearsForFutureValue(futureValue, principal, maxContribution) {
+    let maxYears = 15;
+    const n = 12; // Compounding frequency per year
+    const r = 10 / 100; // Convert rate to decimal form
+
+    if (principal == desiredResult * 0.15)
+      return [20, 0]
+
+  
+    for (let years = 0; years <= maxYears; years++) {
+      for (let contribution = 0; contribution <= maxContribution; contribution += 50) {
+        const compoundTerm = Math.pow(1 + r / n, n * years);
+        const contributionPart = (contribution * (compoundTerm - 1)) * (n / r) + principal * compoundTerm;
+        
+        console.log(contributionPart);
+  
+        if (contributionPart >= futureValue) {
+          return [years, contribution];
+        }
+
+        if (years === maxYears && contribution === maxContribution) {
+            maxYears ++;
+          }
+      }
     }
-
-    dispatch(updateFirstDecadeAge(y1));
-    dispatch(updateSecondDecadeAge(y2));
-    setFirstAgeInterval(y1);
-    setSecondAgeInterval(y2);
-    dispatch(updateFirstDecadeMonthlyContribution(monthlyFirst));
-    dispatch(updateSecondDecadeMonthlyContribution(monthlySecond));
-  };
-
-  const calculateRequiredSavings = (targetValue, existingSavings, years) => {
-    const r = parseFloat(10) / 100;
-    const n = 12;
-  
-    let contribution = 0;
-  
-    for (let i = 0; i < years; i++) {
-      contribution += (targetValue - existingSavings) / Math.pow(1 + (r / n), n * i);
-    }
-  
-    return contribution;
-  };
-
-  const calculateYearsNeeded = (targetValue, existingSavings) => {
-    const r = parseFloat(10) / 100;
-    const n = 12;
-  
-    const savedAmount = targetValue - existingSavings;
-  
-    return Math.round((Math.log(1 + (savedAmount / existingSavings) * (r / n)) / (n * Math.log(1 + r / n))) / 12);
-  };
-  
+  }
   
   const calculateSavings = (contribution, years, savings) => {
     if (savings === 0 && contribution === 0) {
