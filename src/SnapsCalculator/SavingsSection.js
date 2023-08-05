@@ -7,10 +7,9 @@ const SavingsSection = ({age, monthlyCallback, yearsCallback, min, symbolsCountM
   
   const [isChecked, setIsChecked] = useState(true);
 
-  const handleToggle = () => {
-    setIsChecked((prev) => !isChecked);
-
-    toggleCallback(isChecked);
+  const handleToggle = (value, mouse) => {
+    setIsChecked(value);
+    toggleCallback(value);
   };
 
   return (
@@ -20,7 +19,8 @@ const SavingsSection = ({age, monthlyCallback, yearsCallback, min, symbolsCountM
           Your {stageNumber} life savings stage 
         </span>
         <Switch 
-          defaultChecked onChange={handleToggle} 
+          checked={isChecked}
+          onChange={handleToggle} 
           style={{ marginLeft:"2vh", background: isChecked ? '#0BDA51' : 'gray' }}
         />
       </SpanContainer>
