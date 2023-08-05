@@ -115,7 +115,10 @@ const CalculatorWithSnapsCombination = () => {
       return;
     }
 
-    const savingPeriod = 40;
+    let savingPeriod = 40;
+
+    if (startingSavings >= desiredResult * 0.01)
+      savingPeriod = 20;
 
     let first = [0, 0];
     let calculatedInFirst = startingSavings;
