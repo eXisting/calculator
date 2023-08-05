@@ -113,7 +113,7 @@ const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLe
           width={inputFieldWidth}
           height={inputFieldHeight}
           type="text"
-          value={formatCurrency(value)}
+          value={value}
           onInput={e => processInput(e.target.value)}
           onFocus={resetValueOnFocus}
           onBlur={handleBlur}
