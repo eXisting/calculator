@@ -74,6 +74,12 @@ const CalculatorWithSnapsCombination = () => {
   );
 
   useEffect(() => {
+    dispatch(updateFirstDecadeEnabled(true));
+    dispatch(updateSecondDecadeEnabled(true));
+    dispatch(updateThirdDecadeEnabled(true));
+  }, [])
+
+  useEffect(() => {
     if (desiredResult && startingSavings && startingAge) {
       setSmallestCombination();
     }
@@ -97,38 +103,62 @@ const CalculatorWithSnapsCombination = () => {
 
     const savingPeriod = 40;
 
-    let first = {years: 0, contribution: 0};
-    let calculatedInFirst = 0;
-    if (!decadeOneEnabled) {
-      first = calculateContribution(desiredResult * 0.01, startingSavings, Math.floor(savingPeriod * 0.13));
-      calculatedInFirst = calculateSavings(first.contribution, first.years, startingSavings);
+    let first = [0, 0];
+    let calculatedInFirst = startingSavings;
+    if (decadeOneEnabled) {
+
+      let firstPeriod = decadeTwoEnabled && decadeThreeEnabled ?
+        Math.floor(savingPeriod * 0.13) :
+        decadeTwoEnabled ^ decadeThreeEnabled ?
+        Math.floor(savingPeriod * 0.38) :
+        savingPeriod;
+
+        let firstResult = decadeTwoEnabled && decadeThreeEnabled ?
+        desiredResult * 0.01 :
+        decadeTwoEnabled ^ decadeThreeEnabled ?
+        desiredResult * 0.05 :
+        desiredResult;
+
+      first = calculateContribution(firstResult, startingSavings, firstPeriod);
+      calculatedInFirst = calculateSavings(first[1], first[0], startingSavings);
     }
 
-    let second = {years: 0, contribution: 0};
-    let calculatedInSecond = 0;
-    if (calculatedInFirst < desiredResult && !decadeTwoEnabled){
-      second = calculateContribution(desiredResult * 0.11, calculatedInFirst, Math.floor(savingPeriod * 0.38));
-      calculatedInSecond = calculateSavings(second.contribution, second.years, calculatedInFirst);
+    let second = [0, 0];
+    let calculatedInSecond = calculatedInFirst;
+    if (calculatedInFirst < desiredResult && decadeTwoEnabled){
+
+      let secondPeriod = !decadeOneEnabled && !decadeThreeEnabled ?
+        savingPeriod :
+        Math.floor(savingPeriod * 0.38);
+
+      let secondResult = decadeOneEnabled && decadeThreeEnabled ?
+        desiredResult * 0.11 :
+        decadeOneEnabled ^ decadeThreeEnabled ?
+        desiredResult * 0.05 :
+        desiredResult;
+
+      second = calculateContribution(secondResult, calculatedInFirst, secondPeriod);
+      calculatedInSecond = calculateSavings(second[1], second[0], calculatedInFirst);
     }
 
-    let third = {years: 0, contribution: 0};    
-    if (calculatedInSecond < desiredResult && !decadeThreeEnabled){
-      let thirdPeriod = savingPeriod - first.years - second.years;
+    let third = [0, 0];    
+    if (calculatedInSecond < desiredResult && decadeThreeEnabled){
+      let thirdPeriod = savingPeriod - first[0] - second[0];
 
       third = calculateContribution(desiredResult, calculatedInSecond, thirdPeriod);
     }
 
-    dispatch(updateFirstDecadeAge(first[1]));
-    setFirstAgeInterval(first[1]);
-    dispatch(updateFirstDecadeMonthlyContribution(first[0]));
+    dispatch(updateFirstDecadeAge(first[0]));
+    setFirstAgeInterval(first[0]);
+    dispatch(updateFirstDecadeMonthlyContribution(first[1]));
 
-    dispatch(updateSecondDecadeAge(second[1]));
-    setSecondAgeInterval(second[1]);
-    dispatch(updateSecondDecadeMonthlyContribution(second[0]));
+    dispatch(updateSecondDecadeAge(second[0]));
+    setSecondAgeInterval(second[0]);
+    dispatch(updateSecondDecadeMonthlyContribution(second[1]));
 
-    dispatch(updateThirdDecadeAge(third[1]));
-    setThirdAgeInterval(third[1]);
-    dispatch(updateThirdDecadeMonthlyContribution(third[0]));
+    dispatch(updateThirdDecadeAge(third[0]));
+    setThirdAgeInterval(third[0]);
+    dispatch(updateThirdDecadeMonthlyContribution(third[1]));
   };
 
   function calculateContribution(futureValue, principal, maxYears) {

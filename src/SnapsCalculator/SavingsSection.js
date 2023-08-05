@@ -8,7 +8,7 @@ const SavingsSection = ({age, monthlyCallback, yearsCallback, min, symbolsCountM
   const [isChecked, setIsChecked] = useState(true);
 
   const handleToggle = () => {
-    setIsChecked((prev) => !prev);
+    setIsChecked((prev) => !isChecked);
 
     toggleCallback(isChecked);
   };
