@@ -9,6 +9,7 @@ export const decadeOneSlice = createSlice({
     monthlyContribution: 0,
     savingsPercentage: 15,
     totalDecadeSavings: 0,
+    enabled: true,
   },
   reducers: {
     updateCapital: (state, action) => {
@@ -28,6 +29,9 @@ export const decadeOneSlice = createSlice({
     },
     updatePercents: (state, action) => {
       state.savingsPercentage = action.payload;
+    },
+    updateEnabled: (state, action) => {
+      state.enabled = action.payload;
     }
   },
 });
@@ -39,6 +43,7 @@ export const {
   updatePercents,
   updateMonthlyContribution,
   updateTotalDecadeSavings,
+  updateEnabled
 } = decadeOneSlice.actions;
 
 export default decadeOneSlice.reducer;

@@ -149,7 +149,7 @@ const Button = styled.button`
   border-radius: 1vh;
   height: 6vh;
   width: ${props => props.width ? props.width :"70%"};
-  font-size: 3vh;
+  font-size: 2.5vh;
   padding: 1vh;
   cursor: pointer;
 `;

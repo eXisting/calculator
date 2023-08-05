@@ -1,13 +1,32 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import NumbericSnaps from "./NumbericSnaps";
+import { Switch } from 'antd';
 
-const SavingsSection = ({age, totalAge, totalAmount, monthlyCallback, yearsCallback, min, symbolsCountMax, customFormula, interval, initialSavingsValue}) => {
+const SavingsSection = ({age, monthlyCallback, yearsCallback, min, symbolsCountMax, customFormula, interval, initialSavingsValue, stageNumber, toggleCallback}) => {
+  
+  const [isChecked, setIsChecked] = useState(true);
+
+  const handleToggle = () => {
+    setIsChecked((prev) => !prev);
+
+    toggleCallback(isChecked);
+  };
+
   return (
     <Container>
-      <VerticalStack style={{margin:"2vh"}}>
-        <HorizontalStack style={{marginTop:"1vh"}} space={"2vh"}>
-          <span style={{ color: "gray",fontSize: '2vh', textAlign: 'right', width:"30vw" }}>Number of years?</span>
+      <SpanContainer>
+        <span style={{fontSize:"2.5vh"}}>
+          Your {stageNumber} life savings stage 
+        </span>
+        <Switch 
+          defaultChecked onChange={handleToggle} 
+          style={{ marginLeft:"2vh", background: isChecked ? '#0BDA51' : 'gray' }}
+        />
+      </SpanContainer>
+      <HorizontalStack space="2vh">
+        <VerticalStack>
+          <span style={{ color: "gray",fontSize: '2vh', textAlign: 'center'}}># of years?</span>
           <NumbericSnaps
             callback={yearsCallback} 
             min={0} 
@@ -15,11 +34,12 @@ const SavingsSection = ({age, totalAge, totalAmount, monthlyCallback, yearsCallb
             interval={5}
             initialValue={age}
             inputFieldHeight={"4vh"}
+            inputFieldWidth={"6vh"}
             maxLength={2}
           />
-        </HorizontalStack>
-        <HorizontalStack style={{marginTop:"1vh"}} space={"2vh"}>
-          <span style={{ color: "gray", fontSize: '2vh', textAlign: 'right', width:"30vw" }}>Average Monthly savings</span>
+        </VerticalStack>
+        <VerticalStack>
+          <span style={{ color: "gray", fontSize: '2vh', textAlign: 'center'}}>Average Monthly savings</span>
           <NumbericSnaps
             callback={monthlyCallback} 
             min={min} 
@@ -27,16 +47,12 @@ const SavingsSection = ({age, totalAge, totalAmount, monthlyCallback, yearsCallb
             sign={'$'}
             initialValue={initialSavingsValue}
             inputFieldHeight={"4vh"}
+            inputFieldWidth={"16vh"}
             maxLength={symbolsCountMax}
             custom={customFormula}
           />
-        </HorizontalStack>
-      </VerticalStack>
-      <SpanContainer>
-        <span style={{color:"#0476bb", fontSize:"2.5vh"}}>
-          You are {totalAge} and you saved ${totalAmount}!
-        </span>
-      </SpanContainer>
+        </VerticalStack>
+      </HorizontalStack>
     </Container>
   );
 }
@@ -50,10 +66,9 @@ const Container = styled.div`
 `;
 
 const SpanContainer = styled.div`
-color: white;
 font-size: 2vh;
-margin-bottom: 2vh;
 text-align: center;
+height: 4vh;
 display: flex;
 align-items: center;
 justify-content: center;

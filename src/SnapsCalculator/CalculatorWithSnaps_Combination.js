@@ -9,13 +9,22 @@ import {
   updateMonthlyContribution as updateFirstDecadeMonthlyContribution,
   updateAge as updateFirstDecadeAge,
   updateTotalDecadeSavings as updateFirstDecadeTotalSavings,
+  updateEnabled as updateFirstDecadeEnabled,
 } from '../redux/decadeOneReducer';
 
 import {
   updateMonthlyContribution as updateSecondDecadeMonthlyContribution,
   updateAge as updateSecondDecadeAge,
   updateTotalDecadeSavings as updateSecondDecadeTotalSavings,
+  updateEnabled as updateSecondDecadeEnabled,
 } from '../redux/decadeTwoReducer';
+
+import {
+  updateMonthlyContribution as updateThirdDecadeMonthlyContribution,
+  updateAge as updateThirdDecadeAge,
+  updateTotalDecadeSavings as updateThirdDecadeTotalSavings,
+  updateEnabled as updateThirdDecadeEnabled,
+} from '../redux/decadeThreeReducer';
 
 const CalculatorWithSnapsCombination = () => {
   const dispatch = useDispatch();
@@ -23,6 +32,7 @@ const CalculatorWithSnapsCombination = () => {
 
   const [firstAgeInterval, setFirstAgeInterval] = useState(0);
   const [secondAgeInterval, setSecondAgeInterval] = useState(0);
+  const [thirdAgeInterval, setThirdAgeInterval] = useState(0);
 
   const nextPage = () => {
     navigate(`/follow-steps`);
@@ -31,7 +41,7 @@ const CalculatorWithSnapsCombination = () => {
   const {
     startingSavings,
     startingAge,
-    desiredResult
+    desiredResult,
   } = useSelector(
     (state) => state.initialPage
   );
@@ -40,6 +50,7 @@ const CalculatorWithSnapsCombination = () => {
     monthlyContribution: decadeOneMonthlyContribution,
     age: decadeOneAge,
     totalDecadeSavings: decadeOneTotalSavings,
+    enabled: decadeOneEnabled,
   } = useSelector(
     (state) => state.decadeOnePage
   );
@@ -48,8 +59,18 @@ const CalculatorWithSnapsCombination = () => {
     monthlyContribution: decadeTwoMonthlyContribution,
     age: decadeTwoAge,
     totalDecadeSavings: decadeTwoTotalSavings,
+    enabled: decadeTwoEnabled,
   } = useSelector(
     (state) => state.decadeTwoPage
+  );
+
+  const {
+    monthlyContribution: decadeThreeMonthlyContribution,
+    age: decadeThreeAge,
+    totalDecadeSavings: decadeThreeTotalSavings,
+    enabled: decadeThreeEnabled,
+  } = useSelector(
+    (state) => state.decadeThreePage
   );
 
   useEffect(() => {
@@ -60,11 +81,15 @@ const CalculatorWithSnapsCombination = () => {
 
   useEffect(() => {
     updateDecadeTotalSavings(decadeOneMonthlyContribution, firstAgeInterval, startingSavings, updateFirstDecadeTotalSavings);
-  }, [decadeOneMonthlyContribution, firstAgeInterval, startingAge, startingSavings]);
+  }, [decadeOneMonthlyContribution, firstAgeInterval, startingAge, startingSavings, decadeOneEnabled]);
 
   useEffect(() => {
     updateDecadeTotalSavings(decadeTwoMonthlyContribution, secondAgeInterval, decadeOneTotalSavings, updateSecondDecadeTotalSavings);
-  }, [decadeTwoMonthlyContribution, secondAgeInterval, decadeOneTotalSavings]);
+  }, [decadeTwoMonthlyContribution, secondAgeInterval, decadeOneTotalSavings, decadeTwoEnabled]);
+
+  useEffect(() => {
+    updateDecadeTotalSavings(decadeThreeMonthlyContribution, thirdAgeInterval, decadeTwoTotalSavings, updateThirdDecadeTotalSavings);
+  }, [decadeThreeMonthlyContribution, thirdAgeInterval, decadeTwoTotalSavings, decadeThreeEnabled]);
 
   const setSmallestCombination = () => {
     const firstTargetValue = desiredResult * 0.15;
@@ -153,22 +178,35 @@ const CalculatorWithSnapsCombination = () => {
     dispatch(updateAction(Math.round(saved).toLocaleString()));
   };
 
-  const decadeOneContributionChanged = (value) => {
+  const contributionChanged = (value, stageNumber) => {
     const numericValue = value.toString().replace(/[^0-9]/g, ''); // Remove non-numeric characters
-    dispatch(updateFirstDecadeMonthlyContribution(numericValue));
+    if (stageNumber === 1) {
+      dispatch(updateFirstDecadeMonthlyContribution(numericValue));
+    } else if (stageNumber === 2) {
+      dispatch(updateSecondDecadeMonthlyContribution(numericValue));
+    } else if (stageNumber === 3) {
+      dispatch(updateThirdDecadeMonthlyContribution(numericValue));
+    }
   };
 
-  const decadeTwoContributionChanged = (value) => {
-    const numericValue = value.toString().replace(/[^0-9]/g, ''); // Remove non-numeric characters
-    dispatch(updateSecondDecadeMonthlyContribution(numericValue));
+  const ageIntervalChanged = (value, stageNumber) => {
+    if (stageNumber === 1) {
+      setFirstAgeInterval(value);
+    } else if (stageNumber === 2) {
+      setSecondAgeInterval(value);
+    } else if (stageNumber === 3) {
+      setThirdAgeInterval(value);
+    }
   };
 
-  const firstAgeIntervalChanged = (value) => {
-    setFirstAgeInterval(value);
-  };
-
-  const secondAgeIntervalChanged = (value) => {
-    setSecondAgeInterval(value);
+  const changeStageEnabled = (value, stageNumber) => {
+    if (stageNumber === 1) {
+      dispatch(updateFirstDecadeEnabled(value));
+    } else if (stageNumber === 2) {
+      dispatch(updateSecondDecadeEnabled(value));
+    } else if (stageNumber === 3) {
+      dispatch(updateThirdDecadeEnabled(value));
+    }
   };
   
   return (
@@ -176,45 +214,56 @@ const CalculatorWithSnapsCombination = () => {
       <HeaderComponent hasBackButton></HeaderComponent>
       <Section ignore width="85%" backgroundColor="#0476bb" style={{marginTop:"2vh", marginBottom:"2vh"}}>
         <span style={{ color: 'white', fontSize: '4vh', paddingTop: "0.5vh", paddingBottom: "0.5vh", textAlign:"center"}}>
-          Your total savings! <br/>
-          {decadeTwoTotalSavings}
+          {"Your wealth "}
+          {decadeThreeTotalSavings}
         </span>
-      </Section>
-      <Section ignore width="80%" style={{border:"0.2vh solid #000000", paddingLeft:"4vh", paddingRight:"4vh", paddingTop:"1vh", paddingBottom:"1vh", height:"4vh"}}>
-        <span style={{ color: 'black', fontSize: '2.2vh', textAlign: 'center' }}>When you start saving, you save a little less</span>
       </Section>
       <Section ignore maxHeight={"50%"}>
         <SavingsSection
           age={decadeOneAge}
-          totalAmount={decadeOneTotalSavings}
-          totalAge={startingAge + firstAgeInterval}
-          monthlyCallback={decadeOneContributionChanged}
-          yearsCallback={firstAgeIntervalChanged}
+          monthlyCallback={(value) => contributionChanged(value, 1)}
+          yearsCallback={(value) => ageIntervalChanged(value, 1)}
           min={0}
-          symbolsCountMax={15} 
+          symbolsCountMax={10} 
           customFormula={true}
           interval={100}
           initialSavingsValue={decadeOneMonthlyContribution}
+          stageNumber={"1st"}
+          toggleCallback={(value) => changeStageEnabled(value, 1)}
         />
       </Section>
-      <Section ignore width="80%" style={{border:"0.2vh solid #000000", paddingLeft:"4vh", paddingRight:"4vh", paddingTop:"1vh", paddingBottom:"1vh", height:"4vh"}}>
-        <span style={{ color: 'black', fontSize: '2.2vh', textAlign: 'center' }}>As you income increases, you can save more.</span>
-      </Section>
+      <Section ignore width="100%" style={{border:"0.1vh solid #000000", height:"0px", marginTop:"2vh"}} />
       <Section ignore align="top" maxHeight={"50%"}>
         <SavingsSection
           age={decadeTwoAge}
-          totalAmount={decadeTwoTotalSavings}
-          totalAge={startingAge + firstAgeInterval + secondAgeInterval}
-          monthlyCallback={decadeTwoContributionChanged} 
-          yearsCallback={secondAgeIntervalChanged}
+          monthlyCallback={(value) => contributionChanged(value, 2)}
+          yearsCallback={(value) => ageIntervalChanged(value, 2)}
           min={0} 
-          symbolsCountMax={15} 
+          symbolsCountMax={10} 
           customFormula={true}
           interval={500}
           initialSavingsValue={decadeTwoMonthlyContribution}
+          stageNumber={"2nd"}
+          toggleCallback={(value) => changeStageEnabled(value, 2)}
           />
       </Section>
-      <Section justify={"top"}>
+      <Section ignore width="100%" style={{border:"0.1vh solid #000000", height:"0px", marginTop:"2vh"}} />
+      <Section ignore align="top" maxHeight={"50%"}>
+        <SavingsSection
+          age={decadeTwoAge}
+          monthlyCallback={(value) => contributionChanged(value, 3)}
+          yearsCallback={(value) => ageIntervalChanged(value, 3)}
+          min={0} 
+          symbolsCountMax={10} 
+          customFormula={true}
+          interval={500}
+          initialSavingsValue={decadeThreeMonthlyContribution}
+          stageNumber={"3rd"}
+          toggleCallback={(value) => changeStageEnabled(value, 3)}
+          />
+      </Section>
+      <Section ignore width="100%" style={{border:"0.1vh solid #000000", height:"0px", marginTop:"2vh"}} />
+      <Section justify={"top"} style={{marginTop:"2vh"}}>
         <Button onClick={nextPage}>{"What is next? ->"}</Button>
       </Section>
     </Container>

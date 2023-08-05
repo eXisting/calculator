@@ -41,7 +41,7 @@ const FollowSteps = () => {
           </HorizontalStack>
         </VerticalStack>
       </Section>
-      <Section justify={"top"} ignore width="80%" style={{border:"0.2vh solid #000000", padding:"2vh", height:"4vh"}}>
+      <Section justify={"top"} ignore width="80%" style={{border:"0.2vh solid #000000", padding:"2vh"}}>
         <span style={{textAlign:"center"}}>For the past 30, 50 and 80 years, <br/> these steps have produced an <br/> annual return of more than 10%.</span>
       </Section>
     </Container>

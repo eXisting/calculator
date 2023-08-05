@@ -105,9 +105,7 @@ const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLe
     <HorizontalStack space={"1vh"}>
       {!disableControls && 
         <StyledButton 
-          onClick={decrement}
-          width={inputFieldWidth}
-          height={inputFieldHeight}>
+          onClick={decrement}>
           -
         </StyledButton>}
         <StyledInput 
@@ -122,10 +120,7 @@ const NumbericSnaps = ({ callback, min, max, interval, sign, initialValue, maxLe
         />
       {!disableControls && 
         <StyledButton 
-          onClick={increment}
-          width={inputFieldWidth}
-          height={inputFieldHeight}
-        >
+          onClick={increment}>
           +
         </StyledButton>}
       </HorizontalStack>
