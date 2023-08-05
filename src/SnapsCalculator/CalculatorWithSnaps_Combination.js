@@ -101,21 +101,19 @@ const CalculatorWithSnapsCombination = () => {
     let calculatedInFirst = 0;
     if (!decadeOneEnabled) {
       first = calculateContribution(desiredResult * 0.01, startingSavings, Math.floor(savingPeriod * 0.13));
-      calculatedInFirst = calculateSavings(first[1], first[0], startingSavings);
+      calculatedInFirst = calculateSavings(first.contribution, first.years, startingSavings);
     }
 
     let second = {years: 0, contribution: 0};
     let calculatedInSecond = 0;
     if (calculatedInFirst < desiredResult && !decadeTwoEnabled){
       second = calculateContribution(desiredResult * 0.11, calculatedInFirst, Math.floor(savingPeriod * 0.38));
-      calculatedInSecond = calculateSavings(second[0], second[1], calculatedInFirst);
+      calculatedInSecond = calculateSavings(second.contribution, second.years, calculatedInFirst);
     }
 
     let third = {years: 0, contribution: 0};    
     if (calculatedInSecond < desiredResult && !decadeThreeEnabled){
-      let firstPeriod = first[1];
-      let secondPeriod = second[1];
-      let thirdPeriod = savingPeriod - firstPeriod - secondPeriod;
+      let thirdPeriod = savingPeriod - first.years - second.years;
 
       third = calculateContribution(desiredResult, calculatedInSecond, thirdPeriod);
     }
@@ -140,7 +138,7 @@ const CalculatorWithSnapsCombination = () => {
     const compoundCoefficient = Math.pow(1 + annualInterest/compoundingFrequency, compoundingFrequency * maxYears);
     let contribution = Math.ceil((futureValue - principal * compoundCoefficient) * (annualInterest/compoundingFrequency) / (compoundCoefficient - 1));
 
-    return [contribution, maxYears];
+    return [maxYears, contribution];
   }
   
   const calculateSavings = (contribution, years, savings) => {
